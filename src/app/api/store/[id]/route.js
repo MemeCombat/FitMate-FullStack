@@ -2,8 +2,8 @@ import StoreModel from "@/db/models/Store";
 
 export async function GET(request, { params }) {
   try {
-    const id = params.id;
-    const store = await StoreModel.getStoreById(id);
+    const userId = params.id;
+    const store = await StoreModel.getStoreByUserId(userId);
 
     if (!store) {
       return new Response(JSON.stringify({ message: "Store not found" }), {
