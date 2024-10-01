@@ -1,44 +1,50 @@
 import { cookies } from "next/headers";
-import { NextResponse } from "next/server";
 import { verifyWithJose } from "./helpers/jwt";
+import { NextRequest, NextResponse } from "next/server";
+import ErrorHandler from "./helpers/ErrorHandler";
+import { toast } from "react-toastify";
 
-export async function middleware(request) {
-  const authorization = cookies().get("Authorization")?.value;
-  const isLoggedIn = !!authorization;
-
-  if (request.nextUrl.pathname.startsWith("/api/wishlists")) {
-    if (!authorization)
-      return Response.json({ message: "Unauthorized" }, { status: 401 });
-
-    const [type, token] = authorization.split(" ");
-    if (type !== "Bearer")
-      return Response.json({ message: "Unauthorized" }, { status: 401 });
-
-    const decoded = (await verifyWithJose) < { _id: string } > token;
+async function auth(request: NextRequest) {
+    const authCookie = cookies().get('Authorization')
+    // console.log("authCookie: ", authCookie);
+    if(!authCookie) throw {message : "Unouthorize" , status:400};
+    const [type, token] = authCookie.value.split(' ')
+    // console.log("token: ", token);
+    if(type !== 'Bearer') throw new Error("Invalid Token");
+    const payload = await verifyWithJose<{_id:string}>(token);
+    console.log(payload , "ini payload");
 
     const requestHeaders = new Headers(request.headers);
-    requestHeaders.set("x-user-id", decoded._id);
-
-    const response = NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
-    return response;
-  }
-
-  if (request.nextUrl.pathname.startsWith("/wishlist")) {
-    if (!authorization) {
-      return NextResponse.redirect(new URL("/login", request.url));
-    }
-  }
-  if (request.nextUrl.pathname === "/login") {
-    if (isLoggedIn) {
-      return NextResponse.redirect(new URL("/products", request.url));
-    }
-  }
+    console.log("payloadTyped: ", payload);
+    requestHeaders.set('x-user-id', payload._id);
+    // console.log(requestHeaders, "ini request header");
+    return requestHeaders;
 }
 
+export  async function middleware(request:NextRequest) {
+    try {
+        // Authentication
+        const requestHeaders = await auth(request);
+        return NextResponse.next({
+            request: {
+                // New Request Headers
+                headers: requestHeaders
+            }
+        })
+    } catch (err) {
+        toast(  "error middleware" , {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+        return ErrorHandler(err);
+    }
+}
 export const config = {
-  matcher: ["/api/wishlists", "/wishlist"],
-};
+  matcher: [],//midleware cuman buat protect back end klo nge fetch
+}
