@@ -13,8 +13,12 @@ export const verifyToken = (token) => {
 };
 
 export const verifyWithJose = async (token) => {
-  const secret = new TextEncoder().encode(process.env.SECRET);
+  // console.log("tokenjose: ", token);
+  const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+  // console.log("process.env.SECRET: ", process.env.JWT_SECRET);
+  // console.log("secret: ", secret);
 
   const { payload } = await jose.jwtVerify(token, secret);
+  // console.log("payload: ", payload);
   return payload;
 };
