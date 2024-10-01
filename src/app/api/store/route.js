@@ -1,11 +1,11 @@
 import StoreModel from "@/db/models/Store";
+import { cookies } from "next/headers";
 import { z } from "zod";
 
 export async function POST(request) {
   try {
     const { name, description } = await request.json();
-    console.log({ name, description });
-
+    const access_token = cookies;
     await StoreModel.createStore({
       name,
       description,
