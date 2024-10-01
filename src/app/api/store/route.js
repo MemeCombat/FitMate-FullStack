@@ -1,26 +1,29 @@
 import StoreModel from "@/db/models/Store";
-import { cookies } from "next/headers";
-import { z } from "zod";
+import { NextResponse } from "next/server";
 
 export async function POST(request) {
   try {
     const { name, description } = await request.json();
-    const access_token = cookies;
+    const userId = request.headers.get("x-user-id");
+    console.log("userId model: ", userId);
+
     await StoreModel.createStore({
       name,
       description,
+      userId,
     });
-    return Response.json({
-      message: `Success create store ${name}`,
-    });
-  } catch (error) {
-    let message = error.message || "Internal Server Error";
-    let status = error.status || 500;
 
-    if (error instanceof z.ZodError) {
-      message = error.errors[0].message;
-      status = 400;
-    }
-    return Response.json({ message }, { status });
+    return NextResponse.json({ message: `Success create store ${name}` });
+  } catch (error) {
+    return NextResponse.json(
+      { message: error.message },
+      { status: error.status }
+    );
   }
+}
+
+export async function GET(request) {
+  const userId = request.headers.get("x-user-id");
+  const store = await StoreModel.getStore(userId);
+  return Response.json(store);
 }
