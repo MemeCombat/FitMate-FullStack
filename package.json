@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fal-ai/serverless-client": "^0.14.3",
     "bcryptjs": "^2.4.3",
     "jose": "^5.9.3",
     "jsonwebtoken": "^9.0.2",
