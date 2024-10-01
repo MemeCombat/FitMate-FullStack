@@ -45,7 +45,7 @@ class StoreModel {
 
   static async getStoreByUserId(userId) {
     const collection = await this.collection();
-    const store = await collection.findOne({ userId: userId });
+    const store = await collection.findOne({ _id: new ObjectId(String(id)) });
     return store;
   }
 }
