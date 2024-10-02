@@ -1,5 +1,5 @@
-import StoreModel from "@/db/models/Store";
 import { NextResponse } from "next/server";
+import StoreModel from "../../../db/models/Store";
 
 export async function POST(request) {
   try {
@@ -26,4 +26,32 @@ export async function GET(request) {
   const userId = request.headers.get("x-user-id");
   const store = await StoreModel.getStore(userId);
   return Response.json(store);
+}
+
+export async function PUT(request) {
+  try {
+    const { description } = await request.json();
+    const userId = request.headers.get("x-user-id");
+
+    const updatedStore = await StoreModel.updateDescriptionByUserId(
+      userId,
+      description
+    );
+
+    if (updatedStore.matchedCount === 0) {
+      return NextResponse.json(
+        { message: "Store not found for this user" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({
+      message: "Store description updated successfully",
+    });
+  } catch (error) {
+    return NextResponse.json(
+      { message: error.message },
+      { status: error.status || 500 }
+    );
+  }
 }
