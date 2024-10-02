@@ -1,5 +1,6 @@
 import * as fal from "@fal-ai/serverless-client";
 import { NextResponse } from "next/server";
+import ImageKit from "imagekit";
 
 async function processPhoto(photo) {
   if (photo && photo instanceof File) {
@@ -9,6 +10,17 @@ async function processPhoto(photo) {
   }
   return null;
 }
+
+
+var imagekit = new ImageKit({
+    publicKey : process.env.NEXT_PUBLIC_PUBLIC_KEY,
+    privateKey : process.env.PRIVATE_KEY,
+    urlEndpoint : process.env.NEXT_PUBLIC_URL_ENDPOINT
+  });
+  
+  console.log("process.env.NEXT_PUBLIC_PUBLIC_KEY: ", process.env.NEXT_PUBLIC_PUBLIC_KEY);
+  console.log("process.env.NEXT_PUBLIC_URL_ENDPOINT: ", process.env.NEXT_PUBLIC_URL_ENDPOINT);
+  console.log(" process.env.PRIVATE_KEY: ",  process.env.PRIVATE_KEY);
 
 console.log("process.env.FAL_KEY: ", process.env.FAL_KEY)
 fal.config({
@@ -46,11 +58,18 @@ export async function POST(request) {
         }
       },
     });
-    let imgUrl = result.image.url;
-    let content_type = result.image.content_type;
 
-    
-    return NextResponse.json(result);
+    const signedUrl = result.image.url;  
+
+    // console.log("signedUrl: ", signedUrl);
+    const userId = request.headers.get("x-user-id");
+    // console.log("userId: ", userId);
+    const resultImage = await imagekit.upload({
+      file: signedUrl, // required
+      fileName: `user-photo-userid:${userId}-date:${new Date()}`, // required
+      isPublished: true
+    });
+    return NextResponse.json(resultImage);
   } catch (error) {
     console.error("Error:", error);
     return NextResponse.json({ error: "An error occurred" }, { status: 500 });
@@ -58,13 +77,3 @@ export async function POST(request) {
 }
 
 
-// {
-//   "image": {
-//       "url": "https://storage.googleapis.com/isolate-dev-hot-rooster_toolkit_bucket/github_110602490/b17a592dac1c438292d33a456aa788cd_247ade006d254ef6baae14d8225595c4.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gke-service-account%40isolate-dev-hot-rooster.iam.gserviceaccount.com%2F20241002%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20241002T084440Z&X-Goog-Expires=604800&X-Goog-SignedHeaders=host&X-Goog-Signature=7993c3bf50541becd7d55d83ed08999b8b14001b9e864fb4290dc1a01546bc6897865e60b25fb6a242019967de64a908ef14acb91407b716a9d0404f73613f81d63ee606897c3b8a7d06384e8b1bb1a3bae0cb793781a30bcd5306569ed494456465c8689169eb365b7d82b413f5d208852b80fd46bc0dc525ac058b14fe1ebeac8cbbfec86822ac433992265ab714cf3a9c4f28c3c947f046aea646786a23bddc2b604bb07e3e2bb108a911520bd2412ac68117f78e5b97a46ad33215def81fe70cd6c400cc28ad88bb67ac2cdeba9794987adb0f481dbd01feea7da7f9c36bd76d0e1e3defc06ca2f056eb2bef5248e53fb84fb9fc66753bfc7c6588233047",
-//       "content_type": "image/png",
-//       "file_name": "247ade006d254ef6baae14d8225595c4.png",
-//       "file_size": 877419,
-//       "width": 1024,
-//       "height": 784
-//   }
-// }
