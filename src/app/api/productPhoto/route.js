@@ -3,17 +3,17 @@ import StoreModel from "@/db/models/Store";
 
 export async function POST(request) {
   try {
-    const { imgUrl, size, description, linkreferensi, tags } =
+    const { imgUrl, size, description, linkReferensi, tags } =
       await request.json();
     const userId = request.headers.get("x-user-id");
     const { _id: storeId } = await StoreModel.getStoreByUserId(userId);
 
     await ProductPhotoModel.createPhoto(
-      storeId,
       imgUrl,
+      storeId,
       size,
       description,
-      linkreferensi,
+      linkReferensi,
       tags
     );
 

@@ -26,8 +26,8 @@ class ProductPhotoModel {
     return await this.collection().insertOne(newPhoto);
   }
 
-  static async getPhotoByStoreId() {
-    return await this.collection().find().toArray();
+  static async getPhotoByStoreId(storeId) {
+    return await this.collection().findOne({ storeId: new ObjectId(storeId) });
   }
 }
 
