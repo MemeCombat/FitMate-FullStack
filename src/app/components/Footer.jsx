@@ -2,25 +2,25 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-[#333] to-[#1c1c1c] text-white py-8">
-      <div className="container mx-auto text-center">
-        <div className="flex flex-col md:flex-row justify-between items-center mb-6">
-          <div className="mb-4 md:mb-0">
-            <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-pink-500">
+    <footer className="bg-gradient-to-r from-[#333] to-[#1c1c1c] text-white py-4">
+      <div className="container mx-auto text-center px-4">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-4">
+          <div className="mb-4 md:mb-0 text-center md:text-left">
+            <h2 className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-pink-500">
               FitMate
             </h2>
-            <p className="text-sm mt-2 italic">
+            <p className="text-xs mt-1 italic">
               Your perfect fit, just a click away.
             </p>
           </div>
           <nav className="mb-4 md:mb-0">
-            <ul className="flex justify-center space-x-8">
+            <ul className="flex flex-col md:flex-row justify-center space-y-2 md:space-y-0 md:space-x-6">
               {["About Us", "Services", "Contact", "Privacy Policy"].map(
                 (item) => (
                   <li key={item}>
                     <a
                       href={`/${item.toLowerCase().replace(" ", "-")}`}
-                      className="hover:text-yellow-400 transition duration-300 text-lg bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-red-500"
+                      className="hover:text-yellow-400 transition duration-300 text-md bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-red-500"
                     >
                       {item}
                     </a>
@@ -35,10 +35,10 @@ const Footer = () => {
             href="https://twitter.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="mx-3 hover:text-yellow-400 transition duration-300"
+            className="mx-2 hover:text-yellow-400 transition duration-300"
           >
             <svg
-              className="w-8 h-8"
+              className="w-5 h-5 md:w-6 md:h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -53,7 +53,7 @@ const Footer = () => {
             </svg>
           </a>
         </div>
-        <p className="text-sm font-bold">
+        <p className="text-xs font-bold">
           © {new Date().getFullYear()} FitMate. All rights reserved.
         </p>
       </div>
