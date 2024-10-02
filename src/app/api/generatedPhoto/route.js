@@ -1,5 +1,6 @@
-import { toBase64Uri } from "@/app/helpers/baseUri";
 import * as fal from "@fal-ai/serverless-client";
+import { NextResponse } from "next/server";
+
 
 async function processPhoto(photo) {
   if (photo && photo instanceof File) {
@@ -35,23 +36,23 @@ export async function POST(request) {
 
   const gender = formData.get("gender") || "unknown";
 
-  let personPhotoBase64URI ="";
+  let personPhotoBase64URI = "";
 
   if (personPhoto && personPhoto instanceof File) {
     personPhotoBase64URI = await processPhoto(personPhoto);
-    console.log("personPhotoBase64URI: ", personPhotoBase64URI);
+    // console.log("personPhotoBase64URI: ", personPhotoBase64URI);
   }
-  
-  let shirtPhotoBase64URI ="";
+
+  let shirtPhotoBase64URI = "";
 
   if (shirtPhoto && shirtPhoto instanceof File) {
     shirtPhotoBase64URI = await processPhoto(shirtPhoto);
-    console.log("shirtPhotoBase64URI: ", shirtPhotoBase64URI);
+    // console.log("shirtPhotoBase64URI: ", shirtPhotoBase64URI);
   }
 
   const result = await fal.subscribe("fal-ai/omni-zero", {
     input: {
-      prompt: "A woman",
+      prompt: `A ${gender} with ${age} years old, ${height} cm tall, ${weight} kg make the face realistic`,
       image_url: personPhotoBase64URI,
       composition_image_url: personPhotoBase64URI,
       style_image_url: shirtPhotoBase64URI,
@@ -64,5 +65,6 @@ export async function POST(request) {
       }
     },
   });
-  
+
+  NextResponse.json(result);
 }
