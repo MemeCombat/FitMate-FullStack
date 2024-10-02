@@ -25,7 +25,7 @@ export async function POST(request) {
 export async function GET(request) {
   const userId = request.headers.get("x-user-id");
   const store = await StoreModel.getStore(userId);
-  return NextResponse.json(store);
+  return NextNextResponse.json(store);
 }
 
 export async function PUT(request) {
