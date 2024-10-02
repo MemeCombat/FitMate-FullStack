@@ -8,7 +8,7 @@ class ProductPhotoModel {
   }
 
   static async createPhoto(
-    imgUrl,
+    image,
     storeId,
     size,
     description,
@@ -16,7 +16,7 @@ class ProductPhotoModel {
     tags
   ) {
     const newPhoto = {
-      imgUrl: imgUrl,
+      image: image,
       storeId: storeId,
       size: size,
       description: description,

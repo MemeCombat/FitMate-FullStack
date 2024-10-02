@@ -48,6 +48,15 @@ class StoreModel {
     const store = await collection.findOne({ userId: userId });
     return store;
   }
+
+  static async updateDescriptionByUserId(userId, newDescription) {
+    const collection = await this.collection();
+    const result = await collection.updateOne(
+      { userId },
+      { $set: { description: newDescription } }
+    );
+    return result;
+  }
 }
 
 export default StoreModel;
