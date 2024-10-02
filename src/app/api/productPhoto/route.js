@@ -1,15 +1,39 @@
+import { toBase64Uri } from "@/app/helpers/baseUri";
 import ProductPhotoModel from "@/db/models/ProductPhoto";
 import StoreModel from "@/db/models/Store";
 
+async function processPhoto(photo) {
+  if (photo && photo instanceof File) {
+    const arrayBuffer = await photo.arrayBuffer();
+    const base64 = btoa(
+      String.fromCharCode.apply(null, new Uint8Array(arrayBuffer))
+    );
+    return toBase64Uri(photo.type, base64);
+  }
+  return null;
+}
+
 export async function POST(request) {
   try {
-    const { imgUrl, size, description, linkReferensi, tags } =
-      await request.json();
+    const formData = await request.formData();
+
+    const image = formData.get("image");
+    const size = formData.get("size");
+    const description = formData.get("description");
+    const linkReferensi = formData.get("linkReferensi");
+    const tags = formData.get("tags");
+
+    let imageBase64URI = "";
+
+    if (image instanceof File) {
+      imageBase64URI = await processPhoto(image);
+    }
+
     const userId = request.headers.get("x-user-id");
     const { _id: storeId } = await StoreModel.getStoreByUserId(userId);
 
     await ProductPhotoModel.createPhoto(
-      imgUrl,
+      image,
       storeId,
       size,
       description,
