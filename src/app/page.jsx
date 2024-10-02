@@ -39,7 +39,7 @@ export default function Home() {
             <h1 className="text-3xl font-bold">
               Engineering a new economic paradigm
             </h1>
-          </div>
+          </div> 
           <p className="text-lg mb-6">
             We are a digital asset and blockchain leader helping institutions,
             startups, and qualified individuals shape a changing economy. We

@@ -1,4 +1,5 @@
 import UserModel from "@/db/models/User";
+import { NextResponse } from "next/server";
 import { z } from "zod";
 
 export async function POST(request) {
@@ -12,7 +13,7 @@ export async function POST(request) {
       password,
     });
 
-    return Response.json({ message: `Success register user ${username}` });
+    return NextResponse.json({ message: `Success register user ${username}` });
   } catch (error) {
     let message = error.message || "Internal Server Error";
     let status = error.status || 500;
@@ -21,6 +22,6 @@ export async function POST(request) {
       message = error.errors[0].message;
       status = 400;
     }
-    return Response.json({ message }, { status });
+    return NextResponse.json({ message }, { status });
   }
 }
