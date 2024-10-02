@@ -1,12 +1,7 @@
 import React from "react";
-
-const NeoButton = ({ children, className }) => (
-  <button
-    className={`px-4 py-2 bg-yellow-400 text-black font-bold border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px] transition-all ${className}`}
-  >
-    {children}
-  </button>
-);
+import Hero from "./components/Hero";
+import Slider from "./components/Slider";
+import Hero2 from "./components/Hero2";
 
 export default function Home() {
   return (
@@ -39,7 +34,7 @@ export default function Home() {
             <h1 className="text-3xl font-bold">
               Engineering a new economic paradigm
             </h1>
-          </div> 
+          </div>
           <p className="text-lg mb-6">
             We are a digital asset and blockchain leader helping institutions,
             startups, and qualified individuals shape a changing economy. We
