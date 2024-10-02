@@ -1,7 +1,5 @@
 import { toBase64Uri } from "@/app/helpers/baseUri";
 import * as fal from "@fal-ai/serverless-client";
-import { NextResponse } from "next/server";
-
 
 async function processPhoto(photo) {
   if (photo && photo instanceof File) {
@@ -53,7 +51,7 @@ export async function POST(request) {
 
   const result = await fal.subscribe("fal-ai/omni-zero", {
     input: {
-      prompt: `A ${gender} with ${age} years old, ${height} cm tall, ${weight} kg make the face realistic`,
+      prompt: "A woman",
       image_url: personPhotoBase64URI,
       composition_image_url: personPhotoBase64URI,
       style_image_url: shirtPhotoBase64URI,
@@ -66,4 +64,5 @@ export async function POST(request) {
       }
     },
   });
+  
 }
