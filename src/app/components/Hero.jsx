@@ -6,20 +6,22 @@ const Hero = () => {
     <section className="bg-gradient-to-r from-yellow-200 via-purple-200 to-pink-200 rounded-2xl p-8 border-4 border-black flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 w-full">
       <div className="flex-1 text-center md:text-left">
         <div className="flex items-center justify-center md:justify-start space-x-4 mb-4">
-          <h1 className="text-3xl md:text-4xl text-black font-bold">FitMate</h1>
+          <h1 className="text-3xl md:text-4xl text-black font-bold font-monument">
+            FitMate
+          </h1>
         </div>
-        <p className="text-black text-lg mb-6">
+        <p className="text-black text-lg mb-6 font-monument">
           Try on clothes that suit your body shape effortlessly with our
           innovative platform.
         </p>
         <NeoButton>GET STARTED</NeoButton>
       </div>
       <div className="flex-1">
-        <div className="relative w-full h-64 md:h-80 overflow-hidden rounded-lg border-4 border-black">
+        <div className="relative w-full h-64 md:h-80 overflow-hidden rounded-lg">
           <img
-            src="https://i.pinimg.com/originals/dd/b8/5d/ddb85dc58883b87a2ea5324dd37b0fdf.gif"
+            src="https://i.pinimg.com/originals/67/1d/46/671d46a4c1a39c041e6707668b33d794.gif"
             alt="FitMate"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="flex border-4 border-black w-full h-full object-fit"
           />
         </div>
       </div>

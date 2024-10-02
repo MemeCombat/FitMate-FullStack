@@ -5,6 +5,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-family: 'Monument Extended', Arial, Helvetica, sans-serif; 
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,7 +18,7 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-family); 
 }
 
 @layer utilities {
@@ -25,3 +26,20 @@ body {
     text-wrap: balance;
   }
 }
+
+@font-face {
+  font-family: 'Monument Extended';
+  src: url('/fonts/MonumentExtended-Regular.woff2') format('woff2'),
+       url('/fonts/MonumentExtended-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Monument Extended';
+  src: url('/fonts/MonumentExtended-Bold.woff2') format('woff2'),
+       url('/fonts/MonumentExtended-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
