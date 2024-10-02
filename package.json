@@ -12,6 +12,7 @@
     "@fal-ai/serverless-client": "^0.14.3",
     "bcryptjs": "^2.4.3",
     "clsx": "^2.1.1",
+    "imagekit": "^5.2.0",
     "jose": "^5.9.3",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.446.0",
