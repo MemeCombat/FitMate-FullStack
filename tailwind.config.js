@@ -34,12 +34,12 @@ module.exports = {
         reverseBoxShadowX: "-4px",
         reverseBoxShadowY: "-4px",
       },
-      fontFamily: {
-        monument: ["Monument Extended", "sans-serif"],
-      },
       fontWeight: {
         base: "500",
         heading: "700",
+      },
+      fontFamily: {
+        monument: ["Monument Extended", "Arial", "Helvetica", "sans-serif"],
       },
     },
   },
