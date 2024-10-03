@@ -59,7 +59,6 @@ class StoreModel {
   }
 
   static async getStoreByStoreId(_id) {
-    console.log(_id, "?????? store Model");
     const collection = await this.collection();
     const store = await collection.findOne({ _id: new ObjectId(_id) });
 
