@@ -5,7 +5,7 @@ import { z } from "zod";
 export async function POST(request) {
   try {
     const { email, username, password, tags } = await request.json();
-    console.log({ email, username, password });
+    console.log({ email, username, password, tags });
 
     await UserModel.create({
       email,

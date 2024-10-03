@@ -6,7 +6,7 @@ const UserSchema = z.object({
   username: z.string().min(1),
   email: z.string().email().min(10),
   password: z.string().min(5),
-  tags: z.array(z.string),
+  tags: z.array(z.string()),
 });
 
 class UserModel {
