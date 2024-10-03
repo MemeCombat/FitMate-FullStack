@@ -10,7 +10,7 @@ const Hero = () => {
             FitMate
           </h1>
         </div>
-        <p className="text-black text-lg mb-6 font-monument">
+        <p className="text-black text-lg mb-6">
           Try on clothes that suit your body shape effortlessly with our
           innovative platform.
         </p>
@@ -21,7 +21,7 @@ const Hero = () => {
           <img
             src="https://i.pinimg.com/originals/67/1d/46/671d46a4c1a39c041e6707668b33d794.gif"
             alt="FitMate"
-            className="flex border-4 border-black w-full h-full object-fit"
+            className="flex border-4 border-black w-full h-full object-cover"
           />
         </div>
       </div>

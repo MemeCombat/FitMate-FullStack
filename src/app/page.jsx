@@ -5,28 +5,15 @@ import Hero2 from "./components/Hero2";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white font-sans">
-      <header className="flex justify-between items-center p-6 bg-white border-b-4 border-black">
-        <div className="flex items-center space-x-2">
-          <span className="text-3xl">❄️</span>
-          <span className="text-2xl font-bold">Chorke</span>
-        </div>
-        <nav className="space-x-6">
-          {["Platform Solutions", "Clients", "Insights", "Company"].map(
-            (item) => (
-              <a
-                key={item}
-                href="#"
-                className="text-black hover:underline font-bold"
-              >
-                {item}
-              </a>
-            )
-          )}
-        </nav>
-        <NeoButton>CONTACT</NeoButton>
-      </header>
-
+    <div
+      className="min-h-screen bg-white font-MonumentRegular text-black"
+      style={{
+        backgroundImage: `url('https://i.pinimg.com/originals/dd/b8/5d/ddb85dc58883b87a2ea5324dd37b0fdf.gif')`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center center",
+      }}
+    >
       <main className="p-6 space-y-6">
         <section className="bg-gradient-to-r from-yellow-200 via-purple-200 to-pink-200 p-8 border-4 border-black">
           <div className="flex items-center space-x-4 mb-4">
