@@ -11,7 +11,6 @@ export async function GET(request, { params }) {
         status: 400,
       });
     }
-
     return new Response(JSON.stringify(store), { status: 200 });
   } catch (error) {
     console.log(error);

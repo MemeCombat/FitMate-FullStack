@@ -1,6 +1,7 @@
 import * as fal from "@fal-ai/serverless-client";
 import { NextResponse } from "next/server";
 import ImageKit from "imagekit";
+import generatedPhotoModel from "@/db/models/generatedPhoto";
 
 async function processPhoto(photo) {
   if (photo && photo instanceof File) {
@@ -70,7 +71,6 @@ export async function POST(request) {
       fileName: `user-photo-userid:${userId}-date:${new Date()}`, // required
       isPublished: true
     });
-    
     return NextResponse.json(resultImage);
 
   } catch (error) {
