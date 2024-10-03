@@ -4,13 +4,14 @@ import { z } from "zod";
 
 export async function POST(request) {
   try {
-    const { email, username, password } = await request.json();
+    const { email, username, password, tags } = await request.json();
     console.log({ email, username, password });
 
     await UserModel.create({
       email,
       username,
       password,
+      tags,
     });
 
     return NextResponse.json({ message: `Success register user ${username}` });
