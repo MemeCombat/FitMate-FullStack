@@ -1,21 +1,8 @@
 "use client";
-import React, { useState } from "react";
-import {
-  ChevronLeft,
-  ChevronRight,
-  ShoppingCart,
-  Heart,
-  Share2,
-  Star,
-} from "lucide-react";
+import React from "react";
+import { ChevronLeft, ChevronRight, ShoppingCart } from "lucide-react";
 
 const ShopDetail = () => {
-  const [selectedSize, setSelectedSize] = useState(null);
-  const [quantity, setQuantity] = useState(1);
-
-  const sizes = ["S", "M", "L", "XL"];
-  const colors = ["Sea Foam", "Charcoal", "Sunset Orange"];
-
   return (
     <div className="flex flex-col md:flex-row p-8 bg-gradient-to-br from-yellow-400 to-orange-500 min-h-screen font-mono">
       <div className="w-full md:w-1/4 flex flex-col items-center space-y-4 mb-8 md:mb-0">
