@@ -32,7 +32,57 @@ export default class ProductPhotoModel {
     });
   }
 
-  static async getAllPhoto() {
-    return await this.collection().find().toArray();
+  static async getAllPhoto({
+    page = 1,
+    limit = 10,
+    sortField = "createdAt",
+    sortOrder = "desc",
+    search = "",
+    filters = {},
+  }) {
+    const skip = (page - 1) * limit;
+
+    let query = {};
+
+    // Apply search
+    if (search) {
+      query.$or = [
+        { name: { $regex: search, $options: "i" } },
+        { description: { $regex: search, $options: "i" } },
+      ];
+    }
+
+    // Apply filters
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value) {
+        if (key === "_id") {
+          query[key] = new ObjectId(value);
+        } else if (key === "tags") {
+          // Handle tags as an array field
+          query[key] = { $in: [value] };
+        } else if (typeof value === "string") {
+          query[key] = { $regex: value, $options: "i" };
+        } else {
+          query[key] = value;
+        }
+      }
+    });
+
+    const sortOptions = { [sortField]: sortOrder === "asc" ? 1 : -1 };
+
+    const totalCount = await this.collection().countDocuments(query);
+    const photos = await this.collection()
+      .find(query)
+      .sort(sortOptions)
+      .skip(skip)
+      .limit(limit)
+      .toArray();
+
+    return {
+      photos,
+      totalCount,
+      totalPages: Math.ceil(totalCount / limit),
+      currentPage: page,
+    };
   }
 }
