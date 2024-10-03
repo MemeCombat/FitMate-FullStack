@@ -32,7 +32,7 @@ const Slider = () => {
         >
           <div>
             <h2 className="text-2xl font-bold mb-4">{service.title}</h2>
-            <p className="mb-4">{service.description}</p>
+            <p className="text-lg mb-4 font-comfortaa">{service.description}</p>
           </div>
           {/* <NeoButton className="w-full mt-auto">Learn More →</NeoButton> */}
         </div>

@@ -1,24 +1,24 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link"; // Import Link from Next.js
+import Link from "next/link";
 import NeoButton from "./NeoButton";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="flex justify-between items-center p-4 bg-gradient-to-r from-yellow-200 via-purple-200 to-pink-200 border-4 border-black shadow-lg rounded-2xl mx-6">
-      {/* Logo Section */}
+    <header className="flex justify-between mt-1 items-center p-4 bg-gradient-to-r from-yellow-200 via-purple-200 to-pink-200 border-4 border-black shadow-lg rounded-2xl mx-6">
       <Link href="/" className="flex items-center space-x-2 cursor-pointer">
-        <span className="text-4xl font-monument">❄️</span>
-        <span className="text-3xl text-black font-extrabold tracking-wide font-monument">
+        <span className="text-4xl">❄️</span>
+        <span className="text-3xl text-black font-extrabold tracking-wide">
           FitMate
         </span>
       </Link>
 
-      {/* Navigation Links */}
       <nav
-        className={`md:flex space-x-8 ${isOpen ? "block" : "hidden"} md:block`}
+        className={`md:flex space-x-8 ${
+          isOpen ? "block" : "hidden"
+        } md:block font-comfortaa`}
       >
         {["Shop Affiliates", "Fitting Room", "Insights", "Company"].map(
           (item) => (
@@ -31,7 +31,7 @@ const Navbar = () => {
                   ? "/shop-affiliates"
                   : `/${item.toLowerCase().replace(" ", "-")}`
               }
-              className="text-lg font-semibold text-black hover:text-indigo-600 transition-colors duration-300 font-monument"
+              className="text-2xl font-black text-black border-b-2 border-red-500 hover:border-b-0 transition-all duration-300"
             >
               {item}
             </Link>
@@ -39,8 +39,7 @@ const Navbar = () => {
         )}
       </nav>
 
-      {/* Contact Button */}
-      <NeoButton className="hidden md:block font-monument">CONTACT</NeoButton>
+      <NeoButton className="hidden md:block">CONTACT</NeoButton>
 
       {/* Mobile Menu Button (Hamburger icon) */}
       <div className="md:hidden flex items-center">
