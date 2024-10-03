@@ -27,9 +27,6 @@ const ShopDetail = () => {
             alt="Greenlight Men's T-Shirt"
             className="w-full h-auto"
           />
-          <div className="absolute top-4 left-4 bg-red-500 text-white px-4 py-2 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-            NEW
-          </div>
         </div>
         <div className="absolute inset-y-0 left-0 flex items-center">
           <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-none p-3 transition duration-300 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">

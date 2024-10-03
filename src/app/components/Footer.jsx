@@ -5,7 +5,6 @@ const Footer = () => {
     <footer className="bg-black text-white font-mono">
       <div className="container mx-auto p-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Brand Section */}
           <div className="bg-blue-500 p-6 transform -rotate-3 border-4 border-pink-500">
             <h2 className="text-5xl font-bold mb-4 text-yellow-300 tracking-wide">
               FitMate
@@ -14,7 +13,6 @@ const Footer = () => {
               Your perfect fit, just a click away.
             </p>
           </div>
-
           <nav className="bg-green-500 p-6 transform rotate-2 border-4 border-black">
             <ul className="space-y-4">
               {["About Us", "Services", "Contact", "Privacy"].map((item) => (
@@ -32,8 +30,6 @@ const Footer = () => {
               ))}
             </ul>
           </nav>
-
-          {/* Social Connect */}
           <div className="bg-yellow-400 p-6 text-black transform -rotate-1 border-4 border-blue-700">
             <h3 className="text-3xl font-bold mb-4">Connect</h3>
             <div className="flex space-x-4">
@@ -58,8 +54,6 @@ const Footer = () => {
             </div>
           </div>
         </div>
-
-        {/* Copyright */}
         <div className="mt-8 border-t-4 border-white pt-4 justify-center align-middle items-center mx-auto flex">
           <p className="text-xl font-bold bg-pink-500 text-white p-4 inline-block transform -skew-x-6 border-4 border-yellow-500">
             © {new Date().getFullYear()} FitMate. All rights reserved.
