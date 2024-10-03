@@ -4,21 +4,21 @@ import NeoButton from "./NeoButton";
 const Slider = () => {
   const services = [
     {
-      title: "Asset Management",
+      title: "Personalized Fitting",
       description:
-        "Institutional-grade fund offerings across active and passive strategies.",
+        "Get tailored fitting suggestions based on your unique body shape and size.",
       color: "bg-yellow-300",
     },
     {
-      title: "Investment Banking",
+      title: "Virtual Try-On",
       description:
-        "Full lifecycle finding, strategic advisory, and general corporate services for blockchain.",
+        "Experience clothes virtually before buying, ensuring the perfect fit and style.",
       color: "bg-green-300",
     },
     {
-      title: "Chorke Ventures",
+      title: "Seamless Integration",
       description:
-        "Direct investments in early-stage and late-stage venture, liquid cryptocurrency.",
+        "Easily integrate with your favorite e-commerce platforms for a smooth shopping experience.",
       color: "bg-pink-300",
     },
   ];
@@ -34,7 +34,7 @@ const Slider = () => {
             <h2 className="text-2xl font-bold mb-4">{service.title}</h2>
             <p className="mb-4">{service.description}</p>
           </div>
-          <NeoButton className="w-full mt-auto">Learn More →</NeoButton>
+          {/* <NeoButton className="w-full mt-auto">Learn More →</NeoButton> */}
         </div>
       ))}
     </div>
