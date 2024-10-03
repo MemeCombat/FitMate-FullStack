@@ -51,7 +51,7 @@ export async function POST(request) {
       size,
       description,
       linkReferensi,
-      tags
+      tags ? tags.split(",").map((el) => el.trim()) : []
     );
 
     return new Response(
