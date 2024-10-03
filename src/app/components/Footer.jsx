@@ -2,60 +2,69 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-[#333] to-[#1c1c1c] text-white py-8">
-      <div className="container mx-auto text-center">
-        <div className="flex flex-col md:flex-row justify-between items-center mb-6">
-          <div className="mb-4 md:mb-0">
-            <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-pink-500">
+    <footer className="bg-black text-white font-mono">
+      <div className="container mx-auto p-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Brand Section */}
+          <div className="bg-blue-500 p-6 transform -rotate-3 border-4 border-pink-500">
+            <h2 className="text-5xl font-bold mb-4 text-yellow-300 tracking-wide">
               FitMate
             </h2>
-            <p className="text-sm mt-2 italic">
+            <p className="text-xl font-bold bg-red-500 text-white p-3 inline-block transform rotate-2 shadow-lg">
               Your perfect fit, just a click away.
             </p>
           </div>
-          <nav className="mb-4 md:mb-0">
-            <ul className="flex justify-center space-x-8">
-              {["About Us", "Services", "Contact", "Privacy Policy"].map(
-                (item) => (
-                  <li key={item}>
-                    <a
-                      href={`/${item.toLowerCase().replace(" ", "-")}`}
-                      className="hover:text-yellow-400 transition duration-300 text-lg bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-red-500"
-                    >
-                      {item}
-                    </a>
-                  </li>
-                )
-              )}
+
+          <nav className="bg-green-500 p-6 transform rotate-2 border-4 border-black">
+            <ul className="space-y-4">
+              {["About Us", "Services", "Contact", "Privacy"].map((item) => (
+                <li
+                  key={item}
+                  className="transform hover:-translate-y-1 transition-transform border-l-4 border-yellow-400 pl-2"
+                >
+                  <a
+                    href={`/${item.toLowerCase().replace(" ", "-")}`}
+                    className="text-2xl font-bold hover:bg-purple-600 hover:text-yellow-300 p-3 transition-colors block"
+                  >
+                    {item.toUpperCase()}
+                  </a>
+                </li>
+              ))}
             </ul>
           </nav>
+
+          {/* Social Connect */}
+          <div className="bg-yellow-400 p-6 text-black transform -rotate-1 border-4 border-blue-700">
+            <h3 className="text-3xl font-bold mb-4">Connect</h3>
+            <div className="flex space-x-4">
+              {["twitter", "facebook", "instagram"].map((social) => (
+                <a
+                  key={social}
+                  href={`https://${social}.com`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-black text-yellow-400 p-3 hover:bg-red-500 hover:text-white transition-colors border-4 border-green-500"
+                >
+                  <svg
+                    className="w-8 h-8"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
+                  </svg>
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
-        <div className="flex justify-center mb-4">
-          <a
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mx-3 hover:text-yellow-400 transition duration-300"
-          >
-            <svg
-              className="w-8 h-8"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M23 3a10.9 10.9 0 01-3.14.86A4.48 4.48 0 0022.4 1.6a9.16 9.16 0 01-2.89 1.1A4.5 4.5 0 0016.2 0c-2.49 0-4.5 2.2-4.5 4.9 0 .38.04.75.1 1.1C7.68 5.7 4.06 3.73 1.64.96a4.9 4.9 0 00-.61 2.46c0 1.69.88 3.22 2.2 4.1A4.45 4.45 0 01.96 7.3v.06c0 2.27 1.61 4.19 3.74 4.63a4.5 4.5 0 01-2.03.08c.57 1.67 2.25 2.88 4.24 2.93A9.02 9.02 0 010 19.54a12.83 12.83 0 006.93 2.03c8.32 0 12.87-6.89 12.87-12.87 0-.2 0-.41-.02-.61A9.1 9.1 0 0023 3z"
-              />
-            </svg>
-          </a>
+
+        {/* Copyright */}
+        <div className="mt-8 border-t-4 border-white pt-4 justify-center align-middle items-center mx-auto flex">
+          <p className="text-xl font-bold bg-pink-500 text-white p-4 inline-block transform -skew-x-6 border-4 border-yellow-500">
+            © {new Date().getFullYear()} FitMate. All rights reserved.
+          </p>
         </div>
-        <p className="text-sm font-bold">
-          © {new Date().getFullYear()} FitMate. All rights reserved.
-        </p>
       </div>
     </footer>
   );
