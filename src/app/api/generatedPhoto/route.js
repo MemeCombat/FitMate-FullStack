@@ -70,7 +70,9 @@ export async function POST(request) {
       fileName: `user-photo-userid:${userId}-date:${new Date()}`, // required
       isPublished: true
     });
+    
     return NextResponse.json(resultImage);
+
   } catch (error) {
     console.error("Error:", error);
     return NextResponse.json({ error: "An error occurred" }, { status: 500 });
