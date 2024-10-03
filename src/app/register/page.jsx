@@ -4,18 +4,38 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import Button from "../components/Button";
+import Select from "react-select";
+
+const fashionOptions = [
+  { value: "casual", label: "Casual" },
+  { value: "formal", label: "Formal" },
+  { value: "streetwear", label: "Streetwear" },
+  { value: "vintage", label: "Vintage" },
+  { value: "bohemian", label: "Bohemian" },
+  { value: "minimalist", label: "Minimalist" },
+  { value: "athleisure", label: "Athleisure" },
+  { value: "preppy", label: "Preppy" },
+];
 
 export default function Register() {
   const [user, setUser] = useState({
     username: "",
     email: "",
     password: "",
+    tags: [],
   });
   const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
+  };
+
+  const handleFashionChange = (selectedOptions) => {
+    setUser({
+      ...user,
+      tags: selectedOptions.map((option) => option.value),
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -114,6 +134,25 @@ export default function Register() {
                 onChange={handleChange}
               />
             </div>
+
+            <div>
+              <label className="text-2xl font-bold text-black block mb-2">
+                Fashion Preferences
+              </label>
+              <Select
+                isMulti
+                name="tags"
+                value={fashionOptions.filter((option) =>
+                  user.tags.includes(option.value)
+                )} // Map selected tags to options
+                options={fashionOptions}
+                className="text-xl text-black"
+                classNamePrefix="select"
+                onChange={handleFashionChange}
+                placeholder="Select your fashion preferences"
+              />
+            </div>
+
             <Button
               type="submit"
               className="w-full py-4 text-2xl font-bold text-white bg-blue-600 hover:bg-blue-700 border-4 border-black transition duration-300 justify-center shadow-[8px_8px_0_0_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-2 hover:translate-y-2"
