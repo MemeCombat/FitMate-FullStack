@@ -18,7 +18,7 @@ const Navbar = () => {
       <nav
         className={`md:flex space-x-8 ${isOpen ? "block" : "hidden"} md:block `}
       >
-        {["Shop Affiliates", "Fitting Room", "Insights", "Company"].map(
+        {["Shop Affiliates", "Fitting Room", "Product", "Company"].map(
           (item) => (
             <Link
               key={item}
@@ -37,7 +37,7 @@ const Navbar = () => {
         )}
       </nav>
 
-      <NeoButton className="hidden md:block">CONTACT</NeoButton>
+      <NeoButton className="hidden md:block">LOGIN</NeoButton>
 
       <div className="md:hidden flex items-center">
         <button
