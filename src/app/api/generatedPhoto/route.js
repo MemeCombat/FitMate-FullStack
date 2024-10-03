@@ -1,34 +1,30 @@
 import * as fal from "@fal-ai/serverless-client";
 import { NextResponse } from "next/server";
 import ImageKit from "imagekit";
-import generatedPhotoModel from "@/db/models/generatedPhoto";
+import generatedPhotoModel from "../../../db/models/generatedPhoto";
 
 async function processPhoto(photo) {
   if (photo && photo instanceof File) {
     const arrayBuffer = await photo.arrayBuffer();
-    const base64 = Buffer.from(arrayBuffer).toString('base64');
+    const base64 = Buffer.from(arrayBuffer).toString("base64");
     return `data:${photo.type};base64,${base64}`;
   }
   return null;
 }
 
 var imagekit = new ImageKit({
-    publicKey : process.env.NEXT_PUBLIC_PUBLIC_KEY,
-    privateKey : process.env.PRIVATE_KEY,
-    urlEndpoint : process.env.NEXT_PUBLIC_URL_ENDPOINT
-  });
-  
-  console.log("process.env.NEXT_PUBLIC_PUBLIC_KEY: ", process.env.NEXT_PUBLIC_PUBLIC_KEY);
-  console.log("process.env.NEXT_PUBLIC_URL_ENDPOINT: ", process.env.NEXT_PUBLIC_URL_ENDPOINT);
-  console.log(" process.env.PRIVATE_KEY: ",  process.env.PRIVATE_KEY);
+  publicKey: process.env.NEXT_PUBLIC_PUBLIC_KEY,
+  privateKey: process.env.PRIVATE_KEY,
+  urlEndpoint: process.env.NEXT_PUBLIC_URL_ENDPOINT,
+});
 
-console.log("process.env.FAL_KEY: ", process.env.FAL_KEY)
+console.log("process.env.FAL_KEY: ", process.env.FAL_KEY);
+
 fal.config({
   credentials: process.env.FAL_KEY,
 });
 
 export async function POST(request) {
-  
   const formData = await request.formData();
 
   const personPhoto = formData.get("personPhoto");
@@ -38,11 +34,12 @@ export async function POST(request) {
   const weight = formData.get("weight") || "unknown";
   const height = formData.get("height") || "unknown";
   const gender = formData.get("gender") || "unknown";
+  const shopId = formData.get("shopId")|| "userUploadedPhoto";
+  const productPhotoId = formData.get("productPhotoId") || "userUploadedPhoto";
 
   let personPhotoBase64URI = await processPhoto(personPhoto);
 
   let shirtPhotoBase64URI = await processPhoto(shirtPhoto);
- 
 
   try {
     const result = await fal.subscribe("fal-ai/omni-zero", {
@@ -54,14 +51,14 @@ export async function POST(request) {
         identity_image_url: personPhotoBase64URI,
       },
       logs: true,
-      onQueueUpdate: update => {
+      onQueueUpdate: (update) => {
         if (update.status === "IN_PROGRESS") {
-          update.logs.map(log => log.message).forEach(console.log);
+          update.logs.map((log) => log.message).forEach(console.log);
         }
       },
     });
 
-    const signedUrl = result.image.url;  
+    const signedUrl = result.image.url;
 
     // console.log("signedUrl: ", signedUrl);
     const userId = request.headers.get("x-user-id");
@@ -69,14 +66,15 @@ export async function POST(request) {
     const resultImage = await imagekit.upload({
       file: signedUrl, // required
       fileName: `user-photo-userid:${userId}-date:${new Date()}`, // required
-      isPublished: true
+      isPublished: true,
     });
-    return NextResponse.json(resultImage);
-
+    console.log("resultImage: ", resultImage);
+    const imgUrl = resultImage.url;
+    console.log("imgUrl: ", imgUrl);
+    const createdPhoto = await generatedPhotoModel.createPhoto({imgUrl , userId,height,weight,gender,shopId ,productPhotoId });
+    return NextResponse.json({resultImage,createdPhoto,shopId , productPhotoId ,weight ,height,gender});
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Error:", error); 
     return NextResponse.json({ error: "An error occurred" }, { status: 500 });
   }
 }
-
-
