@@ -29,7 +29,12 @@ export async function POST(request) {
         imageBase64URI = await processPhoto(image)
     }
 
-    
+    const resultImage = await imagekit.upload({
+      file: imageBase64URI, // required
+      fileName: `shop-photo-date:${new Date()}`, // required
+      isPublished: true
+    });
+
     const userId = request.headers.get("x-user-id");
     const { _id: storeId } = await StoreModel.getStoreByUserId(userId);
 

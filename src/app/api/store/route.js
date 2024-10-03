@@ -23,10 +23,9 @@ export async function POST(request) {
 }
 
 export async function GET(request) {
-  const userId = request.headers.get("x-user-id");
-  const store = await StoreModel.getStore(userId);
+  const store = await StoreModel.getStore();
   return NextResponse.json(store);
-}
+}//ini diganti jadi get all store
 
 export async function PUT(request) {
   try {

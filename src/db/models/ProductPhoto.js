@@ -2,7 +2,7 @@ import database from "../config/mongodb";
 
 const { ObjectId } = require("mongodb");
 
-class ProductPhotoModel {
+export default class ProductPhotoModel {
   static collection() {
     return database.collection("product_photos");
   }
@@ -27,8 +27,8 @@ class ProductPhotoModel {
   }
 
   static async getPhotoByStoreId(storeId) {
-    return await this.collection().findOne({ storeId: new ObjectId(storeId) });
+    return await this.collection().findOne({ storeId: new ObjectId(String(storeId)) });
   }
 }
 
-export default ProductPhotoModel;
+

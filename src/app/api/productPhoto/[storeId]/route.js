@@ -1,5 +1,5 @@
-import ProductPhotoModel from "@/db/models/ProductPhoto";
 import { NextResponse } from "next/server";
+import ProductPhotoModel from "../../../../db/models/ProductPhoto";
 
 export async function GET(request, { params }) {
   try {

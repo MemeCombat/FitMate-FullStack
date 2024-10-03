@@ -11,7 +11,6 @@ async function processPhoto(photo) {
   return null;
 }
 
-
 var imagekit = new ImageKit({
     publicKey : process.env.NEXT_PUBLIC_PUBLIC_KEY,
     privateKey : process.env.PRIVATE_KEY,
@@ -28,7 +27,9 @@ fal.config({
 });
 
 export async function POST(request) {
+  
   const formData = await request.formData();
+
   const personPhoto = formData.get("personPhoto");
   const shirtPhoto = formData.get("shirtPhoto");
 
