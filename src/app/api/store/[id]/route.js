@@ -1,6 +1,6 @@
 import StoreModel from "@/db/models/Store";
 
-export async function GET(request , { params }) {
+export async function GET(request , { params }) { // yang ini harusnya diganti by 
   try {
     const userId = params.id;
     const store = await StoreModel.getStoreByUserId(userId);
@@ -19,3 +19,4 @@ export async function GET(request , { params }) {
     });
   }
 }
+

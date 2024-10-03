@@ -2,13 +2,13 @@ import database from "../config/mongodb";
 
 const { ObjectId } = require("mongodb");
 
-class ProductPhotoModel {
+export default class ProductPhotoModel {
   static collection() {
     return database.collection("product_photos");
   }
 
   static async createPhoto(
-    imgUrl,
+    image,
     storeId,
     size,
     description,
@@ -16,7 +16,7 @@ class ProductPhotoModel {
     tags
   ) {
     const newPhoto = {
-      imgUrl: imgUrl,
+      image: image,
       storeId: storeId,
       size: size,
       description: description,
@@ -26,9 +26,13 @@ class ProductPhotoModel {
     return await this.collection().insertOne(newPhoto);
   }
 
-  static async getPhotoByStoreId() {
+  static async getPhotoByStoreId(storeId) {
+    return await this.collection().findOne({
+      storeId: new ObjectId(String(storeId)),
+    });
+  }
+
+  static async getAllPhoto() {
     return await this.collection().find().toArray();
   }
 }
-
-export default ProductPhotoModel;

@@ -1,18 +1,20 @@
 import UserModel from "@/db/models/User";
+import { NextResponse } from "next/server";
 import { z } from "zod";
 
 export async function POST(request) {
   try {
-    const { email, username, password } = await request.json();
-    console.log({ email, username, password });
+    const { email, username, password, tags } = await request.json();
+    console.log({ email, username, password, tags });
 
     await UserModel.create({
       email,
       username,
       password,
+      tags,
     });
 
-    return Response.json({ message: `Success register user ${username}` });
+    return NextResponse.json({ message: `Success register user ${username}` });
   } catch (error) {
     let message = error.message || "Internal Server Error";
     let status = error.status || 500;
@@ -21,6 +23,6 @@ export async function POST(request) {
       message = error.errors[0].message;
       status = 400;
     }
-    return Response.json({ message }, { status });
+    return NextResponse.json({ message }, { status });
   }
 }
