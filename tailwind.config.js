@@ -38,6 +38,9 @@ module.exports = {
         base: "500",
         heading: "700",
       },
+      fontFamily: {
+        monument: ["Monument Extended", "Arial", "Helvetica", "sans-serif"],
+      },
     },
   },
   plugins: [],
