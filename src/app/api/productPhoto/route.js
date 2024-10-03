@@ -70,9 +70,9 @@ export async function POST(request) {
 
 export async function GET(request) {
   try {
-    const userId = request.headers.get("x-user-id");
+    // const userId = request.headers.get("x-user-id");
 
-    const productPhotos = await ProductPhotoModel.getAllPhoto(userId);
+    const productPhotos = await ProductPhotoModel.getAllPhoto();
 
     return new Response(JSON.stringify(productPhotos), { status: 200 });
   } catch (error) {

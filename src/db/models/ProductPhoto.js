@@ -27,8 +27,12 @@ export default class ProductPhotoModel {
   }
 
   static async getPhotoByStoreId(storeId) {
-    return await this.collection().findOne({ storeId: new ObjectId(String(storeId)) });
+    return await this.collection().findOne({
+      storeId: new ObjectId(String(storeId)),
+    });
+  }
+
+  static async getAllPhoto() {
+    return await this.collection().find().toArray();
   }
 }
-
-
