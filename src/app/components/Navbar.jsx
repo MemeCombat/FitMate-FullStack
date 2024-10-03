@@ -16,9 +16,7 @@ const Navbar = () => {
       </Link>
 
       <nav
-        className={`md:flex space-x-8 ${
-          isOpen ? "block" : "hidden"
-        } md:block font-comfortaa`}
+        className={`md:flex space-x-8 ${isOpen ? "block" : "hidden"} md:block `}
       >
         {["Shop Affiliates", "Fitting Room", "Insights", "Company"].map(
           (item) => (
