@@ -1,6 +1,7 @@
 import { toBase64Uri } from "@/app/helpers/baseUri";
 import ProductPhotoModel from "@/db/models/ProductPhoto";
 import StoreModel from "@/db/models/Store";
+import { error } from "console";
 import ImageKit from "imagekit";
 
 async function processPhoto(photo) {
@@ -101,6 +102,31 @@ export async function GET(request) {
   } catch (error) {
     console.error("Error fetching photos:", error);
     return new Response(JSON.stringify({ message: "Failed to fetch photos" }), {
+      status: 500,
+    });
+  }
+}
+
+export async function DELETE(request) {
+  try {
+    const { productPhotoId } = await request.json();
+    const deleted = await ProductPhotoModel.deleteProductPhoto(productPhotoId);
+
+    if (deleted) {
+      return new Response(
+        JSON.stringify({ message: "Product succeess to delete" }),
+        {
+          status: 200,
+        }
+      );
+    } else {
+      return new Response(JSON.stringify({ error: "Product not found" }), {
+        status: 400,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    return new Response(JSON.stringify({ error: "Internal Server Error" }), {
       status: 500,
     });
   }

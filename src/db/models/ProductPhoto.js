@@ -85,4 +85,11 @@ export default class ProductPhotoModel {
       currentPage: page,
     };
   }
+
+  static async deleteProductPhoto(_id) {
+    const result = await this.collection().deleteOne({
+      _id: new ObjectId(_id),
+    });
+    return result.deletedCount > 0;
+  }
 }
