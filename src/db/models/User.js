@@ -27,6 +27,9 @@ class UserModel {
   static async findyByEmail(email) {
     return await this.collection().findOne({ email });
   }
+  static async findById (id) {
+    return await this.collection().findOne({ _id: id });
+  }
 }
 
 export default UserModel;
