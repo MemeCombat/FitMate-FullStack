@@ -3,7 +3,12 @@
 import { useState } from "react";
 import { Settings } from "lucide-react";
 
-export default function Dropdown({ items, children }) {
+export default function Dropdown({
+  items,
+  children,
+  setIsModalActive,
+  isModalActive,
+}) {
   const [isActiveDropdown, setIsActiveDropdown] = useState(false);
 
   return (
@@ -37,6 +42,12 @@ export default function Dropdown({ items, children }) {
                 ? "bg-red-500 text-white hover:bg-red-700"
                 : "bg-blue-500 text-white hover:bg-blue-700"
             }`}
+            onClick={(e) => {
+              if (item.name === "Updated") {
+                e.preventDefault();
+                setIsModalActive(true);
+              }
+            }}
           >
             {item.name}
           </a>
