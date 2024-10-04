@@ -1,7 +1,6 @@
 import { toBase64Uri } from "@/app/helpers/baseUri";
 import ProductPhotoModel from "@/db/models/ProductPhoto";
 import StoreModel from "@/db/models/Store";
-import { error } from "console";
 import ImageKit from "imagekit";
 
 async function processPhoto(photo) {
@@ -49,7 +48,7 @@ export async function POST(request) {
     await ProductPhotoModel.createPhoto(
       resultImage.url,
       storeId,
-      size,
+      size ? size.split(",").map((el) => el.trim()) : [],
       description,
       linkReferensi,
       tags ? tags.split(",").map((el) => el.trim()) : []
@@ -79,16 +78,13 @@ export async function GET(request) {
     const sortOrder = searchParams.get("sortOrder") || "desc";
     const search = searchParams.get("search") || "";
 
+    // Parse filters from query params
     const filters = {};
     for (const [key, value] of searchParams.entries()) {
       if (
         !["page", "limit", "sortField", "sortOrder", "search"].includes(key)
       ) {
-        if (key === "tags") {
-          filters[key] = filters[key] ? [...filters[key], value] : [value];
-        } else {
-          filters[key] = value;
-        }
+        filters[key] = value;
       }
     }
 
