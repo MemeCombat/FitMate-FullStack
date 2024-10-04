@@ -79,13 +79,16 @@ export async function GET(request) {
     const sortOrder = searchParams.get("sortOrder") || "desc";
     const search = searchParams.get("search") || "";
 
-    // Parse filters from query params
     const filters = {};
     for (const [key, value] of searchParams.entries()) {
       if (
         !["page", "limit", "sortField", "sortOrder", "search"].includes(key)
       ) {
-        filters[key] = value;
+        if (key === "tags") {
+          filters[key] = filters[key] ? [...filters[key], value] : [value];
+        } else {
+          filters[key] = value;
+        }
       }
     }
 
