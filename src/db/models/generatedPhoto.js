@@ -5,5 +5,5 @@ export default class generatedPhotoModel {
     }
     static async createPhoto(data){
         return this.collection().insertOne(data)
-    }
+    }   
 }

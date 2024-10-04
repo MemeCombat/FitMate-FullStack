@@ -17,8 +17,7 @@ async function auth(request) {
   const requestHeaders = new Headers(request.headers);
   console.log("payloadTyped: ", payload);
   requestHeaders.set("x-user-id", payload._id);
-
-  // console.log(requestHeaders, "ini request header");
+  
   return requestHeaders;
 }
 
@@ -36,5 +35,5 @@ export async function middleware(request) {
   }
 }
 export const config = {
-  matcher: ["/api/store/", "/api/productPhoto" , "/api/generatedPhoto"], //midleware cuman buat protect back end klo nge fetch
+  matcher: ["/api/store/", "/api/productPhoto" , "/api/generatedPhoto" , "/api/ledger"], //midleware cuman buat protect back end klo nge fetch
 };
