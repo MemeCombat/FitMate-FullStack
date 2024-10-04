@@ -1,90 +1,114 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link"; // Import Link from next/link
 import NeoButton from "./NeoButton";
 import ImageCard from "./ImageCard";
 
 const Hero2 = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/api/productPhoto`
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/pub/productPhotoPub`
         );
         const data = await response.json();
-        setProducts(data);
+
+        console.log("Fetched products:", data);
+
+        if (Array.isArray(data)) {
+          setProducts(data);
+        } else if (Array.isArray(data.photos)) {
+          setProducts(data.photos);
+        } else {
+          console.error("Data is not an array:", data);
+          setProducts([]);
+        }
       } catch (error) {
         console.error("Error fetching product photos:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchProducts();
   }, []);
 
+  if (loading) {
+    return <p className="text-center text-xl font-semibold">Loading...</p>;
+  }
+
   return (
-    <section className="bg-red-300 p-8 border-4 border-black flex flex-col items-center space-y-8 w-full rounded-2xl shadow-2xl">
+    <section className="bg-pink-300 p-6 md:p-10 border-4 border-black flex flex-col items-center space-y-10 w-full rounded-3xl shadow-2xl">
       {/* Top bar for brands */}
-      <div className="w-full flex justify-between items-center space-x-4 p-4 bg-black text-white rounded-xl shadow-md">
-        <div className="flex space-x-4">
+      <div className="w-full flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 md:space-x-6 p-6 bg-blue-900 border-4 border-black text-white rounded-xl shadow-lg">
+        <div className="flex flex-wrap justify-center md:justify-start space-x-6">
           <img
             src="https://asset-3s.3second.co.id/p/logo.png"
             alt="3second"
-            className="h-20"
+            className="h-14 md:h-24 object-contain"
           />
           <img
-            src="https://asset-3s.3second.co.id/p/logo.png"
+            src="https://blogger.googleusercontent.com/img/a/AVvXsEgGVv8Gi2XDoITQQ71GYXj2NFhd2XI4AHn1xFckht8rUAxADZX7FNs5vG0uHzGNe-kaEIohMcNcg8Q5mVPWYbW2pPjQKsc3PYeE8xdnUEPPFDQVzrQGg9aNXAuV1JxYRGTeEBTs_UOL1P_Wwe_IlxZgKsgoOJx2Af-0itDL4vDzeNvKWPBDSoeAwj30EQ=w226-h320"
             alt="3second"
-            className="h-20"
+            className="h-14 md:h-24 object-contain"
           />
           <img
-            src="https://asset-3s.3second.co.id/p/logo.png"
-            alt="3second"
-            className="h-20"
-          />
-          <img
-            src="https://asset-3s.3second.co.id/p/logo.png"
+            src="https://logos-world.net/wp-content/uploads/2020/04/Tommy-Hilfiger-Logo.png"
             alt="Gucci"
-            className="h-20"
+            className="h-14 md:h-24 object-contain"
           />
           <img
-            src="https://asset-3s.3second.co.id/p/logo.png"
+            src="https://w7.pngwing.com/pngs/586/74/png-transparent-jumpman-air-jordan-nike-logo-brand-nike-physical-fitness-hand-sticker.png"
             alt="Shopify"
-            className="h-20"
+            className="h-14 md:h-24 object-contain"
           />
           <img
             src="https://asset-3s.3second.co.id/p/logo.png"
             alt="Uniqlo"
-            className="h-20"
+            className="h-14 md:h-24 object-contain"
           />
         </div>
-        <NeoButton className="bg-white text-black border-black border-2 hover:bg-gray-100 transition-colors duration-300 rounded-lg px-4 py-2 shadow-sm">
+        <NeoButton className="bg-white text-black border-black border-2 hover:bg-gray-200 transition duration-300 rounded-lg px-5 py-3 shadow-md">
           View all brands
         </NeoButton>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full h-full">
-        {products.map((product) => (
-          <ImageCard key={product._id} imgaeUrl={product.imgUrl}>
-            <div>
-              <p className="text-lg font-semibold">{product.description}</p>
-              <p className="text-sm text-gray-500">Size: {product.size}</p>
-              <a
-                href={product.linkReferensi}
-                className="text-blue-500 hover:underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View More
-              </a>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1 w-full ">
+        {products.slice(0, 5).map((product, index) => {
+          const rotationClass = index % 2 === 0 ? "rotate-2" : "-rotate-2";
+
+          return (
+            <div key={product._id} className={`transform ${rotationClass}`}>
+              <ImageCard image={product.image || product.imgUrl}>
+                <div className="p-4 bg-white rounded-lg shadow-lg hover:shadow-2xl transition duration-300">
+                  <p className="text-xl font-semibold text-gray-800">
+                    {product.description}
+                  </p>
+                  <p className="text-sm text-gray-600">Size: {product.size}</p>
+                  <a
+                    href={product.linkReferensi}
+                    className="text-indigo-500 hover:text-indigo-700 hover:underline mt-2 inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View More
+                  </a>
+                </div>
+              </ImageCard>
             </div>
-          </ImageCard>
-        ))}
+          );
+        })}
       </div>
 
       <div className="w-full flex justify-center">
-        <NeoButton className="bg-black text-white hover:bg-gray-800 transition-colors duration-300 rounded-lg px-6 py-3 shadow-lg">
-          View all offers
-        </NeoButton>
+        <Link href="/product" passHref>
+          <NeoButton className="bg-black text-black hover:bg-blue-500 transition duration-300 rounded-lg px-8 py-4 shadow-lg">
+            View all offers
+          </NeoButton>
+        </Link>
       </div>
     </section>
   );

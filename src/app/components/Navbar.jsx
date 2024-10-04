@@ -26,7 +26,7 @@ const Navbar = () => {
                 item === "Fitting Room"
                   ? "/fitting"
                   : item === "Shop Affiliates"
-                  ? "/shop-affiliates"
+                  ? "/shop"
                   : `/${item.toLowerCase().replace(" ", "-")}`
               }
               className="text-2xl font-black text-black border-b-2 border-red-500 hover:border-b-0 transition-all duration-300"
@@ -37,7 +37,9 @@ const Navbar = () => {
         )}
       </nav>
 
-      <NeoButton className="hidden md:block">LOGIN</NeoButton>
+      <Link href="/login" className="hidden md:block">
+        <NeoButton>LOGIN</NeoButton>
+      </Link>
 
       <div className="md:hidden flex items-center">
         <button
