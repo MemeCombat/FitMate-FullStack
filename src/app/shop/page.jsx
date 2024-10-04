@@ -1,8 +1,6 @@
 import React from "react";
-import Button from "../components/Button";
-import Dropdown from "../components/Dropdown";
-import { Settings } from "lucide-react";
 import ProductCard from "../components/ProductCard";
+import ButtonAddProduct from "../components/ButtonAddProduct";
 const Shop = () => {
   const products = [
     {
@@ -58,9 +56,7 @@ const Shop = () => {
                 Sazi Shop
               </h1>
             </div>
-            <Button className="transition-all duration-300 px-6 py-2 text-lg font-bold bg-blue-500 text-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none">
-              Add new product
-            </Button>
+            <ButtonAddProduct />
           </div>
         </div>
         <div className="bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-8 rounded-none">
@@ -70,29 +66,6 @@ const Shop = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {products.map((product, index) => (
               <ProductCard key={index} product={product} index={index} />
-              // <div
-              //   key={index}
-              //   className={`${cardColors[index % cardColors.length]} ${
-              //     rotations[index % rotations.length]
-              //   } transform transition-all duration-300 hover:scale-105 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-none overflow-hidden`}
-              // >
-              //   <div className="relative">
-              //     <img
-              //       src={product.image}
-              //       alt={product.name}
-              //       className="w-full h-48 object-cover"
-              //     />
-
-              //     <div className="absolute top-0 right-0 m-2">
-              //       <Dropdown items={items}></Dropdown>
-              //     </div>
-              //   </div>
-              //   <div className="p-4">
-              //     <h3 className="font-black text-black text-sm mb-2 line-clamp-2">
-              //       {product.name}
-              //     </h3>
-              //   </div>
-              // </div>
             ))}
           </div>
         </div>
