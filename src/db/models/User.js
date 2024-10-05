@@ -17,7 +17,6 @@ class UserModel {
   static async create(user) {
     UserSchema.parse(user);
     user.password = hashPassword(user.password);
-
     const existingUser = await this.collection().findOne({
       $or: [{ email: user.email }, { username: user.username }],
     });
@@ -32,5 +31,4 @@ class UserModel {
     return await this.collection().findOne({ _id: new ObjectId(String(id)) });
   }
 }
-
 export default UserModel;
