@@ -47,7 +47,7 @@ const Shop = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-500 to-yellow-300 py-12 px-4 sm:px-6 lg:px-8 m-3 rounded-lg">
+    <div className="min-h-screen border-4 border-black bg-gradient-to-br from-pink-500 to-yellow-300 py-12 px-4 sm:px-6 lg:px-8 m-3 rounded-lg mx-6">
       <div className="max-w-7xl mx-auto">
         <div className="bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-8 mb-12 rounded-none">
           <div className="flex flex-col sm:flex-row items-center justify-between">
