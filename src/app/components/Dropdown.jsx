@@ -3,7 +3,12 @@
 import { useState } from "react";
 import { Settings } from "lucide-react";
 
-export default function Dropdown({ items, children }) {
+export default function Dropdown({
+  items,
+  children,
+  setIsModalActive,
+  isModalActive,
+}) {
   const [isActiveDropdown, setIsActiveDropdown] = useState(false);
 
   return (
@@ -22,7 +27,14 @@ export default function Dropdown({ items, children }) {
         }}
         className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-r from-pink-500 to-yellow-500 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none"
       >
-        {children || <Settings className="h-5 w-5 text-white" />}
+        {/* Apply rotate transformation when dropdown is active */}
+        <div
+          className={`transition-transform duration-300 ${
+            isActiveDropdown ? "rotate-90" : ""
+          }`}
+        >
+          {children || <Settings className="h-5 w-5 text-white" />}
+        </div>
       </button>
       <div
         role="listbox"
@@ -37,6 +49,12 @@ export default function Dropdown({ items, children }) {
                 ? "bg-red-500 text-white hover:bg-red-700"
                 : "bg-blue-500 text-white hover:bg-blue-700"
             }`}
+            onClick={(e) => {
+              if (item.name === "Updated") {
+                e.preventDefault();
+                setIsModalActive(true);
+              }
+            }}
           >
             {item.name}
           </a>

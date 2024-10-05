@@ -1,8 +1,6 @@
 import React from "react";
-import Button from "../components/Button";
-import Dropdown from "../components/Dropdown";
-import { Settings } from "lucide-react";
-
+import ProductCard from "../components/ProductCard";
+import ButtonAddProduct from "../components/ButtonAddProduct";
 const Shop = () => {
   const products = [
     {
@@ -48,33 +46,8 @@ const Shop = () => {
     },
   ];
 
-  const cardColors = [
-    "bg-yellow-300",
-    "bg-blue-300",
-    "bg-green-300",
-    "bg-red-300",
-    "bg-purple-300",
-  ];
-  const rotations = [
-    "rotate-1",
-    "-rotate-1",
-    "rotate-2",
-    "-rotate-2",
-    "rotate-0",
-  ];
-  const items = [
-    {
-      name: "Deleted",
-      link: "https://www.youtube.com",
-    },
-    {
-      name: "Updated",
-      link: "/update",
-    },
-  ];
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-500 to-yellow-300 py-12 px-4 sm:px-6 lg:px-8 m-3 rounded-lg">
+    <div className="min-h-screen border-4 border-black bg-gradient-to-br from-pink-500 to-yellow-300 py-12 px-4 sm:px-6 lg:px-8 m-3 rounded-lg mx-6">
       <div className="max-w-7xl mx-auto">
         <div className="bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-8 mb-12 rounded-none">
           <div className="flex flex-col sm:flex-row items-center justify-between">
@@ -83,9 +56,7 @@ const Shop = () => {
                 Sazi Shop
               </h1>
             </div>
-            <Button className="transition-all duration-300 px-6 py-2 text-lg font-bold bg-blue-500 text-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none">
-              Add new product
-            </Button>
+            <ButtonAddProduct />
           </div>
         </div>
         <div className="bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-8 rounded-none">
@@ -94,29 +65,7 @@ const Shop = () => {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {products.map((product, index) => (
-              <div
-                key={index}
-                className={`${cardColors[index % cardColors.length]} ${
-                  rotations[index % rotations.length]
-                } transform transition-all duration-300 hover:scale-105 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-none overflow-hidden`}
-              >
-                <div className="relative">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-48 object-cover"
-                  />
-
-                  <div className="absolute top-0 right-0 m-2">
-                    <Dropdown items={items}></Dropdown>
-                  </div>
-                </div>
-                <div className="p-4">
-                  <h3 className="font-black text-black text-sm mb-2 line-clamp-2">
-                    {product.name}
-                  </h3>
-                </div>
-              </div>
+              <ProductCard key={index} product={product} index={index} />
             ))}
           </div>
         </div>
