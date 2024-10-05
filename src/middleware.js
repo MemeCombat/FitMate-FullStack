@@ -35,5 +35,5 @@ export async function middleware(request) {
   }
 }
 export const config = {
-  matcher: ["/api/store/", "/api/productPhoto" , "/api/generatedPhoto" , "/api/ledger"], //midleware cuman buat protect back end klo nge fetch
+  matcher: ["/api/store/", "/api/productPhoto" , "/api/generatedPhoto" , "/api/ledger" , "/api/ledger/generateToken"], //midleware cuman buat protect back end klo nge fetch
 };

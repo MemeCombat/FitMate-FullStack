@@ -5,6 +5,7 @@ import { ObjectId } from "mongodb";
 export async function POST(request) {
   try {
     const { type } = await request.json();
+    console.log("type: ", type);
 
     let token, price;
 

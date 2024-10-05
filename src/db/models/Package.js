@@ -47,6 +47,12 @@ export default class PackageModel {
     return packageData;
   }
 
+  static async getPackageByType(type){
+    const data = await this.collection().findOne({type:type})
+    console.log("data: ", data);
+    return data
+  }
+
   static async updatePackage(id, newType) {
     let newToken, newPrice;
     switch (newType) {
