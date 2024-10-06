@@ -13,13 +13,7 @@ const ProductCard = ({ product, index }) => {
     "bg-red-300",
     "bg-purple-300",
   ];
-  const rotations = [
-    "rotate-1",
-    "-rotate-1",
-    "rotate-2",
-    "-rotate-2",
-    "rotate-0",
-  ];
+
   const items = [
     {
       name: "Deleted",
@@ -34,8 +28,8 @@ const ProductCard = ({ product, index }) => {
   return (
     <div
       key={index}
-      className={`${cardColors[index % cardColors.length]} ${
-        rotations[index % rotations.length]
+      className={`${
+        cardColors[index % cardColors.length]
       } transform transition-all duration-300 hover:scale-105 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-none overflow-hidden`}
     >
       <div className="relative">

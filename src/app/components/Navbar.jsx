@@ -26,7 +26,7 @@ const Navbar = () => {
                 item === "Fitting Room"
                   ? "/fitting"
                   : item === "Shop Affiliates"
-                  ? "/shop-affiliates"
+                  ? "/shop"
                   : `/${item.toLowerCase().replace(" ", "-")}`
               }
               className="text-2xl font-black text-black border-b-2 border-red-500 hover:border-b-0 transition-all duration-300"

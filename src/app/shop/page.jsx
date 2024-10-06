@@ -49,12 +49,12 @@ const Shop = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-500 to-yellow-300 py-12 px-4 sm:px-6 lg:px-8 m-3 rounded-lg">
+    <div className="min-h-screen bg-gradient-to-br from-pink-500 to-yellow-300 py-12 px-4 sm:px-6 lg:px-8 m-3  mx-6 mt-6 mb-6 rounded-2xl border-4 border-black">
       <div className="max-w-7xl mx-auto">
         <div className="bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-8 mb-12 rounded-none">
           <div className="flex flex-col sm:flex-row items-center justify-between">
             <div className="flex items-center space-x-4 mb-4 sm:mb-0">
-              <h1 className="text-5xl text-black font-black bg-red-500 p-2 transform -rotate-2">
+              <h1 className="text-5xl text-black font-black bg-red-500 p-2 transform ">
                 Sazi Shop
               </h1>
             </div>
@@ -64,35 +64,12 @@ const Shop = () => {
           </div>
         </div>
         <div className="bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-8 rounded-none">
-          <h2 className="text-4xl font-black text-black mb-8 border-b-4 border-black pb-4 bg-green-400 inline-block transform rotate-1">
+          <h2 className="text-4xl font-black text-black mb-8 border-b-4 border-black pb-4 bg-green-400 inline-block transform ">
             ALL PRODUCTS
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {products.map((product, index) => (
               <ProductCard key={index} product={product} index={index} />
-              // <div
-              //   key={index}
-              //   className={`${cardColors[index % cardColors.length]} ${
-              //     rotations[index % rotations.length]
-              //   } transform transition-all duration-300 hover:scale-105 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-none overflow-hidden`}
-              // >
-              //   <div className="relative">
-              //     <img
-              //       src={product.image}
-              //       alt={product.name}
-              //       className="w-full h-48 object-cover"
-              //     />
-
-              //     <div className="absolute top-0 right-0 m-2">
-              //       <Dropdown items={items}></Dropdown>
-              //     </div>
-              //   </div>
-              //   <div className="p-4">
-              //     <h3 className="font-black text-black text-sm mb-2 line-clamp-2">
-              //       {product.name}
-              //     </h3>
-              //   </div>
-              // </div>
             ))}
           </div>
         </div>
