@@ -1,6 +1,7 @@
 import { hashPassword } from "@/app/helpers/bcrypt";
 import database from "../config/mongodb";
 import { z } from "zod";
+import { ObjectId } from "mongodb";
 
 const UserSchema = z.object({
   username: z.string().min(1),
@@ -16,7 +17,6 @@ class UserModel {
   static async create(user) {
     UserSchema.parse(user);
     user.password = hashPassword(user.password);
-
     const existingUser = await this.collection().findOne({
       $or: [{ email: user.email }, { username: user.username }],
     });
@@ -27,6 +27,8 @@ class UserModel {
   static async findyByEmail(email) {
     return await this.collection().findOne({ email });
   }
+  static async findById(id) {
+    return await this.collection().findOne({ _id: new ObjectId(String(id)) });
+  }
 }
-
 export default UserModel;

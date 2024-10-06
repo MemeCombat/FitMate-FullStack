@@ -6,15 +6,17 @@ export async function POST(request) {
   try {
     const { email, username, password, tags } = await request.json();
     console.log({ email, username, password, tags });
-
+    const token = 0;
     await UserModel.create({
       email,
       username,
       password,
+      token,
       tags,
     });
 
     return NextResponse.json({ message: `Success register user ${username}` });
+    
   } catch (error) {
     let message = error.message || "Internal Server Error";
     let status = error.status || 500;

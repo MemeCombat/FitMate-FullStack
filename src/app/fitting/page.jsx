@@ -1,16 +1,21 @@
 "use client";
 import React, { useState } from "react";
+import Link from "next/link";
 import NeoButton from "../components/NeoButton";
 
 const Fitting = () => {
   const [userImage, setUserImage] = useState(null);
   const [outfitImage, setOutfitImage] = useState(null);
-  const [resultImage, setResultImage] = useState(null);
+  const [userInputMethod, setUserInputMethod] = useState("upload");
+  const [outfitInputMethod, setOutfitInputMethod] = useState("upload");
+  const [userImageUrl, setUserImageUrl] = useState("");
+  const [outfitImageUrl, setOutfitImageUrl] = useState("");
 
   const handleUserImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       setUserImage(URL.createObjectURL(file));
+      setUserImageUrl("");
     }
   };
 
@@ -18,62 +23,128 @@ const Fitting = () => {
     const file = e.target.files[0];
     if (file) {
       setOutfitImage(URL.createObjectURL(file));
+      setOutfitImageUrl("");
     }
   };
 
-  const handleGenerate = () => {
-    // Simulate the image generation process
-    if (userImage && outfitImage) {
-      // Here you would usually call an API to generate the image
-      // For demonstration, we can just use the user's image
-      setResultImage(userImage);
-    }
+  const handleUserImageUrlChange = (e) => {
+    setUserImageUrl(e.target.value);
+    setUserImage(null);
   };
+
+  const handleOutfitImageUrlChange = (e) => {
+    setOutfitImageUrl(e.target.value);
+    setOutfitImage(null);
+  };
+
+  const finalUserImage = userImageUrl || userImage;
+  const finalOutfitImage = outfitImageUrl || outfitImage;
 
   return (
-    <div className="flex flex-col mt-6 mb-6 items-center justify-center min-h-screen mx-4 md:mx-6 bg-gradient-to-r from-yellow-200 via-purple-200 to-pink-200 p-8 border-4 border-black rounded-2xl shadow-lg">
-      <h1 className="text-5xl font-bold text-black mb-6 drop-shadow-md">
+    <div className="flex flex-col mt-6 mb-6 items-center justify-center min-h-screen mx-4 md:mx-6 bg-gradient-to-br from-yellow-300 to-pink-500 p-8 border-4 border-black rounded-2xl shadow-lg">
+      <h1 className="text-5xl font-bold text-black mb-6 drop-shadow-lg">
         Virtual Fitting Room
       </h1>
       <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 w-full max-w-3xl">
-        <div className="flex-1 p-4 bg-white border-2 border-black rounded-lg shadow-md">
-          <h2 className="text-2xl font-semibold text-black mb-2">
+        <div className="flex-1 p-6 bg-white border-4 border-black rounded-lg shadow-xl transform hover:scale-105 transition-transform duration-300">
+          <h2 className="text-2xl font-semibold text-black mb-4">
             Upload Your Photo
           </h2>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleUserImageChange}
-            className="border-2 border-gray-300 rounded-lg p-2 mb-4 w-full hover:border-yellow-400 transition duration-300"
-          />
+          <div className="flex space-x-4 mb-4 text">
+            <button
+              className={`px-4 py-2 rounded-lg shadow-md ${
+                userInputMethod === "upload"
+                  ? "bg-blue-500 text-white"
+                  : "bg-green-400 hover:bg-pink-400"
+              }`}
+              onClick={() => setUserInputMethod("upload")}
+            >
+              Upload Image
+            </button>
+            <button
+              className={`px-4 py-2 rounded-lg shadow-md ${
+                userInputMethod === "url"
+                  ? "bg-blue-500 text-white"
+                  : "bg-green-400 hover:bg-pink-400"
+              }`}
+              onClick={() => setUserInputMethod("url")}
+            >
+              Enter URL
+            </button>
+          </div>
+          {userInputMethod === "upload" ? (
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleUserImageChange}
+              className="border-4 border-gray-400 rounded-lg p-2 mb-4 w-full hover:border-yellow-500 transition duration-300"
+            />
+          ) : (
+            <input
+              type="text"
+              value={userImageUrl}
+              onChange={handleUserImageUrlChange}
+              placeholder="Paste image URL here"
+              className="border-4 border-black text-black rounded-lg p-2 mb-4 w-full hover:border-yellow-500 transition duration-300"
+            />
+          )}
         </div>
-        <div className="flex-1 p-4 bg-white border-2 border-black rounded-lg shadow-md">
-          <h2 className="text-2xl font-semibold text-black mb-2">
+        <div className="flex-1 p-6 bg-white border-4 border-black rounded-lg shadow-xl transform hover:scale-105 transition-transform duration-300">
+          <h2 className="text-2xl font-semibold text-black mb-4">
             Upload Outfit Photo
           </h2>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleOutfitImageChange}
-            className="border-2 border-gray-300 rounded-lg p-2 mb-4 w-full hover:border-yellow-400 transition duration-300"
-          />
+          <div className="flex space-x-4 mb-4">
+            <button
+              className={`px-4 py-2 rounded-lg shadow-md ${
+                outfitInputMethod === "upload"
+                  ? "bg-blue-500 text-white"
+                  : "bg-green-400 hover:bg-pink-400"
+              }`}
+              onClick={() => setOutfitInputMethod("upload")}
+            >
+              Upload Image
+            </button>
+            <button
+              className={`px-4 py-2 rounded-lg shadow-md ${
+                outfitInputMethod === "url"
+                  ? "bg-blue-500 text-white"
+                  : "bg-green-400 hover:bg-pink-400"
+              }`}
+              onClick={() => setOutfitInputMethod("url")}
+            >
+              Enter URL
+            </button>
+          </div>
+          {outfitInputMethod === "upload" ? (
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleOutfitImageChange}
+              className="border-4 border-black rounded-lg p-2 mb-4 w-full hover:border-yellow-500 transition duration-300"
+            />
+          ) : (
+            <input
+              type="text"
+              value={outfitImageUrl}
+              onChange={handleOutfitImageUrlChange}
+              placeholder="Paste image URL here"
+              className="border-4 border-black text-black rounded-lg p-2 mb-4 w-full hover:border-yellow-500 transition duration-300"
+            />
+          )}
         </div>
       </div>
-      <NeoButton onClick={handleGenerate} className="mt-6 mb-6">
-        Generate Fitting
-      </NeoButton>
-
-      {resultImage && (
-        <div className="mt-8 p-4 bg-white border-2 border-black rounded-lg shadow-md">
-          <h2 className="text-2xl font-semibold text-black mb-2">
-            Generated Result
-          </h2>
-          <img
-            src={resultImage}
-            alt="Generated Fitting"
-            className="rounded-lg border-4 border-black shadow-lg w-full max-w-md"
-          />
-        </div>
+      {finalUserImage && finalOutfitImage && (
+        <Link
+          href={{
+            pathname: "/generate",
+            query: { userImage: finalUserImage, outfitImage: finalOutfitImage },
+          }}
+          passHref
+        >
+          <NeoButton className="mt-6 mb-6 bg-blue-600 text-white shadow-lg hover:bg-blue-700 transition duration-300">
+            Generate Fitting
+          </NeoButton>
+        </Link>
       )}
     </div>
   );

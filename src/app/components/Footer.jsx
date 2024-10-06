@@ -1,5 +1,6 @@
 import React from "react";
 import { Twitter, Facebook, Instagram } from "lucide-react";
+import Link from "next/link"; // Import Next.js Link
 
 const Footer = () => {
   return (
@@ -22,12 +23,12 @@ const Footer = () => {
                     key={item}
                     className="transform hover:-translate-y-1 transition-transform border-l-2 border-yellow-400 pl-1"
                   >
-                    <a
+                    <Link
                       href={`/${item.toLowerCase().replace(" ", "-")}`}
                       className="text-base font-bold hover:bg-purple-600 hover:text-yellow-300 p-1 transition-colors block"
                     >
                       {item.toUpperCase()}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -37,12 +38,12 @@ const Footer = () => {
                     key={item}
                     className="transform hover:-translate-y-1 transition-transform border-l-2 border-yellow-400 pl-1"
                   >
-                    <a
+                    <Link
                       href={`/${item.toLowerCase().replace(" ", "-")}`}
                       className="text-base font-bold hover:bg-purple-600 hover:text-yellow-300 p-1 transition-colors block"
                     >
                       {item.toUpperCase()}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

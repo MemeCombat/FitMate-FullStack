@@ -27,7 +27,14 @@ export default function Dropdown({
         }}
         className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-r from-pink-500 to-yellow-500 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none"
       >
-        {children || <Settings className="h-5 w-5 text-white" />}
+        {/* Apply rotate transformation when dropdown is active */}
+        <div
+          className={`transition-transform duration-300 ${
+            isActiveDropdown ? "rotate-90" : ""
+          }`}
+        >
+          {children || <Settings className="h-5 w-5 text-white" />}
+        </div>
       </button>
       <div
         role="listbox"

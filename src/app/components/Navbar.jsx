@@ -37,7 +37,9 @@ const Navbar = () => {
         )}
       </nav>
 
-      <NeoButton className="hidden md:block">LOGIN</NeoButton>
+      <Link href="/login" className="hidden md:block">
+        <NeoButton>LOGIN</NeoButton>
+      </Link>
 
       <div className="md:hidden flex items-center">
         <button

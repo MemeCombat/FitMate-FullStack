@@ -1,8 +1,6 @@
 import React from "react";
-import Button from "../components/Button";
-import Dropdown from "../components/Dropdown";
-import { Settings } from "lucide-react";
 import ProductCard from "../components/ProductCard";
+import ButtonAddProduct from "../components/ButtonAddProduct";
 const Shop = () => {
   const products = [
     {
@@ -58,9 +56,7 @@ const Shop = () => {
                 Sazi Shop
               </h1>
             </div>
-            <Button className="transition-all duration-300 px-6 py-2 text-lg font-bold bg-blue-500 text-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none">
-              Add new product
-            </Button>
+            <ButtonAddProduct />
           </div>
         </div>
         <div className="bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-8 rounded-none">

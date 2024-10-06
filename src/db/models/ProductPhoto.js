@@ -44,7 +44,6 @@ export default class ProductPhotoModel {
 
     let query = {};
 
-    // Apply search
     if (search) {
       query.$or = [
         { name: { $regex: search, $options: "i" } },
@@ -52,14 +51,16 @@ export default class ProductPhotoModel {
       ];
     }
 
-    // Apply filters
     Object.entries(filters).forEach(([key, value]) => {
       if (value) {
         if (key === "_id") {
           query[key] = new ObjectId(value);
         } else if (key === "tags") {
-          // Handle tags as an array field
-          query[key] = { $in: [value] };
+          if (Array.isArray(value) && value.length > 0) {
+            query[key] = { $in: value };
+          } else {
+            query[key] = { $in: [value] };
+          }
         } else if (typeof value === "string") {
           query[key] = { $regex: value, $options: "i" };
         } else {
@@ -84,5 +85,12 @@ export default class ProductPhotoModel {
       totalPages: Math.ceil(totalCount / limit),
       currentPage: page,
     };
+  }
+
+  static async deleteProductPhoto(_id) {
+    const result = await this.collection().deleteOne({
+      _id: new ObjectId(_id),
+    });
+    return result.deletedCount > 0;
   }
 }
