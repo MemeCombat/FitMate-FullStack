@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { CookiesProvider } from "next-client-cookies/server";
 
 const monumentRegular = localFont({
   src: "./fonts/MonumentExtended-Regular.otf",
@@ -27,9 +28,11 @@ export default function RootLayout({ children }) {
           backgroundPosition: "center center fix",
         }}
       >
-        <Navbar />
-        {children}
-        <Footer />
+        <CookiesProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </CookiesProvider>
         <div id="modal"></div>
       </body>
     </html>

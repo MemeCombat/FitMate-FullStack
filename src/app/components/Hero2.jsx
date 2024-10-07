@@ -66,8 +66,8 @@ const Hero2 = () => {
             className="h-14 md:h-24 object-contain"
           />
           <img
-            src="https://asset-3s.3second.co.id/p/logo.png"
-            alt="Uniqlo"
+            src="https://down-id.img.susercontent.com/file/6a5fc4241b3b53139faef76ff19d2c92"
+            alt="Thxinsomnia"
             className="h-14 md:h-24 object-contain"
           />
         </div>
@@ -82,7 +82,7 @@ const Hero2 = () => {
             <Card image={product.image}>
               <div className="p-4 bg-white rounded-lg shadow-lg hover:shadow-2xl transition duration-300">
                 <p className="text-xl font-semibold text-gray-800">
-                  {product.description}
+                  {product.title}
                 </p>
                 <p className="text-sm text-gray-600">Size: {product.size}</p>
                 <Link

@@ -16,7 +16,7 @@ const ProductDetail = () => {
       if (_id) {
         try {
           const response = await fetch(
-            `${process.env.NEXT_PUBLIC_BASE_URL}/api/pub/productPhotoPub/${_id}`
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/pub/product/${_id}`
           );
           const data = await response.json();
           setProduct(data);
@@ -88,10 +88,16 @@ const ProductDetail = () => {
           </div>
         </div>
 
-        <NeoButton className="w-full bg-green-500 hover:bg-green-600 text-white text-xl font-bold py-4 px-6 transition duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center">
-          <ShoppingCart className="mr-2" size={24} />
-          Go Shopping Now
-        </NeoButton>
+        <a
+          href={product.linkReferensi}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <NeoButton className="w-full bg-green-500 hover:bg-green-600 text-white text-xl font-bold py-4 px-6 transition duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center">
+            <ShoppingCart className="mr-2" size={24} />
+            Go Shopping Now
+          </NeoButton>
+        </a>
       </div>
     </div>
   );
