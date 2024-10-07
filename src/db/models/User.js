@@ -30,5 +30,10 @@ class UserModel {
   static async findById(id) {
     return await this.collection().findOne({ _id: new ObjectId(String(id)) });
   }
+  static async updateToken(userId,final){
+    console.log("final: ", final);
+    console.log("userId: ", userId);
+    return await this.collection().findOneAndUpdate({_id:new ObjectId(String(userId))},{$set:{token : final}})
+  }
 }
 export default UserModel;

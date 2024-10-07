@@ -23,6 +23,15 @@ async function generateTransaction(user, productId, findPackage) {
       credit_card: {
         secure: true,
       },
+      item_details: [
+        {
+          "id": findPackage._id,
+          "price": findPackage.price,
+          "quantity": 1,
+          "name": findPackage.type,
+          "token" : findPackage.token
+        },
+      ],
       customer_details: {
         first_name: user.username,
         last_name: "",
@@ -62,11 +71,11 @@ export async function POST(request) {
     //check jenis transaction nya apa
     if (transactionType === "topUp") {
       //final buat nge record token user berapa buat bikin history
-      final = user.token + findPackage.price;
-      console.log("final: ", final);
+      final = user.token + findPackage.token;
+      // console.log("final: ", final);
     } else if (transactionType === "payment") {
-      final = user.token - findPackage.price;
-      console.log("final: ", final);
+      final = user.token - findPackage.token;
+      // console.log("final: ", final);
     } else {
       throw { message: "Transaction Type Not Found", status: 404 };
     }

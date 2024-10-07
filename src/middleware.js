@@ -6,7 +6,7 @@ import ErrorHandler from "./app/helpers/errorHandler";
 
 async function auth(request) {
   const authCookie = cookies().get("Authorization");
-  console.log("authCookie: ", authCookie);
+  // console.log("authCookie: ", authCookie);
   if (!authCookie) throw { message: "Unouthorized", status: 400 };
   const [type, token] = authCookie.value.split(" ");
   console.log("token: ", token);
