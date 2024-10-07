@@ -32,6 +32,12 @@ export default class ProductPhotoModel {
     });
   }
 
+  static async getProductByProductId(_id) {
+    return await this.collection().findOne({
+      _id: new ObjectId(_id),
+    });
+  }
+
   static async getAllPhoto({
     page = 1,
     limit = 10,
