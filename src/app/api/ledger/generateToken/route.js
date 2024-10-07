@@ -46,12 +46,8 @@ async function generateTransaction(user, productId, findPackage) {
 
 export async function POST(request) {
   try {
-    console.log("masuk");
     const userId = request.headers.get("x-user-id");
-    console.log("userId: ", userId);
     let { transactionType, PackageType } = await request.json();
-    console.log("PackageType: ", PackageType);
-    console.log("transactionType: ", transactionType);
     //get user information kayak gimana
     const user = await UserModel.findById(userId);
     console.log("user: ", user);
