@@ -30,10 +30,18 @@ class UserModel {
   static async findById(id) {
     return await this.collection().findOne({ _id: new ObjectId(String(id)) });
   }
-  static async updateToken(userId,final){
-    console.log("final: ", final);
-    console.log("userId: ", userId);
-    return await this.collection().findOneAndUpdate({_id:new ObjectId(String(userId))},{$set:{token : final}})
+  static async updateToken(userId, final) {
+    return await this.collection().findOneAndUpdate(
+      { _id: new ObjectId(String(userId)) },
+      { $set: { token: final } }
+    );
+  }
+  static async decreaseToken(userId) {
+    return await this.collection().findOneAndUpdate(
+      { _id: new ObjectId(String(userId)), token: { $gt: 0 } },
+      { $inc: { token: -1 } },
+      { returnOriginal: false }
+    );
   }
 }
 export default UserModel;

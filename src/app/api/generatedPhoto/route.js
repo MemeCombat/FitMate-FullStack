@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 import ImageKit from "imagekit";
 import generatedPhotoModel from "../../../db/models/generatedPhoto";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import UserModel from "../../../db/models/User"
+
 const genAI = new GoogleGenerativeAI(process.env. API_KEY);
 console.log("genAI: ", genAI);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -44,7 +46,9 @@ export async function POST(request) {
   const formData = await request.formData();
 
   const personPhoto = formData.get("personPhoto");
+  console.log("personPhoto: ", personPhoto);
   const shirtPhoto = formData.get("shirtPhoto");
+  console.log("shirtPhoto: ", shirtPhoto);
 
   const age = formData.get("age") || "unknown";
   const weight = formData.get("weight") || "unknown";
@@ -58,9 +62,10 @@ export async function POST(request) {
   let shirtPhotoBase64URI = await processPhoto(shirtPhoto);
 
   try {
+    
     const result = await fal.subscribe("fal-ai/omni-zero", {
       input: {
-        prompt: `A ${gender} with ${age} years old, ${height} cm tall, ${weight}kg`,
+        prompt: `A ${gender} with ${age} years old, ${height} cm tall, ${weight}kg , make it realistic  , no fillter , no beautify`,
         image_url: personPhotoBase64URI,
         composition_image_url: personPhotoBase64URI,
         style_image_url: shirtPhotoBase64URI,
@@ -74,14 +79,14 @@ export async function POST(request) {
       },
     });
 
+    console.log("result: ", result);
     const signedUrl = result.image.url;
-
-    // console.log("signedUrl: ", signedUrl);
     const userId = request.headers.get("x-user-id");
-    // console.log("userId: ", userId);
+    const decreased = await UserModel.decreaseToken(userId)
+    if(!decreased) throw { message : "inffused token" , status : 400}
     const resultImage = await imagekit.upload({
-      file: signedUrl, // required
-      fileName: `user-photo-userid:${userId}-date:${new Date()}`, // required
+      file: signedUrl, 
+      fileName: `user-photo-userid:${userId}-date:${new Date()}`, 
       isPublished: true,
     });
 
