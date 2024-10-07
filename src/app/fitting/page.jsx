@@ -1,5 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 import Link from "next/link";
 import NeoButton from "../components/NeoButton";
 
@@ -10,6 +12,27 @@ const Fitting = () => {
   const [outfitInputMethod, setOutfitInputMethod] = useState("upload");
   const [userImageUrl, setUserImageUrl] = useState("");
   const [outfitImageUrl, setOutfitImageUrl] = useState("");
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("Authorization="))
+      ?.split("=")[1];
+
+    if (!token) {
+      Swal.fire({
+        icon: "warning",
+        title: "You must log in first!",
+        text: "Please log in to access the fitting room.",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#3085d6",
+      }).then(() => {
+        router.push("/login");
+      });
+    }
+  }, [router]);
 
   const handleUserImageChange = (e) => {
     const file = e.target.files[0];
