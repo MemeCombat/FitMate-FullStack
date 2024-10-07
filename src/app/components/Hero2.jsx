@@ -1,9 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Link from "next/link";
 import NeoButton from "./NeoButton";
-import Card from "./Card";
 import Card from "./Card";
 
 const Hero2 = () => {
@@ -54,17 +52,17 @@ const Hero2 = () => {
           />
           <img
             src="https://blogger.googleusercontent.com/img/a/AVvXsEgGVv8Gi2XDoITQQ71GYXj2NFhd2XI4AHn1xFckht8rUAxADZX7FNs5vG0uHzGNe-kaEIohMcNcg8Q5mVPWYbW2pPjQKsc3PYeE8xdnUEPPFDQVzrQGg9aNXAuV1JxYRGTeEBTs_UOL1P_Wwe_IlxZgKsgoOJx2Af-0itDL4vDzeNvKWPBDSoeAwj30EQ=w226-h320"
-            alt="3second"
+            alt="Mills"
             className="h-14 md:h-24 object-contain"
           />
           <img
             src="https://logos-world.net/wp-content/uploads/2020/04/Tommy-Hilfiger-Logo.png"
-            alt="Gucci"
+            alt="Tommy Hilfiger"
             className="h-14 md:h-24 object-contain"
           />
           <img
             src="https://w7.pngwing.com/pngs/586/74/png-transparent-jumpman-air-jordan-nike-logo-brand-nike-physical-fitness-hand-sticker.png"
-            alt="Shopify"
+            alt="Air Jordan"
             className="h-14 md:h-24 object-contain"
           />
           <img

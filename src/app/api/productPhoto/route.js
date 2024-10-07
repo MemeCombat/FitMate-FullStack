@@ -23,6 +23,7 @@ var imagekit = new ImageKit({
 export async function POST(request) {
   try {
     const formData = await request.formData();
+    // console.log("formData: ", formData);
 
     const image = formData.get("image");
     const size = formData.get("size");
@@ -43,7 +44,9 @@ export async function POST(request) {
     });
 
     const userId = request.headers.get("x-user-id");
+    // console.log("userId: ", userId);
     const { _id: storeId } = await StoreModel.getStoreByUserId(userId);
+    // console.log("_id: ", _id);
 
     await ProductPhotoModel.createPhoto(
       resultImage.url,
