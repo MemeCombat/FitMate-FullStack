@@ -10,7 +10,6 @@ export async function GET(request) {
     const sortOrder = searchParams.get("sortOrder") || "desc";
     const search = searchParams.get("search") || "";
 
-    // Parse filters from query params
     const filters = {};
     for (const [key, value] of searchParams.entries()) {
       if (

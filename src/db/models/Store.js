@@ -45,7 +45,10 @@ class StoreModel {
 
   static async getStoreByUserId(userId) {
     const collection = await this.collection();
+    // console.log("collection: ", collection);
     const store = await collection.findOne({ userId: userId });
+    if (!store) throw new Error("You Need To Make Store First");
+    // console.log("store: ", store);
     return store;
   }
 

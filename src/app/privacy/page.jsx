@@ -141,22 +141,6 @@ const Privacy = () => {
         updating the effective date at the top. You are advised to review this
         Privacy Policy periodically for any changes.
       </p>
-
-      <h2 className="text-3xl font-semibold mt-6 text-gray-800">Contact Us</h2>
-      <p className="mb-4 text-gray-700">
-        If you have any questions or concerns about this Privacy Policy or our
-        practices regarding your personal information, please contact us at:
-      </p>
-      <p className="text-gray-700">
-        <strong>FitMate</strong>
-        <br />
-        Email: stylewith@fitmate.com
-        <br />
-        Phone: 08123456789
-        <br />
-        Address: Iskandar Muda Street
-        <br />
-      </p>
     </section>
   );
 };
