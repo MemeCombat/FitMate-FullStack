@@ -11,7 +11,7 @@ const Thanks = () => {
           Thank you
         </h1>
         <div className="flex justify-center mb-8">
-          <h2 className="text-5xl font-extrabold text-black uppercase bg-green-400 inline-block p-3 shadow-[8px_8px_0_0_#000] transform -rotate-2">
+          <h2 className="text-5xl font-extrabold text-black uppercase bg-green-400 inline-block p-3 shadow-[8px_8px_0_0_#000] transform">
             For your order
           </h2>
         </div>
@@ -22,8 +22,8 @@ const Thanks = () => {
           Don't forget to subscribe to our newsletter to get updates on our new
           products or exclusive discounts.
         </p>
-        <div className="flex flex-col items-center bg-blue-500 p-6 border-4 border-black shadow-[8px_8px_0_0_#000]">
-          <button className="bg-red-500 text-white font-black py-4 px-10 border-4 border-black uppercase text-2xl hover:bg-red-600 transition-colors shadow-[4px_4px_0_0_#000] transform hover:translate-x-1 hover:translate-y-1">
+        <div className="flex justify-center">
+          <button className="bg-red-500 text-white font-black py-4 px-10 border-4 border-black uppercase text-2xl hover:bg-red-600 transition-colors shadow-[4px_4px_0_0_#000] transform hover:translate-x-1 hover:translate-y-1 justify-center flex items-center">
             Go Fitting
           </button>
         </div>
