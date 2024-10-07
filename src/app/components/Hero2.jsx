@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import Link from "next/link"; // Import Link from next/link
+import Link from "next/link";
 import NeoButton from "./NeoButton";
-import ImageCard from "./ImageCard";
+import Card from "./Card";
 
 const Hero2 = () => {
   const [products, setProducts] = useState([]);
@@ -52,17 +52,17 @@ const Hero2 = () => {
           />
           <img
             src="https://blogger.googleusercontent.com/img/a/AVvXsEgGVv8Gi2XDoITQQ71GYXj2NFhd2XI4AHn1xFckht8rUAxADZX7FNs5vG0uHzGNe-kaEIohMcNcg8Q5mVPWYbW2pPjQKsc3PYeE8xdnUEPPFDQVzrQGg9aNXAuV1JxYRGTeEBTs_UOL1P_Wwe_IlxZgKsgoOJx2Af-0itDL4vDzeNvKWPBDSoeAwj30EQ=w226-h320"
-            alt="3second"
+            alt="Mills"
             className="h-14 md:h-24 object-contain"
           />
           <img
             src="https://logos-world.net/wp-content/uploads/2020/04/Tommy-Hilfiger-Logo.png"
-            alt="Gucci"
+            alt="Tommy Hilfiger"
             className="h-14 md:h-24 object-contain"
           />
           <img
             src="https://w7.pngwing.com/pngs/586/74/png-transparent-jumpman-air-jordan-nike-logo-brand-nike-physical-fitness-hand-sticker.png"
-            alt="Shopify"
+            alt="Air Jordan"
             className="h-14 md:h-24 object-contain"
           />
           <img
@@ -76,31 +76,26 @@ const Hero2 = () => {
         </NeoButton>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1 w-full ">
-        {products.slice(0, 5).map((product, index) => {
-          const rotationClass = index % 2 === 0 ? "rotate-2" : "-rotate-2";
-
-          return (
-            <div key={product._id} className={`transform ${rotationClass}`}>
-              <ImageCard image={product.image || product.imgUrl}>
-                <div className="p-4 bg-white rounded-lg shadow-lg hover:shadow-2xl transition duration-300">
-                  <p className="text-xl font-semibold text-gray-800">
-                    {product.description}
-                  </p>
-                  <p className="text-sm text-gray-600">Size: {product.size}</p>
-                  <a
-                    href={product.linkReferensi}
-                    className="text-indigo-500 hover:text-indigo-700 hover:underline mt-2 inline-block"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View More
-                  </a>
-                </div>
-              </ImageCard>
-            </div>
-          );
-        })}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 w-full">
+        {products.slice(0, 5).map((product) => (
+          <div key={product._id}>
+            <Card image={product.image}>
+              <div className="p-4 bg-white rounded-lg shadow-lg hover:shadow-2xl transition duration-300">
+                <p className="text-xl font-semibold text-gray-800">
+                  {product.description}
+                </p>
+                <p className="text-sm text-gray-600">Size: {product.size}</p>
+                <Link
+                  href={`/product/${product._id}`}
+                  passHref
+                  className="text-indigo-500 hover:text-indigo-700 hover:underline mt-2 inline-block"
+                >
+                  View Detail
+                </Link>
+              </div>
+            </Card>
+          </div>
+        ))}
       </div>
 
       <div className="w-full flex justify-center">

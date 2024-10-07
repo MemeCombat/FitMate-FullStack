@@ -8,6 +8,7 @@ export default class ProductPhotoModel {
   }
 
   static async createPhoto(
+    title,
     image,
     storeId,
     size,
@@ -16,6 +17,7 @@ export default class ProductPhotoModel {
     tags
   ) {
     const newPhoto = {
+      title: title,
       image: image,
       storeId: storeId,
       size: size,
