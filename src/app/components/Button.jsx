@@ -2,7 +2,7 @@
 
 import { cn } from "../../lib/utils";
 
-export default function Button({ className, children, onClick }) {
+export default function Button({ className, children, onClick, label }) {
   return (
     <button
       role="button"
@@ -14,6 +14,7 @@ export default function Button({ className, children, onClick }) {
       )}
     >
       {children}
+      {label}
     </button>
   );
 }

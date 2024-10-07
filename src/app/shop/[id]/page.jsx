@@ -12,17 +12,17 @@ const ShopDetail = () => {
 
   return (
     <div className="flex flex-col border-4 border-black mx-6 md:flex-row items-center justify-center p-8 bg-gradient-to-br from-yellow-400 to-purple-400 min-h-screen font-mono m-3 rounded-xl">
-      <div className="w-full md:w-2/3 flex justify-center mb-8 md:mb-0">
+      <div className="w-full md:w-1/2 flex justify-center mb-8 md:mb-0">
         <div className="border-8 border-black text-black bg-white p-6 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)]">
           <img
             src="https://ds393qgzrxwzn.cloudfront.net/resize/m400x400/cat1/img/images/0/HMTuJI0MhR.jpg"
             alt="Greenlight Men's T-Shirt"
-            className="w-full h-auto"
+            className="h-[550px] w-[550px] object-cover"
           />
         </div>
       </div>
 
-      <div className="w-full md:w-1/3 space-y-6">
+      <div className="w-full md:w-1/2 space-y-6">
         <h1 className="text-5xl font-black text-white bg-blue-600 p-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
           Greenlight Men's T-Shirt
         </h1>
