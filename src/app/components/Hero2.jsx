@@ -75,26 +75,22 @@ const Hero2 = () => {
           View all brands
         </NeoButton>
       </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 w-full">
-        {products.slice(0, 5).map((product) => (
-          <div key={product._id}>
-            <Card image={product.image}>
-              <div className="p-4 bg-white rounded-lg shadow-lg hover:shadow-2xl transition duration-300">
-                <p className="text-xl font-semibold text-gray-800">
-                  {product.description}
-                </p>
-                <p className="text-sm text-gray-600">Size: {product.size}</p>
-                <Link
-                  href={`/product/${product._id}`}
-                  passHref
-                  className="text-indigo-500 hover:text-indigo-700 hover:underline mt-2 inline-block"
-                >
-                  View Detail
-                </Link>
-              </div>
-            </Card>
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full h-full">
+        {products.map((product) => (
+          <ImageCard key={product._id} imgaeUrl={product.imgUrl}>
+            <div>
+              <p className="text-lg font-semibold">{product.description}</p>
+              <p className="text-sm text-gray-500">Size: {product.size}</p>
+              <a
+                href={product.linkReferensi}
+                className="text-blue-500 hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View More
+              </a>
+            </div>
+          </ImageCard>
         ))}
       </div>
 
