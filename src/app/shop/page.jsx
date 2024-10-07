@@ -14,38 +14,7 @@ const Shop = () => {
       image:
         "https://kombas.co.id/wp-content/uploads/2023/01/white-denim-jacket-front-view-streetwear-fashion-scaled.jpg",
     },
-    {
-      name: "Jilbab Sport Hamidah S M L",
-      price: "Rp8.800",
-      discount: "2%",
-      rating: "4.4",
-      sales: "10RB+",
-      image: "/images/jilbab2.jpg",
-    },
-    {
-      name: "Inner Turki / Inner Turki / Cepol",
-      price: "Rp10.700",
-      discount: "57%",
-      rating: "4.8",
-      sales: "10RB+",
-      image: "/images/jilbab3.jpg",
-    },
-    {
-      name: "Jilbab Sport Grade B / Bergo Sport S / Jilbab Voll",
-      price: "Rp6.175",
-      discount: "38%",
-      rating: "4.5",
-      sales: "10RB+",
-      image: "/images/jilbab4.jpg",
-    },
-    {
-      name: "Jilbab Hamidah S M L",
-      price: "Rp12.478",
-      discount: "11%",
-      rating: "4.4",
-      sales: "3,3RB",
-      image: "/images/jilbab5.jpg",
-    },
+    // Other products...
   ];
 
   const cardColors = [
