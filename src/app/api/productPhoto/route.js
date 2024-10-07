@@ -24,6 +24,7 @@ export async function POST(request) {
   try {
     const formData = await request.formData();
 
+    const title = formData.get("title");
     const image = formData.get("image");
     const size = formData.get("size");
     const description = formData.get("description");
@@ -46,6 +47,7 @@ export async function POST(request) {
     const { _id: storeId } = await StoreModel.getStoreByUserId(userId);
 
     await ProductPhotoModel.createPhoto(
+      title,
       resultImage.url,
       storeId,
       size ? size.split(",").map((el) => el.trim()) : [],
