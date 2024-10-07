@@ -1,10 +1,25 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, use } from "react";
 import Link from "next/link";
 import NeoButton from "./NeoButton";
+import { useCookies } from "next-client-cookies";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [token, setToken] = useState(null);
+  const cookies = useCookies();
+  useEffect(() => {
+    const tokenFromCookies = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("Authorization="))
+      ?.split("=")[1];
+
+    setToken(tokenFromCookies);
+  }, []);
+
+  // const handleLogout = () => {
+  //   cookies.remove("Authorization");
+  // };
 
   return (
     <header className="flex justify-between mt-1 items-center p-4 bg-gradient-to-r from-yellow-200 via-purple-200 to-pink-200 border-4 border-black shadow-lg rounded-2xl mx-6">
@@ -16,7 +31,7 @@ const Navbar = () => {
       </Link>
 
       <nav
-        className={`md:flex space-x-8 ${isOpen ? "block" : "hidden"} md:block `}
+        className={`md:flex space-x-8 ${isOpen ? "block" : "hidden"} md:block`}
       >
         {["Shop Affiliates", "Fitting Room", "Product", "Company"].map(
           (item) => (
@@ -37,9 +52,18 @@ const Navbar = () => {
         )}
       </nav>
 
-      <Link href="/login" className="hidden md:block">
-        <NeoButton>LOGIN</NeoButton>
-      </Link>
+      {token ? (
+        <NeoButton
+          onClick={() => cookies.remove("Authorization")}
+          className="hidden md:block"
+        >
+          LOGOUT
+        </NeoButton>
+      ) : (
+        <Link href="/login" className="hidden md:block">
+          <NeoButton>LOGIN</NeoButton>
+        </Link>
+      )}
 
       <div className="md:hidden flex items-center">
         <button

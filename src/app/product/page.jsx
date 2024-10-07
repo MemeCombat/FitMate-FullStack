@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import NeoButton from "../components/NeoButton";
+import Link from "next/link";
 
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
@@ -51,28 +52,27 @@ const ProductPage = () => {
             <Card image={product.image || product.imgUrl}>
               <div className="p-4 bg-white rounded-lg shadow-lg transition-transform duration-300 transform group-hover:scale-105">
                 <p className="text-xl font-semibold text-gray-800 mb-2">
-                  {product.description}
+                  {product.title}
                 </p>
                 <p className="text-sm text-gray-600">Size: {product.size}</p>
-                <a
-                  href={product.linkReferensi}
-                  className="text-indigo-500 hover:text-indigo-700 hover:underline mt-2 inline-block"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Details
-                </a>
+                {/* Change to Link component for routing */}
+                <Link href={`/product/${product._id}`}>
+                  <span className="text-indigo-500 hover:text-indigo-700 hover:underline mt-2 inline-block cursor-pointer">
+                    View Details
+                  </span>
+                </Link>
               </div>
             </Card>
           </div>
         ))}
       </div>
-
-      <div className="mt-8 flex justify-center">
-        <NeoButton className="bg-black text-white hover:bg-blue-500 transition duration-300 rounded-lg px-8 py-4 shadow-lg">
-          Back to Home
-        </NeoButton>
-      </div>
+      <Link href="/">
+        <div className="mt-8 flex justify-center">
+          <NeoButton className="bg-black text-white hover:bg-blue-500 transition duration-300 rounded-lg px-8 py-4 shadow-lg">
+            Back to Home
+          </NeoButton>
+        </div>
+      </Link>
     </section>
   );
 };
