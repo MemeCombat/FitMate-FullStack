@@ -18,23 +18,21 @@ const Navbar = () => {
       <nav
         className={`md:flex space-x-8 ${isOpen ? "block" : "hidden"} md:block `}
       >
-        {["Shop Affiliates", "Fitting Room", "Product", "Company"].map(
-          (item) => (
-            <Link
-              key={item}
-              href={
-                item === "Fitting Room"
-                  ? "/fitting"
-                  : item === "Shop Affiliates"
-                  ? "/shop"
-                  : `/${item.toLowerCase().replace(" ", "-")}`
-              }
-              className="text-2xl font-black text-black border-b-2 border-red-500 hover:border-b-0 transition-all duration-300"
-            >
-              {item}
-            </Link>
-          )
-        )}
+        {["My Shop", "Fitting Room", "Product", "Company"].map((item) => (
+          <Link
+            key={item}
+            href={
+              item === "Fitting Room"
+                ? "/fitting"
+                : item === "My Shop"
+                ? "/shop"
+                : `/${item.toLowerCase().replace(" ", "-")}`
+            }
+            className="text-2xl font-black text-black border-b-2 border-red-500 hover:border-b-0 transition-all duration-300"
+          >
+            {item}
+          </Link>
+        ))}
       </nav>
 
       <Link href="/login" className="hidden md:block">

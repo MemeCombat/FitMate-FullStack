@@ -3,12 +3,7 @@
 import { useState } from "react";
 import { Settings } from "lucide-react";
 
-export default function Dropdown({
-  items,
-  children,
-  setIsModalActive,
-  isModalActive,
-}) {
+export default function Dropdown({ items, children, setIsModalActive }) {
   const [isActiveDropdown, setIsActiveDropdown] = useState(false);
 
   return (
@@ -42,15 +37,19 @@ export default function Dropdown({
         {items.map((item, index) => (
           <a
             key={index}
-            href={item.link}
+            href={item.link || "#"}
             className={`block w-full border-b-2 border-black last:border-b-0 px-4 py-2 no-underline transition-colors ${
               index % 2 === 0
-                ? "bg-red-500 text-white hover:bg-red-700"
-                : "bg-blue-500 text-white hover:bg-blue-700"
+                ? "bg-red-500 text-gray-950 hover:bg-red-700"
+                : "bg-blue-500 text-gray-950 hover:bg-blue-700"
             }`}
             onClick={(e) => {
-              if (item.name === "Updated") {
+              if (item.onClick) {
                 e.preventDefault();
+                item.onClick();
+              } else if (item.name === "Update") {
+                e.preventDefault();
+                console.log("Update clicked in Dropdown");
                 setIsModalActive(true);
               }
             }}
