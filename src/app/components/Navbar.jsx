@@ -51,7 +51,7 @@ const Navbar = () => {
             href={
               item === "Fitting Room"
                 ? "/fitting"
-                : item === "Shop Affiliates"
+                : item === "My Shop"
                 ? "/shop"
                 : `/${item.toLowerCase().replace(" ", "-")}`
             }
