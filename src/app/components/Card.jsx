@@ -7,7 +7,7 @@ const Card = ({ image, children, cardColor, rotation, DropdownComponent }) => {
     >
       <div className="relative">
         <img
-          className="w-full h-[200px] object-cover transition-transform duration-300 ease-in-out hover:scale-110"
+          className="w-full h-[200px] object-contain transition-transform duration-300 ease-in-out hover:scale-110"
           src={image}
           alt="product"
         />
