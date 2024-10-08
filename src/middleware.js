@@ -16,7 +16,7 @@ async function auth(request) {
   const requestHeaders = new Headers(request.headers);
   console.log("payloadTyped: ", payload);
   requestHeaders.set("x-user-id", payload._id);
-  
+
   return requestHeaders;
 }
 
@@ -35,6 +35,13 @@ export async function middleware(request) {
   }
 }
 export const config = {
-   //midleware cuman buat protect back end klo nge fetch
-  matcher: ["/api/store/", "/api/productPhoto" , "/api/generatedPhoto" , "/api/ledger" , "/api/ledger/generateToken"], //midleware cuman buat protect back end klo nge fetch
+  //midleware cuman buat protect back end klo nge fetch
+  matcher: [
+    "/api/store/",
+    "/api/productPhoto",
+    "/api/generatedPhoto",
+    "/api/ledger",
+    "/api/ledger/generateToken",
+    "/api/generatedPhoto/userId/:userId",
+  ], //midleware cuman buat protect back end klo nge fetch
 };
