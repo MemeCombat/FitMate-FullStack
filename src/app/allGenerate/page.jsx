@@ -9,7 +9,7 @@ const AllGeneratePage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    fetch("/api/generatedPhotos")
+    fetch("/api/generatedPhoto/userId")
       .then((response) => response.json())
       .then((data) => setPhotos(data))
       .catch((error) => console.error("Error fetching photos:", error));

@@ -2,7 +2,6 @@ import generatedPhotoModel  from "../../../../db/models/generatedPhoto";
 
 export async function GET(request, { params }) {
   const productId = params.id;
-
   if (productId) {
     console.log("Product ID:", productId);
     const data = await generatedPhotoModel.getPhotoById(productId);
