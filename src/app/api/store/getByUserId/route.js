@@ -1,4 +1,4 @@
-import StoreModel from "@/db/models/Store";
+import StoreModel from "../../../../db/models/Store";
 
 export async function GET(request) {
   try {
