@@ -144,7 +144,7 @@ export default function Register() {
                 name="tags"
                 value={fashionOptions.filter((option) =>
                   user.tags.includes(option.value)
-                )} // Map selected tags to options
+                )}
                 options={fashionOptions}
                 className="text-xl text-black"
                 classNamePrefix="select"

@@ -1,10 +1,12 @@
 "use client";
 import React, { useState } from "react";
+import Select from "react-select";
 import Dropdown from "./Dropdown";
 import Modal from "./Modal";
 
 const ProductCard = ({ product, index }) => {
   const [isModalActive, setIsModalActive] = useState(false);
+  const [selectedTags, setSelectedTags] = useState([]);
 
   const cardColors = [
     "bg-yellow-300",
@@ -19,12 +21,27 @@ const ProductCard = ({ product, index }) => {
       name: "Delete",
       link: "",
     },
-
     {
       name: "Update",
       link: "/update",
     },
   ];
+
+  const tagOptions = [
+    { value: "casual", label: "Casual" },
+    { value: "formal", label: "Formal" },
+    { value: "streetwear", label: "Streetwear" },
+    { value: "vintage", label: "Vintage" },
+    { value: "bohemian", label: "Bohemian" },
+    { value: "minimalist", label: "Minimalist" },
+    { value: "athleisure", label: "Athleisure" },
+    { value: "preppy", label: "Preppy" },
+  ];
+
+  const handleTagChange = (selectedOptions) => {
+    setSelectedTags(selectedOptions);
+  };
+
   return (
     <div
       key={index}
@@ -38,7 +55,6 @@ const ProductCard = ({ product, index }) => {
           alt={product.name}
           className="w-full h-48 object-cover"
         />
-
         <div className="absolute top-0 right-0 m-2">
           <Dropdown
             items={items}
@@ -69,27 +85,29 @@ const ProductCard = ({ product, index }) => {
             <div className="overflow-y-auto max-h-[70vh] p-6 space-y-6">
               <div>
                 <label
-                  htmlFor="productName"
+                  htmlFor="title"
                   className="block text-lg font-bold mb-2 text-black"
                 >
                   Product Name
                 </label>
                 <input
+                  name="title"
                   type="text"
-                  id="productName"
+                  id="title"
                   className="w-full p-3 border-2 text-black border-black rounded focus:outline-none focus:ring-2 focus:ring-blue-500 bg-green-100 transition-shadow duration-300"
                   placeholder="Enter product name"
                 />
               </div>
               <div>
                 <label
-                  htmlFor="productDescription"
+                  htmlFor="description"
                   className="block text-lg font-bold mb-2 text-black"
                 >
                   Product Description
                 </label>
                 <textarea
-                  id="productDescription"
+                  name="description"
+                  id="description"
                   className="w-full p-3 border-2 text-black border-black rounded focus:outline-none focus:ring-2 focus:ring-blue-500 bg-orange-100 transition-shadow duration-300"
                   rows="4"
                   placeholder="Enter product description"
@@ -97,27 +115,85 @@ const ProductCard = ({ product, index }) => {
               </div>
               <div>
                 <label
-                  htmlFor="shopLink"
+                  htmlFor="linkReferensi"
                   className="block text-lg font-bold mb-2 text-black"
                 >
-                  Shop Link
+                  Link Reference
                 </label>
                 <input
                   type="url"
-                  id="shopLink"
+                  name="linkReferensi"
+                  id="linkReferensi"
                   className="w-full p-3 border-2 border-black text-black rounded focus:outline-none focus:ring-2 focus:ring-blue-500 bg-blue-100 transition-shadow duration-300"
                   placeholder="Enter shop link"
                 />
               </div>
               <div>
                 <label
-                  htmlFor="uploadFile1"
+                  type="text"
+                  name="tags"
+                  htmlFor="tags"
                   className="block text-lg font-bold mb-2 text-black"
                 >
-                  Upload File
+                  Product Tags
+                </label>
+                <Select
+                  id="tags"
+                  options={tagOptions}
+                  isMulti
+                  value={selectedTags}
+                  onChange={handleTagChange}
+                  className="react-select-container"
+                  classNamePrefix="react-select"
+                  styles={{
+                    control: (provided) => ({
+                      ...provided,
+                      borderColor: "black",
+                      borderWidth: "2px",
+                      borderRadius: "4px",
+                      backgroundColor: "#e0f2fe",
+                      "&:hover": {
+                        borderColor: "black",
+                      },
+                    }),
+                    option: (provided, state) => ({
+                      ...provided,
+                      backgroundColor: state.isSelected
+                        ? "#60a5fa"
+                        : state.isFocused
+                        ? "#93c5fd"
+                        : "white",
+                      color: state.isSelected ? "white" : "black",
+                    }),
+                    multiValue: (provided) => ({
+                      ...provided,
+                      backgroundColor: "#93c5fd",
+                    }),
+                    multiValueLabel: (provided) => ({
+                      ...provided,
+                      color: "black",
+                    }),
+                    multiValueRemove: (provided) => ({
+                      ...provided,
+                      color: "black",
+                      ":hover": {
+                        backgroundColor: "#60a5fa",
+                        color: "white",
+                      },
+                    }),
+                  }}
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="image"
+                  className="block text-lg font-bold mb-2 text-black"
+                >
+                  Upload Image
                 </label>
                 <label
-                  htmlFor="uploadFile1"
+                  htmlFor="image"
+                  name="image"
                   className="bg-purple-300 text-gray-800 font-bold text-lg rounded flex flex-col items-center justify-center cursor-pointer border-4 border-black p-4 transition-transform hover:translate-x-1 hover:translate-y-1 hover:bg-purple-400"
                 >
                   <svg
@@ -129,7 +205,7 @@ const ProductCard = ({ product, index }) => {
                     <path d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z" />
                   </svg>
                   Upload file
-                  <input type="file" id="uploadFile1" className="hidden" />
+                  <input type="file" id="image" className="hidden" />
                   <p className="text-sm font-medium text-gray-800 mt-2">
                     PNG, JPG, SVG, WEBP, and GIF are allowed.
                   </p>

@@ -1,7 +1,4 @@
 import React from "react";
-import Button from "../components/Button";
-import Card from "../components/Card";
-import Dropdown from "../components/Dropdown";
 import ButtonAddProduct from "../components/ButtonAddProduct";
 import ProductCard from "../components/ProductCard";
 
@@ -24,7 +21,7 @@ const Shop = () => {
         <div className="bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-8 mb-12 rounded-none">
           <div className="flex flex-col sm:flex-row items-center justify-between">
             <h1 className="text-5xl text-black font-black bg-red-500 p-2 transform">
-              Sazi Shop
+              Ghazi Shop
             </h1>
             <ButtonAddProduct />
           </div>

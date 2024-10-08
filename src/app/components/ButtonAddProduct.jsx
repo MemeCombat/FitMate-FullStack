@@ -1,9 +1,26 @@
 "use client";
 import { useState } from "react";
+import Select from "react-select";
 import Modal from "./Modal";
 
 function ButtonAddProduct() {
   const [isModalActive, setIsModalActive] = useState(false);
+  const [selectedTags, setSelectedTags] = useState([]);
+
+  const tagOptions = [
+    { value: "casual", label: "Casual" },
+    { value: "formal", label: "Formal" },
+    { value: "streetwear", label: "Streetwear" },
+    { value: "vintage", label: "Vintage" },
+    { value: "bohemian", label: "Bohemian" },
+    { value: "minimalist", label: "Minimalist" },
+    { value: "athleisure", label: "Athleisure" },
+    { value: "preppy", label: "Preppy" },
+  ];
+
+  const handleTagChange = (selectedOptions) => {
+    setSelectedTags(selectedOptions);
+  };
 
   return (
     <div>
@@ -70,6 +87,61 @@ function ButtonAddProduct() {
                     id="shopLink"
                     className="w-full p-3 border-2 border-black text-black rounded focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-indigo-200 transition-shadow duration-300"
                     placeholder="Enter shop link"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="tags"
+                    className="block text-lg font-bold mb-2 text-black"
+                  >
+                    Product Tags
+                  </label>
+                  <Select
+                    id="tags"
+                    name="tags"
+                    options={tagOptions}
+                    isMulti
+                    value={selectedTags}
+                    onChange={handleTagChange}
+                    className="react-select-container"
+                    classNamePrefix="react-select"
+                    styles={{
+                      control: (provided) => ({
+                        ...provided,
+                        borderColor: "black",
+                        borderWidth: "2px",
+                        borderRadius: "4px",
+                        backgroundColor: "#fecaca",
+                        "&:hover": {
+                          borderColor: "black",
+                        },
+                      }),
+                      option: (provided, state) => ({
+                        ...provided,
+                        backgroundColor: state.isSelected
+                          ? "#34d399"
+                          : state.isFocused
+                          ? "#6ee7b7"
+                          : "white",
+                        color: state.isSelected ? "black" : "black",
+                      }),
+                      multiValue: (provided) => ({
+                        ...provided,
+                        backgroundColor: "#6ee7b7",
+                      }),
+                      multiValueLabel: (provided) => ({
+                        ...provided,
+                        color: "black",
+                      }),
+                      multiValueRemove: (provided) => ({
+                        ...provided,
+                        color: "black",
+                        ":hover": {
+                          backgroundColor: "#34d399",
+                          color: "white",
+                        },
+                      }),
+                    }}
                   />
                 </div>
                 <div>
