@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import NeoButton from "./NeoButton";
 import { useCookies } from "next-client-cookies";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,9 +18,17 @@ const Navbar = () => {
   }, [cookies]);
 
   const handleLogout = () => {
-    cookies.remove("Authorization");
-    setToken(null);
-    router.push("/");
+    Swal.fire({
+      icon: "success",
+      title: "Logged Out",
+      text: "You have been logged out.",
+      confirmButtonText: "OK",
+      confirmButtonColor: "#3085d6",
+    }).then(() => {
+      cookies.remove("Authorization");
+      setToken(null);
+      router.push("/");
+    });
   };
 
   const navItems = ["Shop Affiliates", "Fitting Room", "Product", "Company"];

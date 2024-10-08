@@ -1,16 +1,32 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import Button from "../components/Button";
 import ProductCard from "../components/ProductCard";
 import { useCookies } from "next-client-cookies";
+import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const cookies = useCookies();
+  const router = useRouter();
 
   useEffect(() => {
+    const token = cookies.get("Authorization");
+    if (!token) {
+      Swal.fire({
+        icon: "warning",
+        title: "You must log in first!",
+        text: "Please log in to access the Shop.",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#3085d6",
+      }).then(() => {
+        router.push("/login");
+      });
+      return;
+    }
+
     const fetchProducts = async () => {
       const userId = cookies.get("userId");
       const response = await fetch(`/api/store?userId=${userId}`);
@@ -24,7 +40,7 @@ const Shop = () => {
     };
 
     fetchProducts();
-  }, [cookies]);
+  }, [cookies, router]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-500 to-yellow-300 py-12 px-4 sm:px-6 lg:px-8 m-3 mx-6 mt-6 mb-6 rounded-2xl border-4 border-black">
