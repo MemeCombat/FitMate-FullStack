@@ -66,8 +66,6 @@ export default class ProductPhotoModel {
         } else if (key === "tags") {
           if (Array.isArray(value) && value.length > 0) {
             query[key] = { $in: value };
-          } else {
-            query[key] = { $in: [value] };
           }
         } else if (typeof value === "string") {
           query[key] = { $regex: value, $options: "i" };

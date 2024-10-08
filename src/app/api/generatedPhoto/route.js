@@ -87,7 +87,10 @@ export async function POST(request) {
       input: {
         human_image_url: personPhotoBase64URI,
         garment_image_url: shirtPhotoBase64URI,
-        cloth_type: "upper"
+        cloth_type: "upper",
+        image_size: "portrait_4_3",
+        num_inference_steps: 30,
+        guidance_scale: 2.5
       },
       logs: true,
       onQueueUpdate: (update) => {
