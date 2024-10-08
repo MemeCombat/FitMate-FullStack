@@ -106,12 +106,12 @@ const Fitting = () => {
               className="border-4 border-gray-400 rounded-lg p-2 mb-4 w-full hover:border-yellow-500 transition duration-300"
               onChange={handleUserImageChange}
             />
-            <div className="w-full h-48 object-cover rounded-lg mb-4">
+            <div className="w-full h-[300px] object-cover rounded-lg mb-4">
               {userImagePreview && (
                 <img
                   src={userImagePreview}
                   alt="Uploaded Image"
-                  className="w-full h-full object-cover rounded-lg"
+                  className="w-full h-full object-contain rounded-lg"
                 />
               )}
             </div>
@@ -126,12 +126,12 @@ const Fitting = () => {
               className="border-4 border-black rounded-lg p-2 mb-4 w-full hover:border-yellow-500 transition duration-300"
               onChange={handleOutfitImageChange}
             />
-            <div className="w-full h-48 object-cover rounded-lg mb-4">
+            <div className="w-full h-[300px] object-cover rounded-lg mb-4">
               {outfitImagePreview && (
                 <img
                   src={outfitImagePreview}
                   alt="Uploaded Image"
-                  className="w-full h-full object-cover rounded-lg"
+                  className="w-full h-full object-contain rounded-lg"
                 />
               )}
             </div>
