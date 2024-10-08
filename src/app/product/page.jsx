@@ -46,11 +46,11 @@ const ProductPage = () => {
         All Products
       </h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 ">
         {products.map((product) => (
           <div key={product._id} className="group">
             <Card image={product.image || product.imgUrl}>
-              <div className="p-4 bg-white rounded-lg shadow-lg transition-transform duration-300 transform group-hover:scale-105">
+              <div className="p-4 w-full h-full bg-white rounded-lg shadow-lg transition-transform duration-300 transform group-hover:scale-105">
                 <p className="text-xl font-semibold text-gray-800 mb-2">
                   {product.title}
                 </p>

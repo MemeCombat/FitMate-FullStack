@@ -76,6 +76,11 @@ const Hero2 = () => {
             alt="Thxinsomnia"
             className="h-14 md:h-24 object-contain"
           />
+          <img
+            src="https://cdn.discordapp.com/attachments/869116850976481321/1293192129216253982/Logo-removebg-preview.png?ex=67067a85&is=67052905&hm=30261363537d74f26bada3822912f58f42ae9975e75c503b1e7eded5bca4f397&"
+            alt="logo"
+            className="h-14 md:h-24 object-contain"
+          />
         </div>
         <NeoButton className="bg-white text-black border-black border-2 hover:bg-gray-200 transition duration-300 rounded-lg px-5 py-3 shadow-md">
           View all brands
