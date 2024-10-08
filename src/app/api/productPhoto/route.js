@@ -89,7 +89,14 @@ export async function GET(request) {
       if (
         !["page", "limit", "sortField", "sortOrder", "search"].includes(key)
       ) {
-        filters[key] = value;
+        if (key === "tags") {
+          const tagsArray = value.split(",").map((tag) => ({
+            tags: { $regex: new RegExp(tag, "i") }, // Case-insensitive regex search for tags
+          }));
+          filters.$or = tagsArray; // Using $or to match any of the provided tags
+        } else {
+          filters[key] = value;
+        }
       }
     }
 
