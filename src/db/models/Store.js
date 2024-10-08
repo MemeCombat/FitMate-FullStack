@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb";
 import database from "../config/mongodb";
 import { z } from "zod";
+import { pipeline } from "stream";
 
 const StoreSchema = z.object({
   userId: z.string().min(1),
@@ -44,6 +45,8 @@ class StoreModel {
   }
 
   static async getStoreByUserId(userId) {
+    const collection = await this.collection();
+    // console.log("userId: ", userId);
     const pipeline = [
       {
         $match:
@@ -72,15 +75,13 @@ class StoreModel {
           },
       },
     ];
-    const store = await this.collection().aggregate(pipeline).toArray();
+    const store = await collection.aggregate(pipeline).toArray();
     console.log("store: ", store);
     if (!store) throw new Error("You Need To Make Store First");
-    // console.log("store: ", store);
     return store;
   }
 
   static async updateDescriptionByUserId(userId, newDescription) {
-    const collection = await this.collection();
     const result = await collection.updateOne(
       { userId },
       { $set: { description: newDescription } }
