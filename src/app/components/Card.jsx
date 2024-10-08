@@ -5,9 +5,9 @@ const Card = ({ image, children, cardColor, rotation, DropdownComponent }) => {
     <div
       className={`${cardColor} ${rotation} transform transition-all duration-300 hover:scale-105 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-2xl overflow-hidden`}
     >
-      <div className="relative">
+      <div className="relative h-[300px] overflow-hidden">
         <img
-          className="w-full h-[200px] object-contain transition-transform duration-300 ease-in-out hover:scale-110"
+          className="w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-110"
           src={image}
           alt="product"
         />
