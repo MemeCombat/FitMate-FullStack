@@ -1,8 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import { X, ShoppingBag, ArrowRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const CreateStore = () => {
+  const router = useRouter();
   const [isModalActive, setIsModalActive] = useState(false);
   const [storeName, setStoreName] = useState("");
   const [storeDescription, setStoreDescription] = useState("");
@@ -27,6 +29,7 @@ const CreateStore = () => {
       const data = await response.json();
       console.log("Store created:", data);
       setIsModalActive(false);
+      router.push("/store");
     } catch (error) {
       console.error("Error creating store:", error);
       setError("Failed to create store. Please try again.");
@@ -128,11 +131,12 @@ const CreateStore = () => {
                   onChange={(e) => setStoreName(e.target.value)}
                   className="w-full p-4 text-xl border-4 text-black border-black rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-500 bg-white transition-shadow duration-300"
                   placeholder="Enter your awesome store name"
+                  required
                 />
               </div>
               <div>
                 <label
-                  htmlFor="Description"
+                  htmlFor="description"
                   className="block text-2xl font-bold mb-2 text-black"
                 >
                   Store Description
@@ -145,6 +149,7 @@ const CreateStore = () => {
                   className="w-full p-4 text-xl border-4 text-black border-black rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-500 bg-white transition-shadow duration-300"
                   rows="4"
                   placeholder="Describe your store in a few sentences"
+                  required
                 ></textarea>
               </div>
               <div className="pt-8 flex justify-center">

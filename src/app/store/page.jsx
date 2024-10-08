@@ -6,7 +6,7 @@ import { useCookies } from "next-client-cookies";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 
-const Shop = () => {
+const Store = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const cookies = useCookies();
@@ -18,7 +18,7 @@ const Shop = () => {
       Swal.fire({
         icon: "warning",
         title: "You must log in first!",
-        text: "Please log in to access the Shop.",
+        text: "Please log in to access the Store.",
         confirmButtonText: "OK",
         confirmButtonColor: "#3085d6",
       }).then(() => {
@@ -28,9 +28,8 @@ const Shop = () => {
     }
 
     const fetchProducts = async () => {
-      // const userId = cookies.get("Authorization");
-
-      const response = await fetch(`/api/store/getByUserId`);
+      const userId = cookies.get("userId");
+      const response = await fetch(`/api/store?userId=${userId}`);
       if (response.ok) {
         const data = await response.json();
         setProducts(data);
@@ -70,4 +69,4 @@ const Shop = () => {
   );
 };
 
-export default Shop;
+export default Store;
