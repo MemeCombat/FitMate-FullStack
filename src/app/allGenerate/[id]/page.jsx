@@ -21,7 +21,7 @@ const GenerateDetail = () => {
   }
 
   return (
-    <section className="p-8 bg-gradient-to-r from-pink-300 via-purple-300 to-blue-300 min-h-screen mx-6 mt-6 mb-6 rounded-2xl border-4 border-black shadow-lg">
+    <section className="p-8 h-full bg-gradient-to-r from-pink-300 via-purple-300 to-blue-300 min-h-screen mx-6 mt-6 mb-6 rounded-2xl border-4 border-black shadow-lg">
       <h1 className="text-center text-2xl font-bold my-4">Photo Detail</h1>
       <div className="max-w-md mx-auto">
         <img
