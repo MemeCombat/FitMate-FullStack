@@ -32,7 +32,7 @@ const AllGeneratePage = () => {
             >
               <Card>
                 <img
-                  src={photo.url}
+                  src={photo.imgUrl}
                   alt={`Generated ${index}`}
                   className="w-full h-48 object-cover rounded-t-lg"
                 />
