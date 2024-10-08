@@ -5,6 +5,7 @@ import ProductCard from "../components/ProductCard";
 import { useCookies } from "next-client-cookies";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
+import NoShop from "../components/NoShop";
 
 const Store = () => {
   const [products, setProducts] = useState([]);
@@ -29,10 +30,10 @@ const Store = () => {
 
     const fetchProducts = async () => {
       const userId = cookies.get("userId");
-      const response = await fetch(`/api/store?userId=${userId}`);
+      const response = await fetch(`/api/store/getByUserId?userId=${userId}`);
       if (response.ok) {
         const data = await response.json();
-        setProducts(data);
+        setProducts(data); // Assuming data is an array of stores
       } else {
         console.error("Failed to fetch products");
       }
@@ -43,29 +44,30 @@ const Store = () => {
   }, [cookies, router]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-500 to-yellow-300 py-12 px-4 sm:px-6 lg:px-8 m-3 mx-6 mt-6 mb-6 rounded-2xl border-4 border-black">
-      <div className="max-w-7xl mx-auto">
-        <div className="bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-8 mb-12 rounded-none">
-          <div className="flex flex-col sm:flex-row items-center justify-between">
-            <ButtonAddProduct />
-          </div>
-        </div>
-        <div className="bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-8 rounded-none">
-          <h2 className="text-4xl font-black text-black mb-8 border-b-4 border-black pb-4 bg-green-400 inline-block transform ">
-            ALL PRODUCTS
-          </h2>
-          {loading ? (
-            <p className="text-xl text-center">Loading products...</p>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {products.map((product) => (
+    <section className="p-8 bg-pink-300 min-h-screen mx-6 mt-6 mb-6 rounded-2xl border-4 border-black shadow-lg">
+      {loading ? (
+        <p className="text-center text-lg font-semibold">Loading...</p>
+      ) : products.length === 0 ? (
+        <NoShop />
+      ) : (
+        products.map((store) => (
+          <div key={store._id}>
+            <div className="flex justify-between items-center mb-4">
+              <h1 className="text-4xl font-black mb-2 border-b-4 border-black pb-2 bg-green-400 inline-block">
+                {store.name}
+              </h1>
+              <ButtonAddProduct className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300" />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {store.product.map((product) => (
                 <ProductCard key={product._id} product={product} />
               ))}
             </div>
-          )}
-        </div>
-      </div>
-    </div>
+          </div>
+        ))
+      )}
+      <div className="text-center mt-6"></div>
+    </section>
   );
 };
 

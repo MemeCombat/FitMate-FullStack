@@ -49,11 +49,11 @@ const ProductCard = ({ product, index }) => {
         cardColors[index % cardColors.length]
       } transform transition-all duration-300 hover:scale-105 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-none overflow-hidden bg-blue-300`}
     >
-      <div className="relative">
+      <div className="relative h-[500px] overflow-hidden">
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-48 object-cover"
+          className="w-full h-full object-cover"
         />
         <div className="absolute top-0 right-0 m-2">
           <Dropdown
@@ -64,8 +64,8 @@ const ProductCard = ({ product, index }) => {
         </div>
       </div>
       <div className="p-4">
-        <h3 className="font-black text-black text-sm mb-2 line-clamp-2">
-          {product.name}
+        <h3 className="font-black text-black text-sm text-center mb-2 line-clamp-2">
+          {product.title}
         </h3>
       </div>
       <Modal active={isModalActive} setActive={setIsModalActive}>

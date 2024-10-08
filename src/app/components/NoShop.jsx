@@ -13,13 +13,18 @@ const CreateStore = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
+
     try {
       const response = await fetch("/api/store", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "x-user-id": "userId",
         },
-        body: JSON.stringify({ storeName, storeDescription }),
+        body: JSON.stringify({
+          name: storeName,
+          description: storeDescription,
+        }),
       });
 
       if (!response.ok) {
@@ -29,6 +34,7 @@ const CreateStore = () => {
       const data = await response.json();
       console.log("Store created:", data);
       setIsModalActive(false);
+
       router.push("/store");
     } catch (error) {
       console.error("Error creating store:", error);
@@ -44,7 +50,7 @@ const CreateStore = () => {
           "linear-gradient(90deg, rgba(0,255,252,1) 0%, rgba(255,0,254,1) 100%) ",
       }}
     >
-      <div className="max-w-7xl mx-auto bg-white border-8 border-black rounded-3xl shadow-[8px_8px_0_0_#000] overflow-hidden flex-grow ">
+      <div className="max-w-7xl mx-auto bg-white border-8 border-black rounded-3xl shadow-[8px_8px_0_0_#000] overflow-hidden flex-grow">
         <div className="p-12 space-y-12 h-full flex flex-col">
           <h1 className="text-6xl font-black text-black text-center mb-12">
             MAKE YOUR OWN STORE HERE
