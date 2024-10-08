@@ -42,19 +42,10 @@ const Navbar = () => {
         </span>
       </Link>
 
-      <button
-        className="md:hidden text-3xl focus:outline-none text-black"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        ☰
-      </button>
-
       <nav
-        className={`${
-          isOpen ? "flex" : "hidden"
-        } md:flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8 w-full md:w-auto mt-4 md:mt-0`}
+        className={`md:flex space-x-8 ${isOpen ? "block" : "hidden"} md:block`}
       >
-        {navItems.map((item) => (
+        {["My Shop", "Fitting Room", "Product", "Pricing"].map((item) => (
           <Link
             key={item}
             href={
