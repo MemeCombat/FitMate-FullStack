@@ -44,6 +44,7 @@ async function geminiAi(prompt) {
 
 export async function POST(request) {
   const formData = await request.formData();
+  console.log("formData: ", formData);
 
   const personPhoto = formData.get("personPhoto");
   console.log("personPhoto: ", personPhoto);
@@ -66,13 +67,27 @@ export async function POST(request) {
     const decreased = await UserModel.decreaseToken(userId);
     if (!decreased) throw { message: "inffused token", status: 400 };
 
-    const result = await fal.subscribe("fal-ai/omni-zero", {
+    // const result = await fal.subscribe("fal-ai/omni-zero", {
+    //   input: {
+    //     prompt: `A ${gender} with ${age} years old, ${height} cm tall, ${weight}kg , make it realistic  , no fillter , no beautify`,
+    //     image_url: personPhotoBase64URI,
+    //     composition_image_url: personPhotoBase64URI,
+    //     style_image_url: shirtPhotoBase64URI,
+    //     identity_image_url: personPhotoBase64URI,
+    //   },
+    //   logs: true,
+    //   onQueueUpdate: (update) => {
+    //     if (update.status === "IN_PROGRESS") {
+    //       update.logs.map((log) => log.message).forEach(console.log);
+    //     }
+    //   },
+    // });
+    
+    const result = await fal.subscribe("fal-ai/cat-vton", {
       input: {
-        prompt: `A ${gender} with ${age} years old, ${height} cm tall, ${weight}kg , make it realistic  , no fillter , no beautify`,
-        image_url: personPhotoBase64URI,
-        composition_image_url: personPhotoBase64URI,
-        style_image_url: shirtPhotoBase64URI,
-        identity_image_url: personPhotoBase64URI,
+        human_image_url: personPhotoBase64URI,
+        garment_image_url: shirtPhotoBase64URI,
+        cloth_type: "upper"
       },
       logs: true,
       onQueueUpdate: (update) => {
