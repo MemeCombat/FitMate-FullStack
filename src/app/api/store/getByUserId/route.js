@@ -1,8 +1,9 @@
 import StoreModel from "@/db/models/Store";
 
-export async function GET(request , { params }) { // yang ini harusnya diganti by 
+export async function GET(request) {
   try {
-    const userId = params.id;
+    const userId = request.headers.get("x-user-id");
+    console.log("userId: ", userId);
     const store = await StoreModel.getStoreByUserId(userId);
 
     if (!store) {
@@ -19,4 +20,3 @@ export async function GET(request , { params }) { // yang ini harusnya diganti b
     });
   }
 }
-
