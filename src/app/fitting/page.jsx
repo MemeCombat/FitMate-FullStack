@@ -49,7 +49,8 @@ const Fitting = () => {
       if (response.ok) {
         console.log("tags1: ", tags);
         const data = await response.json();
-        setProductPhotos(data.photos);
+        const shuffledPhotos = data.photos.sort(() => 0.5 - Math.random());
+        setProductPhotos(shuffledPhotos);
       } else {
         setError("Error fetching product photos");
       }
