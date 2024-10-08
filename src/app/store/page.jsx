@@ -33,7 +33,7 @@ const Store = () => {
       const response = await fetch(`/api/store/getByUserId?userId=${userId}`);
       if (response.ok) {
         const data = await response.json();
-        setProducts(data); // Assuming data is an array of stores
+        setProducts(data);
       } else {
         console.error("Failed to fetch products");
       }

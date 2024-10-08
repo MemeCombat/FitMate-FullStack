@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { X, ShoppingBag, ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 const CreateStore = () => {
   const router = useRouter();
@@ -35,9 +36,23 @@ const CreateStore = () => {
       console.log("Store created:", data);
       setIsModalActive(false);
 
-      router.push("/store");
+      Swal.fire({
+        title: "Success!",
+        text: "Your store has been created.",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then(() => {
+        window.location.href = "/store";
+      });
     } catch (error) {
       console.error("Error creating store:", error);
+      Swal.fire({
+        title: "Error!",
+        text: "Failed to create store. Please try again.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+
       setError("Failed to create store. Please try again.");
     }
   };
