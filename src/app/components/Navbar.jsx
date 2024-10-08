@@ -31,8 +31,6 @@ const Navbar = () => {
     });
   };
 
-  const navItems = ["Shop Affiliates", "Fitting Room", "Product", "Company"];
-
   return (
     <header className="relative flex flex-wrap justify-between items-center p-4 bg-gradient-to-r from-yellow-200 via-purple-200 to-pink-200 border-4 border-black shadow-lg rounded-2xl mx-6">
       <Link href="/" className="flex items-center space-x-2 cursor-pointer">
