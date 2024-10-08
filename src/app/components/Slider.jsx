@@ -24,7 +24,7 @@ const Slider = () => {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-black">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-black font-sans">
       {services.map((service, index) => (
         <div
           key={index}

@@ -1,13 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Button from "../components/Button";
 import ButtonAddProduct from "../components/ButtonAddProduct";
 import ProductCard from "../components/ProductCard";
 import { useCookies } from "next-client-cookies";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 
-const Shop = () => {
+const Store = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const cookies = useCookies();
@@ -19,7 +18,7 @@ const Shop = () => {
       Swal.fire({
         icon: "warning",
         title: "You must log in first!",
-        text: "Please log in to access the Shop.",
+        text: "Please log in to access the Store.",
         confirmButtonText: "OK",
         confirmButtonColor: "#3085d6",
       }).then(() => {
@@ -29,9 +28,8 @@ const Shop = () => {
     }
 
     const fetchProducts = async () => {
-      // const userId = cookies.get("Authorization");
-
-      const response = await fetch(`/api/store/getByUserId`);
+      const userId = cookies.get("userId");
+      const response = await fetch(`/api/store?userId=${userId}`);
       if (response.ok) {
         const data = await response.json();
         setProducts(data);
@@ -49,12 +47,6 @@ const Shop = () => {
       <div className="max-w-7xl mx-auto">
         <div className="bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-8 mb-12 rounded-none">
           <div className="flex flex-col sm:flex-row items-center justify-between">
-            <Button className="transition-all duration-300 px-6 py-2 text-lg font-bold bg-blue-500 text-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none">
-              Add new product
-            </Button>
-            <h1 className="text-5xl text-black font-black bg-red-500 p-2 transform">
-              Sazi Shop
-            </h1>
             <ButtonAddProduct />
           </div>
         </div>
@@ -77,4 +69,4 @@ const Shop = () => {
   );
 };
 
-export default Shop;
+export default Store;

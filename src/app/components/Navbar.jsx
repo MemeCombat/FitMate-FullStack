@@ -5,6 +5,8 @@ import Link from "next/link";
 import NeoButton from "./NeoButton";
 import { useCookies } from "next-client-cookies";
 import Swal from "sweetalert2";
+import Dropdown from "./ProfileDropdown";
+import { UserCircle } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,7 +33,30 @@ const Navbar = () => {
     });
   };
 
-  const navItems = ["Shop Affiliates", "Fitting Room", "Product", "Company"];
+  const dropdownItems = [
+    {
+      name: "Logout",
+      component: (
+        <NeoButton
+          onClick={handleLogout}
+          className="w-full mr-10 bg-yellow-300 hover:bg-blue-400 "
+        >
+          LOGOUT
+        </NeoButton>
+      ),
+    },
+    {
+      name: "Token",
+      component: (
+        <NeoButton
+          onClick={() => alert(`Your token is: ${token}`)}
+          className="w-full mr-10 bg-blue-300 hover:bg-rose-400"
+        >
+          VIEW TOKEN
+        </NeoButton>
+      ),
+    },
+  ];
 
   return (
     <header className="relative flex flex-wrap justify-between items-center p-4 bg-gradient-to-r from-yellow-200 via-purple-200 to-pink-200 border-4 border-black shadow-lg rounded-2xl mx-6">
@@ -45,14 +70,14 @@ const Navbar = () => {
       <nav
         className={`md:flex space-x-8 ${isOpen ? "block" : "hidden"} md:block`}
       >
-        {["My Shop", "Fitting Room", "Product", "Pricing"].map((item) => (
+        {["My Store", "Fitting Room", "Product", "Pricing"].map((item) => (
           <Link
             key={item}
             href={
               item === "Fitting Room"
                 ? "/fitting"
-                : item === "My Shop"
-                ? "/shop"
+                : item === "My Store"
+                ? "/store"
                 : `/${item.toLowerCase().replace(" ", "-")}`
             }
             className="text-2xl font-black text-black border-b-2 border-red-500 hover:border-b-0 transition-all duration-300"
@@ -62,9 +87,12 @@ const Navbar = () => {
           </Link>
         ))}
         {token ? (
-          <NeoButton onClick={handleLogout} className="w-full md:w-auto">
-            LOGOUT
-          </NeoButton>
+          <Dropdown
+            items={dropdownItems}
+            colors={["bg-pink-300", "bg-purple-300", "bg-blue-300"]}
+          >
+            <UserCircle size={40} className="text-black cursor-pointer" />
+          </Dropdown>
         ) : (
           <Link
             href="/login"
