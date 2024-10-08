@@ -39,7 +39,8 @@ export default function Login() {
           },
         },
       }).then(() => {
-        router.push("/");
+        // router.push("/");
+        window.location.href = "/";
       });
     } catch (error) {
       console.error(error);
@@ -76,7 +77,7 @@ export default function Login() {
               <h3 className="text-black text-4xl font-bold tracking-wider text-center">
                 Sign in
               </h3>
-              <p className="text-black text-md mt-4">
+              <p className="text-black text-md text-center mt-4">
                 Enter your credentials to explore the world of possibilities.
               </p>
             </div>

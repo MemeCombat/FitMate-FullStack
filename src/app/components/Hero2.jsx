@@ -4,6 +4,12 @@ import Link from "next/link";
 import NeoButton from "./NeoButton";
 import Card from "./Card";
 
+// Utility function to truncate product titles
+const truncateTitle = (title, maxLength) => {
+  if (title.length <= maxLength) return title;
+  return title.substring(0, maxLength) + "...";
+};
+
 const Hero2 = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -41,9 +47,9 @@ const Hero2 = () => {
   }
 
   return (
-    <section className="bg-pink-300 p-6 md:p-10 border-4 border-black flex flex-col items-center space-y-10 w-full rounded-3xl shadow-2xl">
+    <section className="bg-gradient-to-r from-green-200 via-yellow-200 to-pink-200 p-6 md:p-10 border-4 border-black flex flex-col items-center space-y-10 w-full rounded-3xl shadow-2xl">
       {/* Top bar for brands */}
-      <div className="w-full flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 md:space-x-6 p-6 bg-blue-900 border-4 border-black text-white rounded-xl shadow-lg">
+      <div className="w-full flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 md:space-x-6 p-6 bg-gradient-to-br from-yellow-300 to-pink-500 border-4 border-black text-white rounded-xl shadow-lg">
         <div className="flex flex-wrap justify-center md:justify-start space-x-6">
           <img
             src="https://asset-3s.3second.co.id/p/logo.png"
@@ -66,8 +72,8 @@ const Hero2 = () => {
             className="h-14 md:h-24 object-contain"
           />
           <img
-            src="https://asset-3s.3second.co.id/p/logo.png"
-            alt="Uniqlo"
+            src="https://down-id.img.susercontent.com/file/6a5fc4241b3b53139faef76ff19d2c92"
+            alt="Thxinsomnia"
             className="h-14 md:h-24 object-contain"
           />
         </div>
@@ -78,23 +84,20 @@ const Hero2 = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 w-full">
         {products.slice(0, 5).map((product) => (
-          <div key={product._id}>
-            <Card image={product.image}>
-              <div className="p-4 bg-white rounded-lg shadow-lg hover:shadow-2xl transition duration-300">
-                <p className="text-xl font-semibold text-gray-800">
-                  {product.description}
-                </p>
-                <p className="text-sm text-gray-600">Size: {product.size}</p>
-                <Link
-                  href={`/product/${product._id}`}
-                  passHref
-                  className="text-indigo-500 hover:text-indigo-700 hover:underline mt-2 inline-block"
-                >
-                  View Detail
-                </Link>
-              </div>
-            </Card>
-          </div>
+          <Card key={product._id} image={product.image}>
+            <div className="p-4 bg-white rounded-lg shadow-lg hover:shadow-2xl transition duration-300">
+              <p className="text-xl font-semibold text-gray-800">
+                {truncateTitle(product.title, 20)}
+              </p>
+              <Link
+                href={`/product/${product._id}`}
+                passHref
+                className="text-indigo-500 hover:text-indigo-700 hover:underline mt-2 inline-block"
+              >
+                View Detail
+              </Link>
+            </div>
+          </Card>
         ))}
       </div>
 

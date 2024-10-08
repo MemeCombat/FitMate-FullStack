@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Settings } from "lucide-react";
 
-export default function Dropdown({ items, children, setIsModalActive }) {
+export default function Dropdown({ items, children }) {
   const [isActiveDropdown, setIsActiveDropdown] = useState(false);
 
   return (
