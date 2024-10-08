@@ -22,7 +22,7 @@ const AllGeneratePage = () => {
   return (
     <section className="p-8 bg-gradient-to-r from-pink-300 via-purple-300 to-blue-300 min-h-screen mx-6 mt-6 mb-6 rounded-2xl border-4 border-black shadow-lg">
       <h1 className="text-center text-2xl font-bold my-4">Generated Photos</h1>
-      <div className="container mx-auto">
+      <div className="mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {photos.map((photo, index) => (
             <div
@@ -34,7 +34,7 @@ const AllGeneratePage = () => {
                 <img
                   src={photo.imgUrl}
                   alt={`Generated ${index}`}
-                  className="w-full h-48 object-cover rounded-t-lg"
+                  className="w-full h-full object-cover rounded-t-lg"
                 />
                 <div className="card-body p-4">
                   <h5 className="text-lg font-semibold">Photo {index + 1}</h5>
