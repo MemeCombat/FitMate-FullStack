@@ -12,7 +12,7 @@ const CreateStore = () => {
     e.preventDefault();
     setError(null);
     try {
-      const response = await fetch("/api/createStore", {
+      const response = await fetch("/api/store", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
