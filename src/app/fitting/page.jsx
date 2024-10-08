@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 import Link from "next/link";
 import NeoButton from "../components/NeoButton";
@@ -55,9 +54,6 @@ const Fitting = () => {
       setIsLoading(false);
     }
   };
-
-  const router = useRouter();
-
   useEffect(() => {
     const token = document.cookie
       .split("; ")

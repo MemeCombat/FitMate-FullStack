@@ -39,7 +39,8 @@ export default function Login() {
           },
         },
       }).then(() => {
-        router.push("/");
+        // router.push("/");
+        window.location.href = "/";
       });
     } catch (error) {
       console.error(error);
