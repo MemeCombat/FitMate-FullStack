@@ -55,9 +55,6 @@ const Fitting = () => {
       setIsLoading(false);
     }
   };
-
-  const router = useRouter();
-
   useEffect(() => {
     const token = document.cookie
       .split("; ")
