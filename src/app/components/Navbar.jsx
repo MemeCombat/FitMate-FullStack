@@ -59,7 +59,7 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="relative flex flex-wrap justify-between items-center p-4 bg-gradient-to-r from-yellow-200 via-purple-200 to-pink-200 border-4 border-black shadow-lg rounded-2xl mx-6">
+    <header className="relative mt-1 flex flex-wrap justify-between items-center p-4 bg-gradient-to-r from-yellow-200 via-purple-200 to-pink-200 border-4 border-black shadow-lg rounded-2xl mx-6">
       <Link href="/" className="flex items-center space-x-2 cursor-pointer">
         <span className="text-4xl">❄️</span>
         <span className="text-3xl text-black font-extrabold tracking-wide">

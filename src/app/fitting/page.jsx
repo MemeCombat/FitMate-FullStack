@@ -292,7 +292,7 @@ const Fitting = () => {
                   <p className="text-sm text-gray-700 mb-3 font-medium line-clamp-3">
                     {photo.description}
                   </p>
-                  <p className="text-sm font-bold mb-2 bg-yellow-300 inline-block px-2 py-1 rounded-md">
+                  <p className="text-sm font-bold mb-2 bg-green-500 inline-block px-2 py-1 rounded-md">
                     Size: {photo.size.join(", ")}
                   </p>
                   <p className="text-sm font-bold text-white bg-black inline-block px-2 py-1 rounded-md">

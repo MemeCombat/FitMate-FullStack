@@ -24,7 +24,7 @@ const Slider = () => {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-black font-sans">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-black">
       {services.map((service, index) => (
         <div
           key={index}
@@ -32,7 +32,7 @@ const Slider = () => {
         >
           <div>
             <h2 className="text-2xl font-bold mb-4">{service.title}</h2>
-            <p className="text-lg mb-4 font-comfortaa">{service.description}</p>
+            <p className="text-lg mb-4 font-mono">{service.description}</p>
           </div>
           {/* <NeoButton className="w-full mt-auto">Learn More →</NeoButton> */}
         </div>
