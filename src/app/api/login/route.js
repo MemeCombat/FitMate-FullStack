@@ -7,6 +7,7 @@ export async function POST(request) {
   try {
     const { email, password } = await request.json();
     const user = await UserModel.findyByEmail(email);
+
     if (!user) throw { message: "Invalid Email/Password", status: 400 };
 
     const isValidPassword = comparePassword(password, user.password);
@@ -18,6 +19,7 @@ export async function POST(request) {
     };
     const accessToken = signToken(payload);
     cookies().set("Authorization", `Bearer ${accessToken}`);
+    cookies().set("tags", user.tags.join(","));
 
     return Response.json({ accessToken });
   } catch (error) {
