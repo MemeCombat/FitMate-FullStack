@@ -55,7 +55,6 @@ const ProductPage = () => {
                   {product.title}
                 </p>
                 <p className="text-sm text-gray-600">Size: {product.size}</p>
-                {/* Change to Link component for routing */}
                 <Link href={`/product/${product._id}`}>
                   <span className="text-indigo-500 hover:text-indigo-700 hover:underline mt-2 inline-block cursor-pointer">
                     View Details
