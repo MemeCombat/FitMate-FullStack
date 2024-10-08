@@ -42,6 +42,6 @@ export const config = {
     "/api/generatedPhoto",
     "/api/ledger",
     "/api/ledger/generateToken",
-    "/api/generatedPhoto/userId/",
+    "/api/generatedPhoto/userId",
   ], //midleware cuman buat protect back end klo nge fetch
 };
