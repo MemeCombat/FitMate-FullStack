@@ -29,8 +29,9 @@ const Shop = () => {
     }
 
     const fetchProducts = async () => {
-      const userId = cookies.get("userId");
-      const response = await fetch(`/api/store?userId=${userId}`);
+      // const userId = cookies.get("Authorization");
+
+      const response = await fetch(`/api/store/getByUserId`);
       if (response.ok) {
         const data = await response.json();
         setProducts(data);

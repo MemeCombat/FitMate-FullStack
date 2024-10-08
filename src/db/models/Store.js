@@ -44,9 +44,36 @@ class StoreModel {
   }
 
   static async getStoreByUserId(userId) {
-    const collection = await this.collection();
-    // console.log("collection: ", collection);
-    const store = await collection.findOne({ userId: userId });
+    const pipeline = [
+      {
+        $match:
+          /**
+           * query: The query in MQL.
+           */
+          {
+            userId: userId,
+          },
+      },
+      {
+        $lookup:
+          /**
+           * from: The target collection.
+           * localField: The local join field.
+           * foreignField: The target join field.
+           * as: The name for the results.
+           * pipeline: Optional pipeline to run on the foreign collection.
+           * let: Optional variables to use in the pipeline field stages.
+           */
+          {
+            from: "product_photos",
+            localField: "_id",
+            foreignField: "storeId",
+            as: "product",
+          },
+      },
+    ];
+    const store = await this.collection().aggregate(pipeline).toArray();
+    console.log("store: ", store);
     if (!store) throw new Error("You Need To Make Store First");
     // console.log("store: ", store);
     return store;
