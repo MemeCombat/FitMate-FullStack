@@ -44,7 +44,9 @@ export async function POST(request) {
   const formData = await request.formData();
 
   const personPhoto = formData.get("personPhoto");
+  console.log("personPhoto: ", personPhoto);
   const shirtPhoto = formData.get("shirtPhoto");
+  console.log("shirtPhoto: ", shirtPhoto);
 
   const age = formData.get("age") || "unknown";
   const weight = formData.get("weight") || "unknown";
@@ -119,3 +121,5 @@ export async function POST(request) {
     return NextResponse.json({ error: "An error occurred" }, { status: 500 });
   }
 }
+
+
