@@ -16,12 +16,12 @@ const ProductCard = ({ product, index }) => {
 
   const items = [
     {
-      name: "Deleted",
-      link: "https://www.youtube.com",
+      name: "Delete",
+      link: "",
     },
 
     {
-      name: "Updated",
+      name: "Update",
       link: "/update",
     },
   ];
@@ -30,7 +30,7 @@ const ProductCard = ({ product, index }) => {
       key={index}
       className={`${
         cardColors[index % cardColors.length]
-      } transform transition-all duration-300 hover:scale-105 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-none overflow-hidden`}
+      } transform transition-all duration-300 hover:scale-105 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-none overflow-hidden bg-blue-300`}
     >
       <div className="relative">
         <img

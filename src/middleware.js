@@ -9,8 +9,7 @@ async function auth(request) {
   console.log("authCookie: ", authCookie);
   if (!authCookie) throw { message: "Login First !", status: 400 };
   const [type, token] = authCookie.value.split(" ");
-  console.log("token: ", token);
-
+  // console.log("token: ", token);
   if (type !== "Bearer") throw new Error("Invalid Token");
   const payload = await verifyWithJose(token);
   console.log(payload, "ini payload");
@@ -31,6 +30,7 @@ export async function middleware(request) {
       },
     });
   } catch (err) {
+    console.log("err: ", err);
     return ErrorHandler(err);
   }
 }
