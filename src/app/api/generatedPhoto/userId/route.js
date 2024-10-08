@@ -1,4 +1,4 @@
-import generatedPhotoModel from "../../../../../db/models/generatedPhoto";
+import generatedPhotoModel from "../../../../db/models/generatedPhoto";
 
 export async function GET(request) {
   const userId = request.headers.get("x-user-id");
