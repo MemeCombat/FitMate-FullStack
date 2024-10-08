@@ -36,7 +36,7 @@ export default class ProductPhotoModel {
 
   static async getProductByProductId(_id) {
     return await this.collection().findOne({
-      _id: new ObjectId(_id),
+      _id: new ObjectId(String(_id)),
     });
   }
 

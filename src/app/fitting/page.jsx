@@ -18,6 +18,8 @@ const Fitting = () => {
   const [productPhotos, setProductPhotos] = useState([]);
   const [photoError, setPhotoError] = useState(null);
   const [error, setError] = useState(null);
+  const [tags, setTags] = useState("");
+  console.log("tags2: ", tags);
 
   useEffect(() => {
     const token = document.cookie
@@ -38,25 +40,43 @@ const Fitting = () => {
     }
   }, [router]);
 
-  useEffect(() => {
-    const fetchProductPhotos = async () => {
-      setIsLoading(true);
-      try {
-        const response = await fetch(
-          "http://localhost:3000/api/productPhoto?tags=t-shirt,jacket"
-        );
-        if (response.ok) {
-          const data = await response.json();
-          setProductPhotos(data.photos);
-        } else {
-          setError("Error fetching product photos");
-        }
-      } catch (error) {
-        setError("Error: " + error.message);
-      } finally {
-        setIsLoading(false);
+  const fetchProductPhotos = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/productPhoto?tags=${tags}`
+      );
+      if (response.ok) {
+        console.log("tags1: ", tags);
+        const data = await response.json();
+        setProductPhotos(data.photos);
+      } else {
+        setError("Error fetching product photos");
       }
-    };
+    } catch (error) {
+      setError("Error: " + error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const fetchProfileData = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/api/profile", {
+        credentials: "include", // This includes cookies in the request
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setTags(data.tags.join(","));
+      } else {
+        console.error("Failed to fetch profile data");
+      }
+    } catch (error) {
+      console.error("Error fetching profile data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProfileData();
 
     fetchProductPhotos();
   }, []);
