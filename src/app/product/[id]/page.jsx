@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { ShoppingCart } from "lucide-react";
 import NeoButton from "../../components/NeoButton";
+import LayoutWithNavbar from "../../with-navbar";
 
 const ProductDetail = () => {
   const params = useParams();
@@ -44,6 +45,7 @@ const ProductDetail = () => {
   }
 
   return (
+    <LayoutWithNavbar>
     <div className="flex flex-col border-4 border-black mx-6 md:flex-row items-center justify-center p-8 bg-gradient-to-br from-yellow-400 to-purple-400 min-h-screen font-mono m-3 rounded-xl">
       <div className="w-full md:w-2/3 flex justify-center mb-8 md:mb-0">
         <div className="border-8 border-black text-black bg-white p-6 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)]">
@@ -102,6 +104,7 @@ const ProductDetail = () => {
         </a>
       </div>
     </div>
+    </LayoutWithNavbar>
   );
 };
 

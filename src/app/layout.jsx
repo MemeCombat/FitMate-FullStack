@@ -3,9 +3,8 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { CookiesProvider } from "next-client-cookies/server";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const monumentRegular = localFont({
   src: "./fonts/MonumentExtended-Regular.otf",
@@ -32,7 +31,7 @@ export default function RootLayout({ children }) {
         }}
       >
         <CookiesProvider>
-          <Navbar />
+          {/* <Navbar /> */}
           {children}
           <Footer />
         </CookiesProvider>
