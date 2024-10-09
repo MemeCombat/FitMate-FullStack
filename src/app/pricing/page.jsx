@@ -4,18 +4,21 @@ import PricingCard from "../components/PricingCard";
 
 const Pricing = () => {
   const [plans, setPlans] = useState([]);
+  const fetchPricing = async () => {
+    try {
+      const response = await fetch("/api/pack");
+      const data = await response.json();
+      if (response.ok){
+        setPlans(data);
+      }else{
+        throw data
+      }
+    } catch (error) {
+      console.error("Error fetching pricing data:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchPricing = async () => {
-      try {
-        const response = await fetch("/api/pack");
-        const data = await response.json();
-        setPlans(data);
-      } catch (error) {
-        console.error("Error fetching pricing data:", error);
-      }
-    };
-
     fetchPricing();
   }, []);
 

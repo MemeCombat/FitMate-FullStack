@@ -231,4 +231,5 @@ const PricingCardFooter = () => (
   </div>
 );
 
+
 export default PricingCard;
