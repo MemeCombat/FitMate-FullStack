@@ -69,7 +69,6 @@ const ProductCard = ({ product, index }) => {
         </h3>
       </div>
       <Modal active={isModalActive} setActive={setIsModalActive}>
-        
         <div className="flex justify-center items-center min-h-screen bg-black/50 fixed top-0 left-0 right-0 z-50">
         {/* <div>{JSON.stringify(product , null,2)}</div> */}
           <div className="relative w-full max-w-lg sm:max-w-xl md:max-w-3xl bg-yellow-300 border-4 border-black shadow-[12px_12px_0_0_#000] rounded-xl overflow-hidden mx-4">
