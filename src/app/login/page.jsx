@@ -70,7 +70,7 @@ export default function Login() {
         backgroundPosition: "center",
       }}
     >
-      <div className="flex flex-col items-center justify-center p-6">
+      <div className="flex flex-col items-center justify-center p-6 mt-10">
         <div className="border-4 border-black rounded-lg p-6 max-w-md shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] bg-white">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="mb-8">

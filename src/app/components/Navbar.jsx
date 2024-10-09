@@ -7,17 +7,72 @@ import { useCookies } from "next-client-cookies";
 import Swal from "sweetalert2";
 import Dropdown from "./ProfileDropdown";
 import { UserCircle, Menu, X } from "lucide-react";
+const CoinIcon = ({ tokenCount }) => (
+  <div className="flex items-center space-x-1 justify-center">
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        cx="12"
+        cy="12"
+        r="10"
+        fill="#FFD700"
+        stroke="#000000"
+        strokeWidth="2"
+      />
+      <text
+        x="50%"
+        y="50%"
+        dominantBaseline="middle"
+        textAnchor="middle"
+        fontSize="10"
+        fontFamily="Arial, sans-serif"
+        fill="#000000"
+        fontWeight="bold"
+      >
+        $
+      </text>
+    </svg>
+    <span className="font-bold text-black">{tokenCount}</span>
+  </div>
+);
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [token, setToken] = useState(null);
+  const [profileData, setProfileData] = useState(null);
   const cookies = useCookies();
   const router = useRouter();
 
   useEffect(() => {
     const tokenFromCookies = cookies.get("Authorization");
     setToken(tokenFromCookies);
+
+    if (tokenFromCookies) {
+      fetchProfileData(tokenFromCookies);
+    }
   }, [cookies]);
+
+  const fetchProfileData = async (authToken) => {
+    try {
+      const response = await fetch("/api/profile", {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Failed to fetch profile data");
+      }
+      const data = await response.json();
+      setProfileData(data);
+    } catch (error) {
+      console.error("Error fetching profile data:", error);
+    }
+  };
 
   const handleLogout = () => {
     Swal.fire({
@@ -29,6 +84,7 @@ const Navbar = () => {
     }).then(() => {
       cookies.remove("Authorization");
       setToken(null);
+      setProfileData(null);
       router.push("/");
     });
   };
@@ -48,12 +104,9 @@ const Navbar = () => {
     {
       name: "Token",
       component: (
-        <NeoButton
-          onClick={() => alert(`Your token is: ${token}`)}
-          className="w-full mr-10 bg-blue-300 hover:bg-rose-400"
-        >
-          VIEW TOKEN
-        </NeoButton>
+        <div className="w-full mr-10">
+          {CoinIcon({ tokenCount: profileData?.token || 0 })}
+        </div>
       ),
     },
     {
@@ -104,12 +157,19 @@ const Navbar = () => {
           </div>
           <div className="hidden md:flex items-center">
             {token ? (
-              <Dropdown
-                items={dropdownItems}
-                colors={["bg-pink-300", "bg-purple-300", "bg-blue-300"]}
-              >
-                <UserCircle size={40} className="text-black cursor-pointer" />
-              </Dropdown>
+              <div className="flex items-center">
+                {profileData && (
+                  <span className="mr-4 text-lg font-bold text-black hidden md:block">
+                    {profileData.username}
+                  </span>
+                )}
+                <Dropdown
+                  items={dropdownItems}
+                  colors={["bg-pink-300", "bg-purple-300", "bg-blue-300"]}
+                >
+                  <UserCircle size={40} className="text-black cursor-pointer" />
+                </Dropdown>
+              </div>
             ) : (
               <Link href="/login">
                 <NeoButton className="w-full">LOGIN</NeoButton>
@@ -155,11 +215,18 @@ const Navbar = () => {
               </Link>
             ))}
             {token ? (
-              dropdownItems.map((item, index) => (
-                <div key={index} className="px-3 py-2">
-                  {item.component}
-                </div>
-              ))
+              <>
+                {profileData && (
+                  <div className="px-3 py-2 text-lg font-bold text-black">
+                    {profileData.username}
+                  </div>
+                )}
+                {dropdownItems.map((item, index) => (
+                  <div key={index} className="px-3 py-2">
+                    {item.component}
+                  </div>
+                ))}
+              </>
             ) : (
               <Link
                 href="/login"
