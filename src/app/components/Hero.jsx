@@ -1,5 +1,6 @@
 import React from "react";
 import NeoButton from "./NeoButton";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -8,11 +9,13 @@ const Hero = () => {
         <div className="flex items-center justify-center md:justify-start space-x-4 mb-4">
           <h1 className="text-7xl md:text-9xl text-black">FitMate</h1>
         </div>
-        <p className="text-black text-lg mb-6 font-comfortaa">
+        <p className="text-black text-lg mb-6 font-mono">
           Try on clothes that suit your body shape effortlessly with our
           innovative platform.
         </p>
-        <NeoButton>GET STARTED</NeoButton>
+        <Link href="/fitting" passHref>
+          <NeoButton>GET STARTED</NeoButton>
+        </Link>
       </div>
       <div className="flex-1">
         <div className="relative w-full h-64 md:h-80 overflow-hidden rounded-lg">

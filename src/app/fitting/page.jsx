@@ -50,7 +50,8 @@ const Fitting = () => {
       if (response.ok) {
         console.log("tags1: ", tags);
         const data = await response.json();
-        setProductPhotos(data.photos);
+        const shuffledPhotos = data.photos.sort(() => 0.5 - Math.random());
+        setProductPhotos(shuffledPhotos);
       } else {
         setError("Error fetching product photos");
       }
@@ -325,7 +326,7 @@ const Fitting = () => {
                   <p className="text-sm text-gray-700 mb-3 font-medium line-clamp-3">
                     {photo.description}
                   </p>
-                  <p className="text-sm font-bold mb-2 bg-yellow-300 inline-block px-2 py-1 rounded-md">
+                  <p className="text-sm font-bold mb-2 bg-green-500 inline-block px-2 py-1 rounded-md">
                     Size: {photo.size.join(", ")}
                   </p>
                   <p className="text-sm font-bold text-white bg-black inline-block px-2 py-1 rounded-md">
