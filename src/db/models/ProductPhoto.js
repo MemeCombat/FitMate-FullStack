@@ -99,4 +99,12 @@ export default class ProductPhotoModel {
     });
     return result.deletedCount > 0;
   }
+
+  static async editphotoProduct(_id, updateData) {
+    const result = await this.collection().updateOne(
+      { _id: new ObjectId(_id) },
+      { $set: updateData }
+    );
+    return result;
+  }
 }
