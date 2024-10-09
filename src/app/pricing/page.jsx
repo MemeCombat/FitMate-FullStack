@@ -8,10 +8,10 @@ const Pricing = () => {
     try {
       const response = await fetch("/api/pack");
       const data = await response.json();
-      if (response.ok){
+      if (response.ok) {
         setPlans(data);
-      }else{
-        throw data
+      } else {
+        throw data;
       }
     } catch (error) {
       console.error("Error fetching pricing data:", error);
@@ -37,7 +37,7 @@ const Pricing = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="border-4 border-black p-6 bg-yellow-200 shadow-[8px_8px_0_rgba(0,0,0,1)] relative flex flex-col justify-between h-full w-full">
             <h2 className="text-4xl font-black text-black mb-2">Free</h2>
-            <p className="text-5xl font-black text-black mb-4">$0</p>
+            <p className="text-4xl font-black text-black mb-4">RP 0</p>
             <p className="text-xl text-black mb-6 font-bold">
               Get 3 tokens for fitting
             </p>
