@@ -325,9 +325,6 @@ const Fitting = () => {
           <p className="text-2xl font-bold text-center text-black">
             Loading...
           </p>
-          <p className="text-2xl font-bold text-center text-black">
-            Loading...
-          </p>
         ) : error ? (
           <p className="text-2xl font-bold text-red-600 text-center">{error}</p>
         ) : (
