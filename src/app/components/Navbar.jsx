@@ -78,10 +78,11 @@ const Navbar = () => {
               href="/"
               className="flex items-center space-x-2 cursor-pointer"
             >
-              <span className="text-4xl">❄️</span>
-              <span className="text-2xl sm:text-3xl text-black font-extrabold tracking-wide">
-                FitMate
-              </span>
+              <img
+                className="w-[150px] lg:w-[200px] "
+                src="/fitmate_logo.png"
+                alt=""
+              />
             </Link>
           </div>
           <div className="hidden md:flex md:items-center md:space-x-8 lg:space-x-8">
