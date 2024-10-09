@@ -54,7 +54,7 @@ const ProductDetail = () => {
       </div>
 
       <div className="w-full md:w-1/3 space-y-6">
-        <h1 className="text-5xl font-black text-white bg-blue-600 p-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+        <h1 className="lg:text-5xl text-3xl font-black text-white bg-blue-600 p-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
           {product.title || "Product Title"}
         </h1>
 
@@ -70,12 +70,12 @@ const ProductDetail = () => {
             <span className="block text-xl font-bold text-black mb-2">
               Select Size
             </span>
-            <div className="flex space-x-4">
+            <div className="flex lg:space-x-4 lg:justify-start justify-center space-x-1">
               {["S", "M", "L", "XL"].map((size) => (
                 <button
                   key={size}
                   onClick={() => setSelectedSize(size)}
-                  className={`border-2 border-black px-6 py-2 text-lg font-bold cursor-pointer ${
+                  className={`border-2 border-black px-6 py-2 text-sm lg:text-lg font-bold cursor-pointer ${
                     selectedSize === size
                       ? "bg-black text-white"
                       : "bg-white text-black"

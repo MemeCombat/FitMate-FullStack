@@ -48,45 +48,7 @@ const Hero2 = () => {
 
   return (
     <section className="bg-gradient-to-r from-green-200 via-yellow-200 to-pink-200 p-6 md:p-10 border-4 border-black flex flex-col items-center space-y-10 w-full rounded-3xl shadow-2xl">
-      {/* Top bar for brands */}
-      <div className="w-full flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 md:space-x-6 p-6 bg-gradient-to-br from-yellow-300 to-pink-500 border-4 border-black text-white rounded-xl shadow-lg">
-        <div className="flex flex-wrap justify-center md:justify-start space-x-6">
-          <img
-            src="https://asset-3s.3second.co.id/p/logo.png"
-            alt="3second"
-            className="h-14 md:h-24 object-contain"
-          />
-          <img
-            src="https://blogger.googleusercontent.com/img/a/AVvXsEgGVv8Gi2XDoITQQ71GYXj2NFhd2XI4AHn1xFckht8rUAxADZX7FNs5vG0uHzGNe-kaEIohMcNcg8Q5mVPWYbW2pPjQKsc3PYeE8xdnUEPPFDQVzrQGg9aNXAuV1JxYRGTeEBTs_UOL1P_Wwe_IlxZgKsgoOJx2Af-0itDL4vDzeNvKWPBDSoeAwj30EQ=w226-h320"
-            alt="Mills"
-            className="h-14 md:h-24 object-contain"
-          />
-          <img
-            src="https://logos-world.net/wp-content/uploads/2020/04/Tommy-Hilfiger-Logo.png"
-            alt="Tommy Hilfiger"
-            className="h-14 md:h-24 object-contain"
-          />
-          <img
-            src="https://w7.pngwing.com/pngs/586/74/png-transparent-jumpman-air-jordan-nike-logo-brand-nike-physical-fitness-hand-sticker.png"
-            alt="Air Jordan"
-            className="h-14 md:h-24 object-contain"
-          />
-          <img
-            src="https://down-id.img.susercontent.com/file/6a5fc4241b3b53139faef76ff19d2c92"
-            alt="Thxinsomnia"
-            className="h-14 md:h-24 object-contain"
-          />
-          <img
-            src="https://cdn.discordapp.com/attachments/869116850976481321/1293192129216253982/Logo-removebg-preview.png?ex=67067a85&is=67052905&hm=30261363537d74f26bada3822912f58f42ae9975e75c503b1e7eded5bca4f397&"
-            alt="logo"
-            className="h-14 md:h-24 object-contain"
-          />
-        </div>
-        <NeoButton className="bg-white text-black border-black border-2 hover:bg-gray-200 transition duration-300 rounded-lg px-5 py-3 shadow-md">
-          View all brands
-        </NeoButton>
-      </div>
-
+      <p className="text-4xl font-bold text-black">Featured Items</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 w-full">
         {products.slice(0, 5).map((product) => (
           <Card key={product._id} image={product.image}>

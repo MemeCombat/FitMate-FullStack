@@ -299,7 +299,7 @@ const Fitting = () => {
         )}
       </div>
       <div className="flex-1 mt-6 mb-6 mx-4 md:mx-6 bg-gradient-to-br from-yellow-300 to-pink-500 p-8 border-4 border-black rounded-2xl shadow-lg">
-        <h1 className="text-4xl font-bold text-black mb-8 uppercase tracking-wider text-center">
+        <h1 className="text-3xl lg:text-4xl font-bold text-black mb-8 uppercase tracking-wider text-center">
           Fashion Recommendation
         </h1>
         {isLoading ? (
@@ -326,7 +326,7 @@ const Fitting = () => {
                   <p className="text-sm text-gray-700 mb-3 font-medium line-clamp-3">
                     {photo.description}
                   </p>
-                  <p className="text-sm font-bold mb-2 bg-yellow-300 inline-block px-2 py-1 rounded-md">
+                  <p className="text-sm font-bold mb-2 bg-green-500 inline-block px-2 py-1 rounded-md">
                     Size: {photo.size.join(", ")}
                   </p>
                   <p className="text-sm font-bold text-white bg-black inline-block px-2 py-1 rounded-md">

@@ -23,7 +23,7 @@ const Pricing = () => {
     <div className="min-h-screen bg-gradient-to-r from-indigo-500 to-pink-500 p-8 md:p-16 mx-6 mt-6 mb-6 rounded-2xl border-4 border-black">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h1 className="text-7xl font-black text-black mb-6">
+          <h1 className="lg:text-7xl text-4xl font-black text-black mb-6">
             Need more fitting?
           </h1>
           <p className="text-2xl text-black font-bold">
