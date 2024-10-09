@@ -24,7 +24,7 @@ const Fitting = () => {
   const [productId , setProductId] =  useState("");
 
 
-  console.log("tags2: ", tags);
+  // console.log("tags2: ", tags);
 
   useEffect(() => {
     const token = document.cookie
@@ -118,7 +118,7 @@ const Fitting = () => {
       if (response.ok) {
         const result = await response.json();
         console.log("result: ini result  ", result);
-        router.push(`/result?ProductId=${result.createdPhoto.insertedId}`);
+        router.push(`/result?productId=${result.createdPhoto.insertedId}`);
       } else {
         console.error("Error generating photo");
       }

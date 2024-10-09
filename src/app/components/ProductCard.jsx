@@ -6,7 +6,6 @@ import Button from "../components/Button";
 
 const PricingCard = ({ type, price, description, isPopular, token, color }) => {
   const backgroundColor = getBackgroundColor(type, color);
-
   return (
     <div
       key={index}

@@ -2,13 +2,14 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Markdown from "react-markdown";
-
+import { useRouter } from "next/navigation";
 export default function Result() {
   const searchParams = useSearchParams();
-  const productId = searchParams.get("ProductId");
-  // console.log("productId: ", productId);
+  const productId = searchParams.get("productId");
+  console.log("productId: ", productId);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   const fetchData = async () => {
     try {
@@ -16,6 +17,7 @@ export default function Result() {
         `http://localhost:3000/api/generatedPhoto/${productId}`
       );
       const data = await response.json();
+      console.log("data: ", data);
       setData(data);
     } catch (error) {
       console.error(error);
@@ -60,10 +62,15 @@ export default function Result() {
           <div className="text-black mb-4 text-sm md:text-base">
             <Markdown>{data.resultGemini || "No result gemini"}</Markdown>
           </div>
-
-          <button className="w-full bg-green-500 hover:bg-green-600 text-white text-lg md:text-xl font-bold py-3 md:py-4 px-4 md:px-6 transition duration-300 shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center">
-            View More
-          </button>
+        
+          {data.productPhotoId !== "userUploadedPhoto" && (
+            <button
+              onClick={() => router.push(`/store/${data.productPhotoId}`)}
+              className="w-full bg-green-500 hover:bg-green-600 text-white text-lg md:text-xl font-bold py-3 md:py-4 px-4 md:px-6 transition duration-300 shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center"
+            >
+              View More
+            </button>
+          )}
         </div>
       </div>
     </div>
