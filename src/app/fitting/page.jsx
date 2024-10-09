@@ -91,7 +91,7 @@ const Fitting = () => {
     formData.append("weight", weight);
     formData.append("height", height);
     formData.append("gender", gender);
-    formData.append("photoType" , photoType)npm
+    formData.append("photoType" , photoType)
     if (userImage) {
       formData.append("personPhoto", userImage);
     }
