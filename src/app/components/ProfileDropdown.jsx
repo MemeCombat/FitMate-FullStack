@@ -39,7 +39,7 @@ export default function ProfileDropdown({ items, children, colors }) {
                 colors[index % colors.length]
               }`}
             >
-              {item.component}
+              {item.component} 
             </div>
           ))}
         </div>

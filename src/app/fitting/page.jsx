@@ -11,6 +11,7 @@ const Fitting = () => {
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
   const [gender, setGender] = useState("");
+  const [photoType, setPhotoType] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [userImagePreview, setUserImagePreview] = useState("");
   const [outfitImagePreview, setOutfitImagePreview] = useState("");
@@ -90,6 +91,7 @@ const Fitting = () => {
     formData.append("weight", weight);
     formData.append("height", height);
     formData.append("gender", gender);
+    formData.append("photoType" , photoType)
 
     if (userImage) {
       formData.append("personPhoto", userImage);
@@ -249,10 +251,22 @@ const Fitting = () => {
               value={gender}
               onChange={(e) => setGender(e.target.value)}
             >
-              <option value="">Select Gender</option>
+              <option value="" disabled>Select Gender</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="other">Other</option>
+            </select>
+            <select
+              className="border-4 border-black text-black rounded-lg p-2 mb-4 w-full"
+              value={photoType}
+              onChange={(e) => setPhotoType(e.target.value)}
+            >
+              <option value="" disabled >Select photo Type</option>
+              <option value="upper">upper</option>
+              <option value="lower">lower</option>
+              <option value="overall">overall</option>
+              <option value="inner">inner</option>
+              <option value="outer">outer</option>
             </select>
           </div>
           <button
@@ -277,7 +291,7 @@ const Fitting = () => {
             <div className="bg-white p-8 rounded-lg shadow-xl text-center">
               <div className="loader mb-4 mx-auto"></div>
               <p className="text-xl text-gray-800 font-semibold">
-                Generating your fitting...
+                
               </p>
               <p className="text-gray-600">This may take a moment</p>
             </div>

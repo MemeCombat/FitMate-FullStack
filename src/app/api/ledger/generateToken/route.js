@@ -56,7 +56,10 @@ async function generateTransaction(user, productId, findPackage) {
 export async function POST(request) {
   try {
     const userId = request.headers.get("x-user-id");
+    console.log("userId: ", userId);
     let { transactionType, PackageType } = await request.json();
+    console.log("PackageType: ", PackageType);
+    console.log("transactionType: ", transactionType);
     //get user information kayak gimana
     const user = await UserModel.findById(userId);
     console.log("user: ", user);
@@ -72,10 +75,10 @@ export async function POST(request) {
     if (transactionType === "topUp") {
       //final buat nge record token user berapa buat bikin history
       final = user.token + findPackage.token;
-      // console.log("final: ", final);
+      console.log("final: ", final);
     } else if (transactionType === "payment") {
       final = user.token - findPackage.token;
-      // console.log("final: ", final);
+      console.log("final: ", final);
     } else {
       throw { message: "Transaction Type Not Found", status: 404 };
     }
