@@ -2,10 +2,16 @@
 import { useState } from "react";
 import Select from "react-select";
 import Modal from "./Modal";
+import Swal from "sweetalert2";
 
 function ButtonAddProduct() {
   const [isModalActive, setIsModalActive] = useState(false);
+  const [productName, setProductName] = useState("");
+  const [productDescription, setProductDescription] = useState("");
+  const [shopLink, setShopLink] = useState("");
   const [selectedTags, setSelectedTags] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [size, setSize] = useState([]);
 
   const tagOptions = [
     { value: "casual", label: "Casual" },
@@ -20,6 +26,64 @@ function ButtonAddProduct() {
 
   const handleTagChange = (selectedOptions) => {
     setSelectedTags(selectedOptions);
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file instanceof File) {
+      setSelectedImage(file);
+    } else {
+      setSelectedImage(null);
+      console.error("Invalid file selected");
+    }
+  };
+
+  const handleAddProduct = async () => {
+    const formData = new FormData();
+    formData.append("title", productName);
+    formData.append("description", productDescription);
+    formData.append("linkReferensi", shopLink);
+    formData.append(
+      "tags",
+      JSON.stringify(selectedTags.map((tag) => tag.value))
+    );
+    formData.append("size", JSON.stringify(size));
+
+    if (selectedImage && selectedImage instanceof File) {
+      formData.append("image", selectedImage, selectedImage.name);
+    } else {
+      console.warn("No valid image selected");
+    }
+
+    try {
+      const response = await fetch("/api/productPhoto", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const newProduct = await response.json();
+        Swal.fire("Success", "Product added successfully", "success");
+        setIsModalActive(false);
+        // Reset form fields
+        setProductName("");
+        setProductDescription("");
+        setShopLink("");
+        setSelectedTags([]);
+        setSelectedImage(null);
+        setSize([]);
+      } else {
+        const errorData = await response.json();
+        Swal.fire(
+          "Error",
+          errorData.message || "Failed to add product",
+          "error"
+        );
+      }
+    } catch (error) {
+      console.error("Error adding product:", error);
+      Swal.fire("Error", "An unexpected error occurred", "error");
+    }
   };
 
   return (
@@ -52,11 +116,13 @@ function ButtonAddProduct() {
                     htmlFor="productName"
                     className="block text-lg font-bold mb-2 text-black"
                   >
-                    Product Name
+                    Title
                   </label>
                   <input
                     type="text"
                     id="productName"
+                    value={productName}
+                    onChange={(e) => setProductName(e.target.value)}
                     className="w-full p-3 border-2 text-black border-black rounded focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-rose-200 transition-shadow duration-300"
                     placeholder="Enter product name"
                   />
@@ -70,6 +136,8 @@ function ButtonAddProduct() {
                   </label>
                   <textarea
                     id="productDescription"
+                    value={productDescription}
+                    onChange={(e) => setProductDescription(e.target.value)}
                     className="w-full p-3 border-2 text-black border-black rounded focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-violet-200 transition-shadow duration-300"
                     rows="4"
                     placeholder="Enter product description"
@@ -77,14 +145,32 @@ function ButtonAddProduct() {
                 </div>
                 <div>
                   <label
+                    htmlFor="size"
+                    className="block text-lg font-bold mb-2 text-black"
+                  >
+                    Size
+                  </label>
+                  <input
+                    type="text"
+                    id="size"
+                    value={size.join(", ")}
+                    onChange={(e) => setSize(e.target.value.split(", "))}
+                    className="w-full p-3 border-2 text-black border-black rounded focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-yellow-200 transition-shadow duration-300"
+                    placeholder="Enter sizes separated by comma (e.g. S, M, L)"
+                  />
+                </div>
+                <div>
+                  <label
                     htmlFor="shopLink"
                     className="block text-lg text-black font-bold mb-2"
                   >
-                    Shop Link
+                    Link Referensi
                   </label>
                   <input
                     type="url"
                     id="shopLink"
+                    value={shopLink}
+                    onChange={(e) => setShopLink(e.target.value)}
                     className="w-full p-3 border-2 border-black text-black rounded focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-indigo-200 transition-shadow duration-300"
                     placeholder="Enter shop link"
                   />
@@ -154,21 +240,36 @@ function ButtonAddProduct() {
                       className="w-10 mb-2 fill-current"
                       viewBox="0 0 32 32"
                     >
-                      <path d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z" />
+                      <path d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-. 035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z" />
                       <path d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z" />
                     </svg>
                     Upload file
-                    <input type="file" id="uploadFile1" className="hidden" />
+                    <input
+                      type="file"
+                      id="uploadFile1"
+                      className="hidden"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                    />
                     <p className="text-sm font-medium text-gray-800 mt-2">
-                      PNG, JPG, SVG, WEBP, and GIF are allowed.
+                      PNG, JPG, SVG, and WEBP are allowed.
                     </p>
                   </label>
+                  {selectedImage && (
+                    <div className="mt-4">
+                      <img
+                        src={selectedImage}
+                        alt="Selected"
+                        className="w-full h-auto border-2 border-black rounded"
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
-              <div className="p-4 bg-gradient-to-br from-cyan-400 via-teal-400 to-emerald-400 text-black font-bold">
+              <div className="p-4 bg-gradient-to-br from-cyan-400 via-teal-400 to-emerald-400">
                 <button
-                  type="submit"
-                  className="w-full bg-fuchsia-400 text-black font-bold py-3 px-4 border-4 border-black rounded shadow-[4px_4px_0_0_#000] transition-transform hover:translate-x-1 hover:translate-y-1 hover:bg-fuchsia-500"
+                  onClick={handleAddProduct}
+                  className="w-full px-4 py-2 font-bold text-lg text-black bg-red-500 rounded shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all duration-300"
                 >
                   Add Product
                 </button>
