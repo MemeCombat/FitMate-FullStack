@@ -8,7 +8,7 @@ const GeneratePhotoDetail = () => {
   const [error, setError] = useState(null);
 
   const params = useParams();
-  const { id } = params; 
+  const { id } = params;
 
   useEffect(() => {
     if (id) {
@@ -24,7 +24,7 @@ const GeneratePhotoDetail = () => {
           if (!data || data.error) {
             throw new Error("Photo not found or invalid response.");
           }
-          setPhoto(data); 
+          setPhoto(data);
         })
         .catch((error) => {
           console.error("Error fetching photo:", error);
@@ -34,14 +34,14 @@ const GeneratePhotoDetail = () => {
       console.error("ID parameter is missing");
       setError("Invalid photo ID.");
     }
-  }, [id]); 
+  }, [id]);
 
   if (error) {
     return <div className="text-red-500 text-center mt-4">{error}</div>;
   }
 
   if (!photo) {
-    return <div className="text-center mt-4">Loading...</div>;
+    return <div className="text-center mt-4 text-black">Loading...</div>;
   }
 
   return (

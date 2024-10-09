@@ -93,7 +93,7 @@ const ProductDetail = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <NeoButton className="w-full mt-3 lg:mt-0 bg-green-500 hover:bg-green-600 text-white text-xl font-bold py-4 px-6 transition duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center">
+          <NeoButton className="w-full mt-3 lg:mt-4 bg-green-500 hover:bg-green-600 text-white text-xl font-bold py-4 px-6 transition duration-300 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center">
             <ShoppingCart className="mr-2" size={24} />
             Go Shopping Now
           </NeoButton>
