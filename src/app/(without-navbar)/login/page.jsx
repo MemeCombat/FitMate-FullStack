@@ -1,9 +1,10 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Button from "../components/Button";
+import Button from "../../components/Button";
 import Swal from "sweetalert2";
 import Link from "next/link";
+import LayoutWithoutNavbar from "../layout";
 
 export default function Login() {
   const [user, setUser] = useState({ email: "", password: "" });

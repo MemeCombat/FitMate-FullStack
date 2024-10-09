@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
-import Button from "../components/Button";
+import Button from "../../components/Button";
 import Select from "react-select";
 
 const fashionOptions = [
@@ -82,7 +82,7 @@ export default function Register() {
         backgroundPosition: "center",
       }}
     >
-      <div className="w-full max-w-6xl grid md:grid-cols-3 bg-white border-8 border-black shadow-[16px_16px_0_0_rgba(0,0,0,1)] mt-2 mb-6 lg:mt-4 lg:mb-8 rounded-3xl overflow-hidden">
+      <div className="w-full max-w-6xl grid md:grid-cols-3 bg-white border-8 border-black shadow-[16px_16px_0_0_rgba(0,0,0,1)] mt-2 mb-6 lg:mt-4 lg:mb-8 rounded-3xl overflow-hidden ">
         <div className="md:col-span-1 flex justify-center items-center bg-gray-800 border-r-8 border-black">
           <img
             src="/componentregis.png"
