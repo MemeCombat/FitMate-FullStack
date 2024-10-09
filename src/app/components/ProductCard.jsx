@@ -47,9 +47,9 @@ const ProductCard = ({ product, index }) => {
       key={index}
       className={`${
         cardColors[index % cardColors.length]
-      } transform transition-all duration-300 hover:scale-105 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-none overflow-hidden bg-blue-300`}
+      } transform transition-all duration-300 hover:scale-105 border-8 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] rounded-none overflow-hidden bg-blue-300 hover:shadow-[20px_20px_0px_0px_rgba(0,0,0,1)]`}
     >
-      <div className="relative h-[500px] overflow-hidden">
+      <div className="relative overflow-hidden">
         <img
           src={product.image}
           alt={product.name}
@@ -63,8 +63,8 @@ const ProductCard = ({ product, index }) => {
           ></Dropdown>
         </div>
       </div>
-      <div className="p-4">
-        <h3 className="font-black text-black text-sm text-center mb-2 line-clamp-2">
+      <div className="p-2">
+        <h3 className="font-black text-black text-sm text-center mb-1 line-clamp-2">
           {product.title}
         </h3>
       </div>
@@ -78,9 +78,7 @@ const ProductCard = ({ product, index }) => {
               <button
                 onClick={() => setIsModalActive(false)}
                 className="text-black font-extrabold"
-              >
-                X
-              </button>
+              ></button>
             </div>
             <div className="overflow-y-auto max-h-[70vh] p-6 space-y-6">
               <div>

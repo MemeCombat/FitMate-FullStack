@@ -24,7 +24,7 @@ const Hero = () => {
           <img
             src="fitting_gif.gif"
             alt="FitMate"
-            className="flex border-4 border-black w-full h-full"
+            className="flex border-4 border-black w-full h-full object-cover"
           />
         </div>
       </div>
