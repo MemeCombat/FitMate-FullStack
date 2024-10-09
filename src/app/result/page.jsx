@@ -65,12 +65,14 @@ export default function Result() {
             <Markdown>{data.resultGemini || "No result gemini"}</Markdown>
           </div>
         
-          <button
-            onClick={() => router.push(`/store/${data.productPhotoId}`)}
-            className="w-full bg-green-500 hover:bg-green-600 text-white text-lg md:text-xl font-bold py-3 md:py-4 px-4 md:px-6 transition duration-300 shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center"
-          >
-            View More
-          </button>
+          {data.productPhotoId !== "userUploadedPhoto" && (
+            <button
+              onClick={() => router.push(`/store/${data.productPhotoId}`)}
+              className="w-full bg-green-500 hover:bg-green-600 text-white text-lg md:text-xl font-bold py-3 md:py-4 px-4 md:px-6 transition duration-300 shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] md:hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center"
+            >
+              View More
+            </button>
+          )}
         </div>
       </div>
     </div>
