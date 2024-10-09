@@ -56,7 +56,7 @@ export async function POST(request) {
   const height = formData.get("height") || "unknown";
   const gender = formData.get("gender") || "unknown";
   const shopId = formData.get("shopId") || "userUploadedPhoto";
-  const productPhotoId = formData.get("productPhotoId") || "userUploadedPhoto";
+  const productPhotoId = formData.get("productId") || "userUploadedPhoto";
 
   let personPhotoBase64URI = await processPhoto(personPhoto);
 

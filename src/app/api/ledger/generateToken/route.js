@@ -44,11 +44,8 @@ async function generateTransaction(user, productId, findPackage) {
     return { transactionToken, transactionUrl };
   } catch (error) {
     console.error("Error generating transaction:", error);
-    return new NextResponse(
-      JSON.stringify({ message: "Failed to generate transaction" }),
-      {
-        status: 500,
-      }
+    throw (
+      { message: `Failed to generate transaction : ${error}` }
     );
   }
 }
@@ -102,6 +99,10 @@ export async function POST(request) {
 
     return NextResponse.json({ transactionToken, transactionUrl });
   } catch (error) {
-    console.log("error: ", error);
+    // console.log("error: ", error);
+    return NextResponse.json(
+      { message: error.message },
+      { status: error.status || 500 }
+    );
   }
 }

@@ -22,6 +22,7 @@ var imagekit = new ImageKit({
 
 export async function POST(request) {
   try {
+    console.log("masukk")
     const formData = await request.formData();
     // console.log("formData: ", formData);
 
@@ -45,9 +46,11 @@ export async function POST(request) {
     });
 
     const userId = request.headers.get("x-user-id");
-    // console.log("userId: ", userId);
-    const { _id: storeId } = await StoreModel.getStoreByUserId(userId);
-    // console.log("_id: ", _id);
+    console.log("userId: ", userId);
+    const dataResponse = await StoreModel.getStoreByUserId(userId);
+    const storeId = dataResponse[0]._id;
+    console.log("storeId: ", storeId);
+    // console.log("_id: ", storeId);
 
     await ProductPhotoModel.createPhoto(
       title,

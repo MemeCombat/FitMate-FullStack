@@ -1,18 +1,53 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
 import Button from "../components/Button";
 
 const PricingCard = ({ type, price, description, isPopular, token, color }) => {
   const backgroundColor = getBackgroundColor(type, color);
+  const [transactionToken, setTransactionToken] = useState("");
+  const [transactionUrl, setTransactionUrl] = useState("");
 
+  const handleBuyClick = async () => {
+    const packageName = type.toUpperCase();
+    const requestBody = {
+      transactionType: "topUp",
+      PackageType: packageName,
+    };
+
+    try {
+      const response = await fetch("http://localhost:3000/api/ledger/generateToken", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(requestBody),
+      });
+      
+
+      const responseData = await response.json();
+      if (!response.ok) throw responseData
+      console.log("responseData: ", responseData);
+      setTransactionToken(responseData.transactionToken);
+      setTransactionUrl(responseData.transactionUrl);
+
+      //  Redirect to transactionUrl
+      window.location.href = responseData.transactionUrl;
+    } catch (error) {
+      console.error(error);
+      alert(error.message)
+    }
+  };
   return (
     <div
-      className={`border-4 border-black p-6 ${backgroundColor} shadow-[8px_8px_0_rgba(0,0,0,1)] relative flex flex-col justify-between h-full w-full`}
-    >
-      {isPopular && <PopularBadge />}
-      <PricingCardHeader type={type} />
-      <PricingCardBody price={price} token={token} description={description} />
-      <PricingCardFooter />
-    </div>
+    className={`border-4 border-black p-6 ${backgroundColor} shadow-[8px_8px_0_rgba(0,0,0,1)] relative flex flex-col justify-between h-full w-full`}
+  >
+    {isPopular && <PopularBadge />}
+    <PricingCardHeader type={type} />
+    <PricingCardBody price={price} token={token} description={description} />
+      <div className="mt-auto">
+        <Button className="w-full justify-center" onClick={handleBuyClick}>
+          Click here to buy
+        </Button>
+      </div>
+  </div>
   );
 };
 

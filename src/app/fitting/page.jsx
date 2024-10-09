@@ -20,6 +20,10 @@ const Fitting = () => {
   const [photoError, setPhotoError] = useState(null);
   const [error, setError] = useState(null);
   const [tags, setTags] = useState("");
+  const [storeId, setStoreId] = useState("");
+  const [productId , setProductId] =  useState("");
+
+
   console.log("tags2: ", tags);
 
   useEffect(() => {
@@ -50,6 +54,7 @@ const Fitting = () => {
       if (response.ok) {
         console.log("tags1: ", tags);
         const data = await response.json();
+        console.log("data: ", data);
         const shuffledPhotos = data.photos.sort(() => 0.5 - Math.random());
         setProductPhotos(shuffledPhotos);
       } else {
@@ -93,6 +98,9 @@ const Fitting = () => {
     formData.append("height", height);
     formData.append("gender", gender);
     formData.append("photoType" , photoType)
+    formData.append("productId", productId);
+    formData.append("shopId", storeId);
+    
     if (userImage) {
       formData.append("personPhoto", userImage);
     }
@@ -155,14 +163,15 @@ const Fitting = () => {
     }
   };
 
-  const handleCardClick = (photo) => {
+  const handleCardClick = (photo , productId , shopId) => {
     fetch(photo.image)
       .then((res) => res.blob())
       .then((blob) => {
-        const file = new File([blob], "outfit.jpg", { type: "image/jpeg" });
+        const file = new File([blob],"outfit.jpg", { type: "image/jpeg" });
         setOutfitImage(file);
         setOutfitImagePreview(photo.image);
-
+        setStoreId(shopId||"")
+        setProductId(productId||"");
         Swal.fire({
           title: "Outfit Selected!",
           text: `${photo.title} has been set as your outfit.`,
@@ -312,7 +321,7 @@ const Fitting = () => {
               <div
                 key={photo._id}
                 className="w-64 bg-white border-4 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 cursor-pointer"
-                onClick={() => handleCardClick(photo)}
+                onClick={() => handleCardClick(photo , photo._id , photo.storeId)}
               >
                 <img
                   src={photo.image}
