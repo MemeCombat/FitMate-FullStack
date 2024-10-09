@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import Card from "../components/Card";
 
 const Fitting = () => {
   const router = useRouter();
@@ -21,10 +22,9 @@ const Fitting = () => {
   const [error, setError] = useState(null);
   const [tags, setTags] = useState("");
   const [storeId, setStoreId] = useState("");
-  const [productId , setProductId] =  useState("");
+  const [productId, setProductId] = useState("");
 
-
-  // console.log("tags2: ", tags);
+  console.log("tags2: ", tags);
 
   useEffect(() => {
     const token = document.cookie
@@ -97,10 +97,10 @@ const Fitting = () => {
     formData.append("weight", weight);
     formData.append("height", height);
     formData.append("gender", gender);
-    formData.append("photoType" , photoType)
+    formData.append("photoType", photoType);
     formData.append("productId", productId);
     formData.append("shopId", storeId);
-    
+
     if (userImage) {
       formData.append("personPhoto", userImage);
     }
@@ -118,7 +118,7 @@ const Fitting = () => {
       if (response.ok) {
         const result = await response.json();
         console.log("result: ini result  ", result);
-        router.push(`/result?productId=${result.createdPhoto.insertedId}`);
+        router.push(`/result?ProductId=${result.createdPhoto.insertedId}`);
       } else {
         console.error("Error generating photo");
       }
@@ -163,15 +163,15 @@ const Fitting = () => {
     }
   };
 
-  const handleCardClick = (photo , productId , shopId) => {
+  const handleCardClick = (photo, productId, shopId) => {
     fetch(photo.image)
       .then((res) => res.blob())
       .then((blob) => {
-        const file = new File([blob],"outfit.jpg", { type: "image/jpeg" });
+        const file = new File([blob], "outfit.jpg", { type: "image/jpeg" });
         setOutfitImage(file);
         setOutfitImagePreview(photo.image);
-        setStoreId(shopId||"")
-        setProductId(productId||"");
+        setStoreId(shopId || "");
+        setProductId(productId || "");
         Swal.fire({
           title: "Outfit Selected!",
           text: `${photo.title} has been set as your outfit.`,
@@ -196,16 +196,20 @@ const Fitting = () => {
               <input
                 type="file"
                 accept="image/*"
-                className="border-4 border-gray-400 rounded-lg p-2 mb-4 w-full hover:border-yellow-500 transition duration-300"
+                className="border-4 border-black rounded-lg p-2 mb-4 w-full hover:border-yellow-500 transition duration-300"
                 onChange={handleUserImageChange}
               />
-              <div className="w-full h-48 object-cover rounded-lg mb-4">
-                {userImagePreview && (
+              <div className="w-full h-[500px] rounded-lg overflow-hidden">
+                {userImagePreview ? (
                   <img
                     src={userImagePreview}
                     alt="Uploaded Image"
-                    className="w-full h-full object-cover rounded-lg"
+                    className="w-full h-full object-contain"
                   />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-gray-200">
+                    <p className="text-gray-500">No image uploaded</p>
+                  </div>
                 )}
               </div>
             </div>
@@ -219,13 +223,17 @@ const Fitting = () => {
                 className="border-4 border-black rounded-lg p-2 mb-4 w-full hover:border-yellow-500 transition duration-300"
                 onChange={handleOutfitImageChange}
               />
-              <div className="w-full h-48 object-cover rounded-lg mb-4">
-                {outfitImagePreview && (
+              <div className="w-full h-[500px] rounded-lg overflow-hidden">
+                {outfitImagePreview ? (
                   <img
                     src={outfitImagePreview}
                     alt="Uploaded Image"
-                    className="w-full h-full object-cover rounded-lg"
+                    className="w-full h-full object-contain"
                   />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-gray-200">
+                    <p className="text-gray-500">No image uploaded</p>
+                  </div>
                 )}
               </div>
             </div>
@@ -260,7 +268,9 @@ const Fitting = () => {
               value={gender}
               onChange={(e) => setGender(e.target.value)}
             >
-              <option value="" disabled>Select Gender</option>
+              <option value="" disabled>
+                Select Gender
+              </option>
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="other">Other</option>
@@ -270,7 +280,9 @@ const Fitting = () => {
               value={photoType}
               onChange={(e) => setPhotoType(e.target.value)}
             >
-              <option value="" disabled >Select photo Type</option>
+              <option value="" disabled>
+                Select photo Type
+              </option>
               <option value="upper">upper</option>
               <option value="lower">lower</option>
               <option value="overall">overall</option>
@@ -299,9 +311,7 @@ const Fitting = () => {
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white p-8 rounded-lg shadow-xl text-center">
               <div className="loader mb-4 mx-auto"></div>
-              <p className="text-xl text-gray-800 font-semibold">
-                
-              </p>
+              <p className="text-xl text-gray-800 font-semibold"></p>
               <p className="text-gray-600">This may take a moment</p>
             </div>
           </div>
@@ -320,8 +330,8 @@ const Fitting = () => {
             {productPhotos.map((photo) => (
               <div
                 key={photo._id}
-                className="w-64 bg-white border-4 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 cursor-pointer"
-                onClick={() => handleCardClick(photo , photo._id , photo.storeId)}
+                className="relative w-64 h-[300px] bg-white border-4 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 cursor-pointer"
+                onClick={() => handleCardClick(photo, photo._id, photo.storeId)}
               >
                 <img
                   src={photo.image}
@@ -332,15 +342,6 @@ const Fitting = () => {
                   <h3 className="text-lg font-bold text-black mb-2 uppercase line-clamp-2">
                     {photo.title}
                   </h3>
-                  <p className="text-sm text-gray-700 mb-3 font-medium line-clamp-3">
-                    {photo.description}
-                  </p>
-                  <p className="text-sm font-bold mb-2 bg-green-500 inline-block px-2 py-1 rounded-md">
-                    Size: {photo.size.join(", ")}
-                  </p>
-                  <p className="text-sm font-bold text-white bg-black inline-block px-2 py-1 rounded-md">
-                    {photo.tags.join(", ")}
-                  </p>
                 </div>
               </div>
             ))}
