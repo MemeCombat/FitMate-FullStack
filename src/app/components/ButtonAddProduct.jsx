@@ -26,7 +26,7 @@ function ButtonAddProduct() {
     <div>
       <button
         onClick={() => setIsModalActive(true)}
-        className="transition-all duration-300 px-6 py-2 text-lg font-bold bg-blue-500 text-black border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
+        className="transition-all duration-300 px-6 lg:py-2 py-1 text-lg font-bold bg-blue-500 text-black border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
       >
         Add new product
       </button>

@@ -265,7 +265,7 @@ const Fitting = () => {
         )}
       </div>
       <div className="flex-1 mt-6 mb-6 mx-4 md:mx-6 bg-gradient-to-br from-yellow-300 to-pink-500 p-8 border-4 border-black rounded-2xl shadow-lg">
-        <h1 className="text-4xl font-bold text-black mb-8 uppercase tracking-wider text-center">
+        <h1 className="text-3xl lg:text-4xl font-bold text-black mb-8 uppercase tracking-wider text-center">
           Fashion Recommendation
         </h1>
         {isLoading ? (
