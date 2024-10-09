@@ -145,3 +145,57 @@ export async function DELETE(request) {
     });
   }
 }
+
+export async function PUT(request) {
+  try {
+    const formData = await request.formData();
+
+    const productPhotoId = formData.get("productPhotoId");
+    const title = formData.get("title");
+    const image = formData.get("image");
+    const size = formData.get("size");
+    const description = formData.get("description");
+    const linkReferensi = formData.get("linkReferensi");
+    const tags = formData.get("tags");
+
+    let updateData = {
+      title,
+      size: size ? size.split(",").map((el) => el.trim()) : [],
+      description,
+      linkReferensi,
+      tags: tags ? tags.split(",").map((el) => el.trim()) : [],
+    };
+
+    if (image instanceof File) {
+      const imageBase64URI = await processPhoto(image);
+      const resultImage = await imagekit.upload({
+        file: imageBase64URI,
+        fileName: `shop-photo-update:${new Date()}`,
+        isPublished: true,
+      });
+      updateData.image = resultImage.url;
+    }
+
+    const result = await ProductPhotoModel.editphotoProduct(
+      productPhotoId,
+      updateData
+    );
+
+    if (result.modifiedCount > 0) {
+      return new Response(
+        JSON.stringify({ message: "Product successfully updated" }),
+        { status: 200 }
+      );
+    } else {
+      return new Response(
+        JSON.stringify({ message: "No changes were made to the product" }),
+        { status: 200 }
+      );
+    }
+  } catch (error) {
+    console.error("Error updating photo:", error);
+    return new Response(JSON.stringify({ error: "Failed to update product" }), {
+      status: 500,
+    });
+  }
+}
