@@ -22,7 +22,7 @@ const Hero = () => {
       <div className="flex-1">
         <div className="relative w-full h-64 md:h-80 overflow-hidden rounded-lg">
           <img
-            src="fitting_gif.gif"
+            src="https://i.pinimg.com/originals/39/72/09/39720901cad6ac2488f7653a6e451991.gif"
             alt="FitMate"
             className="flex border-4 border-black w-full h-full"
           />
