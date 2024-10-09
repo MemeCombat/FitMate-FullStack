@@ -58,7 +58,7 @@ const Store = () => {
               <h1 className="text-4xl font-black mb-2 border-b-4 border-black pb-2 bg-green-400 inline-block">
                 {store.name}
               </h1>
-              <ButtonAddProduct className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300" />
+              <ButtonAddProduct store={store} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300" />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {store.product.map((product) => (

@@ -4,7 +4,7 @@ import Select from "react-select";
 import Modal from "./Modal";
 import Swal from "sweetalert2";
 
-function ButtonAddProduct() {
+function ButtonAddProduct({store}) {
   const [isModalActive, setIsModalActive] = useState(false);
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
@@ -54,6 +54,7 @@ function ButtonAddProduct() {
     } else {
       console.warn("No valid image selected");
     }
+    formData.append("storeId" , store._id)
 
     try {
       const response = await fetch("/api/productPhoto", {

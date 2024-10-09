@@ -32,6 +32,8 @@ export async function POST(request) {
     const description = formData.get("description");
     const linkReferensi = formData.get("linkReferensi");
     const tags = formData.get("tags");
+    const storeId = formData.get("storeId");
+    // console.log("storeId: ", storeId);
 
     let imageBase64URI = "";
 
@@ -44,14 +46,7 @@ export async function POST(request) {
       fileName: `shop-photo-date:${new Date()}`,
       isPublished: true,
     });
-
-    const userId = request.headers.get("x-user-id");
-    console.log("userId: ", userId);
-    const dataResponse = await StoreModel.getStoreByUserId(userId);
-    const storeId = dataResponse[0]._id;
-    console.log("storeId: ", storeId);
-    // console.log("_id: ", storeId);
-
+    
     await ProductPhotoModel.createPhoto(
       title,
       resultImage.url,

@@ -6,7 +6,7 @@ import Modal from "./Modal";
 
 const ProductCard = ({ product, index }) => {
   const [isModalActive, setIsModalActive] = useState(false);
-  const [selectedTags, setSelectedTags] = useState([]);
+  const [selectedTags, setSelectedTags] = useState(product.tags);
 
   const cardColors = [
     "bg-yellow-300",
@@ -69,7 +69,9 @@ const ProductCard = ({ product, index }) => {
         </h3>
       </div>
       <Modal active={isModalActive} setActive={setIsModalActive}>
+        
         <div className="flex justify-center items-center min-h-screen bg-black/50 fixed top-0 left-0 right-0 z-50">
+        {/* <div>{JSON.stringify(product , null,2)}</div> */}
           <div className="relative w-full max-w-lg sm:max-w-xl md:max-w-3xl bg-yellow-300 border-4 border-black shadow-[12px_12px_0_0_#000] rounded-xl overflow-hidden mx-4">
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] -z-10 opacity-25"></div>
 
@@ -78,7 +80,7 @@ const ProductCard = ({ product, index }) => {
               <button
                 onClick={() => setIsModalActive(false)}
                 className="text-black font-extrabold"
-              ></button>
+              >X</button>
             </div>
             <div className="overflow-y-auto max-h-[70vh] p-6 space-y-6">
               <div>
@@ -89,6 +91,7 @@ const ProductCard = ({ product, index }) => {
                   Product Name
                 </label>
                 <input
+                value={product.title}
                   name="title"
                   type="text"
                   id="title"
@@ -104,6 +107,7 @@ const ProductCard = ({ product, index }) => {
                   Product Description
                 </label>
                 <textarea
+                value={product.description}
                   name="description"
                   id="description"
                   className="w-full p-3 border-2 text-black border-black rounded focus:outline-none focus:ring-2 focus:ring-blue-500 bg-orange-100 transition-shadow duration-300"
@@ -119,6 +123,7 @@ const ProductCard = ({ product, index }) => {
                   Link Reference
                 </label>
                 <input
+                 value={product.linkReferensi}
                   type="url"
                   name="linkReferensi"
                   id="linkReferensi"
@@ -203,7 +208,7 @@ const ProductCard = ({ product, index }) => {
                     <path d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z" />
                   </svg>
                   Upload file
-                  <input type="file" id="image" className="hidden" />
+                  <input type="file" id="image" className="hidden"/>
                   <p className="text-sm font-medium text-gray-800 mt-2">
                     PNG, JPG, SVG, WEBP, and GIF are allowed.
                   </p>
