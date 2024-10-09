@@ -37,7 +37,9 @@ const ProductPage = () => {
   }, []);
 
   if (loading) {
-    return <p className="text-center text-xl font-semibold">Loading...</p>;
+    return (
+      <p className="text-center text-xl font-semibold text-black">Loading...</p>
+    );
   }
 
   return (

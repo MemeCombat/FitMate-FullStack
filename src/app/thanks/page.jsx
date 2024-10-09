@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Thanks = () => {
@@ -19,13 +20,14 @@ const Thanks = () => {
           className="text-2xl mb-10 text-black font-bold text-center"
           style={{ fontFamily: "monospace" }}
         >
-          Don't forget to subscribe to our newsletter to get updates on our new
-          products or exclusive discounts.
+          Don't forget to buy more token for fitting!
         </p>
         <div className="flex justify-center">
-          <button className="bg-red-500 text-white font-black py-4 px-10 border-4 border-black uppercase text-2xl hover:bg-red-600 transition-colors shadow-[4px_4px_0_0_#000] transform hover:translate-x-1 hover:translate-y-1 justify-center flex items-center">
-            Go Fitting
-          </button>
+          <Link href="/fitting" className="text-2xl font-bold text-black">
+            <button className="bg-red-500 text-white font-black py-4 px-10 border-4 border-black uppercase text-2xl hover:bg-red-600 transition-colors shadow-[4px_4px_0_0_#000] transform hover:translate-x-1 hover:translate-y-1 justify-center flex items-center">
+              Go Fitting
+            </button>
+          </Link>
         </div>
       </div>
     </div>

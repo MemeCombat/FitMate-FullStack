@@ -31,7 +31,9 @@ export default function Result() {
   }, [productId]);
 
   if (loading) {
-    return <p className="text-center text-xl font-semibold">Loading...</p>;
+    return (
+      <p className="text-center text-xl font-semibold text-black">Loading...</p>
+    );
   }
 
   if (!data) {

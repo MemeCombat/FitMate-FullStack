@@ -16,7 +16,11 @@ const AllGeneratePage = () => {
   }, []);
 
   const handleCardClick = (id) => {
-    router.push(`/allGenerate/${id}`);
+    if (id) {
+      router.push(`/result?ProductId=${id}`);
+    } else {
+      console.error("Invalid ID, cannot navigate.");
+    }
   };
 
   return (
@@ -24,13 +28,13 @@ const AllGeneratePage = () => {
       <h1 className="text-center text-3xl font-extrabold my-6 text-gray-800">
         Generated Photos
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-black">
         {photos.map((photo, index) => (
           <GenerateCard
-            key={photo.id}
+            key={photo._id}
             photo={photo}
             index={index}
-            onClick={handleCardClick}
+            onClick={() => handleCardClick(photo._id)}
           />
         ))}
       </div>

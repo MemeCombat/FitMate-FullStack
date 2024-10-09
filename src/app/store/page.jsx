@@ -46,7 +46,9 @@ const Store = () => {
   return (
     <section className="p-8 bg-pink-300 min-h-screen mx-6 mt-6 mb-6 rounded-2xl border-4 border-black shadow-lg">
       {loading ? (
-        <p className="text-center text-lg font-semibold">Loading...</p>
+        <p className="text-center text-lg font-semibold text-black">
+          Loading...
+        </p>
       ) : products.length === 0 ? (
         <NoShop />
       ) : (
