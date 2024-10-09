@@ -17,7 +17,7 @@ const AllGeneratePage = () => {
 
   const handleCardClick = (id) => {
     if (id) {
-      router.push(`/result?ProductId=${id}`);
+      router.push(`/result?productId=${id}`);
     } else {
       console.error("Invalid ID, cannot navigate.");
     }
