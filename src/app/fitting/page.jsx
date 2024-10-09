@@ -98,6 +98,7 @@ const Fitting = () => {
     formData.append("gender", gender);
     formData.append("photoType", photoType);
     formData.append("photoType", photoType);
+    formData.append("photoType", photoType);
     formData.append("productId", productId);
     formData.append("shopId", storeId);
 
@@ -263,6 +264,9 @@ const Fitting = () => {
               <option value="" disabled>
                 Select Gender
               </option>
+              <option value="" disabled>
+                Select Gender
+              </option>
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="other">Other</option>
@@ -272,6 +276,9 @@ const Fitting = () => {
               value={photoType}
               onChange={(e) => setPhotoType(e.target.value)}
             >
+              <option value="" disabled>
+                Select photo Type
+              </option>
               <option value="" disabled>
                 Select photo Type
               </option>
@@ -304,6 +311,7 @@ const Fitting = () => {
             <div className="bg-white p-8 rounded-lg shadow-xl text-center">
               <div className="loader mb-4 mx-auto"></div>
               <p className="text-xl text-gray-800 font-semibold"></p>
+              <p className="text-xl text-gray-800 font-semibold"></p>
               <p className="text-gray-600">This may take a moment</p>
             </div>
           </div>
@@ -314,6 +322,9 @@ const Fitting = () => {
           Fashion Recommendation
         </h1>
         {isLoading ? (
+          <p className="text-2xl font-bold text-center text-black">
+            Loading...
+          </p>
           <p className="text-2xl font-bold text-center text-black">
             Loading...
           </p>
