@@ -308,6 +308,18 @@ const Fitting = () => {
                 "Generate Fitting"
               )}
             </button>
+            <div>
+              <h3 style={{color: 'red'}}>Upper</h3>
+              <p style={{color: 'black'}}>This refers to the top part of your clothes, including your shoulders, chest, and arms. Think about where your shirt goes - that's the "upper" part.</p>
+              <h3 style={{color: 'blue'}}>Lower</h3>
+              <p style={{color: 'black'}}>This is the bottom part of your clothes, covering your legs and hips. It's where your pants, skirts, or shorts go.</p>
+              <h3 style={{color: 'green'}}>Overall</h3>
+              <p style={{color: 'black'}}>This means the whole outfit, from top to bottom. It's like looking at all your clothes at once, not just the top or bottom.</p>
+              <h3 style={{color: 'blue'}}>Inner</h3>
+              <p style={{color: 'black'}}>Imagine turning your clothes inside out. The "inner" part is what touches your skin. It's the hidden side of your clothes that nobody usually sees.</p>
+              <h3 style={{color: 'purple'}}>Outer</h3>
+              <p style={{color: 'black'}}>This is the part of your clothes that everyone can see. It's the outside of your shirt or pants, the part that faces the world.</p>
+            </div>
           </form>
           {isLoading && (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
