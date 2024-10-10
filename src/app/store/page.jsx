@@ -12,7 +12,17 @@ const Store = () => {
   const [loading, setLoading] = useState(true);
   const cookies = useCookies();
   const router = useRouter();
-
+  const fetchProducts = async () => {
+    const userId = cookies.get("userId");
+    const response = await fetch(`/api/store/getByUserId?userId=${userId}`);
+    if (response.ok) {
+      const data = await response.json();
+      setProducts(data);
+    } else {
+      console.error("Failed to fetch products");
+    }
+    setLoading(false);
+  };
   useEffect(() => {
     const token = cookies.get("Authorization");
     if (!token) {
@@ -27,18 +37,6 @@ const Store = () => {
       });
       return;
     }
-
-    const fetchProducts = async () => {
-      const userId = cookies.get("userId");
-      const response = await fetch(`/api/store/getByUserId?userId=${userId}`);
-      if (response.ok) {
-        const data = await response.json();
-        setProducts(data);
-      } else {
-        console.error("Failed to fetch products");
-      }
-      setLoading(false);
-    };
 
     fetchProducts();
   }, [cookies, router]);
@@ -58,11 +56,15 @@ const Store = () => {
               <h1 className="text-4xl font-black mb-2 border-b-4 border-black pb-2 bg-green-400 inline-block">
                 {store.name}
               </h1>
-              <ButtonAddProduct store={store} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300" />
+              <ButtonAddProduct
+                store={store}
+                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300"
+                fetchProducts={fetchProducts}
+              />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {store.product.map((product) => (
-                <ProductCard key={product._id} product={product} />
+                <ProductCard key={product._id} product={product} fetchProducts={fetchProducts} />
               ))}
             </div>
           </div>

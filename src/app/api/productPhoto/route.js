@@ -194,8 +194,13 @@ export async function PUT(request) {
       );
     }
   } catch (error) {
-    console.error("Error updating photo:", error);
-    return new Response(JSON.stringify({ error: "Failed to update product" }), {
+    console.error("Error updating photo:", error.name);
+    if(error.name === "RangeError") {
+      return new Response(JSON.stringify({ message:"File Size Limit Reached" }), {
+        status: 400,
+      });
+    }
+    return new Response(JSON.stringify({ message:error.message }), {
       status: 500,
     });
   }

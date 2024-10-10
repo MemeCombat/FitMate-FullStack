@@ -19,7 +19,7 @@ export default class ProductPhotoModel {
     const newPhoto = {
       title: title,
       image: image,
-      storeId: storeId,
+      storeId: new ObjectId(String(storeId)),
       size: size,
       description: description,
       linkReferensi: linkReferensi,

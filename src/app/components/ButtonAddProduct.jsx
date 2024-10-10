@@ -4,7 +4,7 @@ import Select from "react-select";
 import Modal from "./Modal";
 import Swal from "sweetalert2";
 
-function ButtonAddProduct({store}) {
+function ButtonAddProduct({store , fetchProducts}) {
   const [isModalActive, setIsModalActive] = useState(false);
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
@@ -12,6 +12,7 @@ function ButtonAddProduct({store}) {
   const [selectedTags, setSelectedTags] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const [size, setSize] = useState([]);
+  const [products, setProducts] = useState([]);
 
   const tagOptions = [
     { value: "casual", label: "Casual" },
@@ -24,6 +25,15 @@ function ButtonAddProduct({store}) {
     { value: "preppy", label: "Preppy" },
   ];
 
+  const addNewProduct = (newProduct) => {
+    setProducts(prevProducts => 
+      prevProducts.map(store => 
+        store._id === newProduct.storeId 
+          ? { ...store, product: [...store.product, newProduct] }
+          : store
+      )
+    );
+  };
   const handleTagChange = (selectedOptions) => {
     setSelectedTags(selectedOptions);
   };
@@ -63,7 +73,8 @@ function ButtonAddProduct({store}) {
       });
 
       if (response.ok) {
-        const newProduct = await response.json();
+         const newProduct = await response.json();
+        addNewProduct(newProduct);
         Swal.fire("Success", "Product added successfully", "success");
         setIsModalActive(false);
         // Reset form fields
@@ -73,6 +84,7 @@ function ButtonAddProduct({store}) {
         setSelectedTags([]);
         setSelectedImage(null);
         setSize([]);
+        await fetchProducts()
       } else {
         const errorData = await response.json();
         Swal.fire(
