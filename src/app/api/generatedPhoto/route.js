@@ -19,7 +19,6 @@ async function processPhoto(photo) {
   return null;
 }
 
-console.log("process.env.GEMINI_API_KEY: ", process.env.GEMINI_API_KEY);
 
 var imagekit = new ImageKit({
   publicKey: process.env.NEXT_PUBLIC_PUBLIC_KEY,

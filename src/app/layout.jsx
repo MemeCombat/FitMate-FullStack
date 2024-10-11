@@ -10,7 +10,7 @@ const monumentRegular = localFont({
   src: "./fonts/MonumentExtended-Regular.otf",
 });
 const monumentBold = localFont({
-  src: "./fonts/MonumentExtended-UltraBold.otf",
+  src: "./fonts/MonumentExtended-Ultrabold.otf",
 });
 
 export const metadata = {

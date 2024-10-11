@@ -50,7 +50,7 @@ const Fitting = () => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:3000/api/productPhoto?tags=${tags}`
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/productPhoto?tags=${tags}`
       );
       if (response.ok) {
         console.log("tags1: ", tags);
@@ -69,7 +69,7 @@ const Fitting = () => {
   };
   const fetchProfileData = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/profile", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/profile`, {
         credentials: "include", // This includes cookies in the request
       });
       if (response.ok) {
@@ -111,7 +111,7 @@ const Fitting = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/api/generatedPhoto", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/generatedPhoto`, {
         method: "POST",
         body: formData,
       });

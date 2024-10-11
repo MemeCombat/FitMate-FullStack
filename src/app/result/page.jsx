@@ -15,7 +15,7 @@ export default function Result() {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/generatedPhoto/${productId}`
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/generatedPhoto/${productId}`
       );
       const data = await response.json();
       console.log("data: ", data);

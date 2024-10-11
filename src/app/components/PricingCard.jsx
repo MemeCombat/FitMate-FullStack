@@ -16,7 +16,7 @@ const PricingCard = ({ type, price, description, isPopular, token, color }) => {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/api/ledger/generateToken",
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/ledger/generateToken`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

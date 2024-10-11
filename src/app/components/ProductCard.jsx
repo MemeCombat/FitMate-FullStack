@@ -74,7 +74,7 @@ const ProductCard = ({ product, index ,fetchProducts}) => {
     form.append("tags", selectedTags.map((tag) => tag.value).join(","));
 
     try {
-      const response = await fetch("http://localhost:3000/api/productPhoto", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/productPhoto`, {
         method: "PUT",
         body: form,
       });
